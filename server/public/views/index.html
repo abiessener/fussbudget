@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Solo Project</title>
-        <link rel="stylesheet" href="styles/style.css">
 
-        <script type="text/javascript" src="vendors/angular/angular.min.js"></script>
-        <script type="text/javascript" src="vendors/angular-route/angular-route.min.js"></script>
-        <script type="text/javascript" src="scripts/client.js"></script>
-        <script type="text/javascript" src="scripts/controllers/info.controller.js"></script>
-        <script type="text/javascript" src="scripts/controllers/login.controller.js"></script>
-        <script type="text/javascript" src="scripts/controllers/user.controller.js"></script>
-        <script type="text/javascript" src="scripts/services/user.service.js"></script>
-    </head>
+<head>
+    <title>Fussbudget</title>
+    <link rel="stylesheet" href="vendors/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="styles/style.css">
 
-    <body ng-app="myApp">
-      <header ng-include="'/views/partials/header.html'"></header>
+    <script type="text/javascript" src="vendors/angular/angular.min.js"></script>
+    <script type="text/javascript" src="vendors/angular-route/angular-route.min.js"></script>
+    <script type="text/javascript" src="scripts/client.js"></script>
+    <script type="text/javascript" src="scripts/controllers/schedule.controller.js"></script>
+    <script type="text/javascript" src="scripts/controllers/login.controller.js"></script>
+    <script type="text/javascript" src="scripts/controllers/user.controller.js"></script>
+    <script type="text/javascript" src="scripts/controllers/nav.controller.js"></script>
+    <script type="text/javascript" src="scripts/services/user.service.js"></script>
+    <script type="text/javascript" src="scripts/services/schedule.service.js"></script>
+</head>
 
-      <main ng-view></main>
+<body ng-app="myApp">
+    <header ng-include="'/views/partials/nav.html'">
+     
+    </header>
 
-    </body>
+    <main ng-view></main>
+
+</body>
+
 </html>
