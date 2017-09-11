@@ -1,5 +1,5 @@
 myApp.controller('NavController', ['UserService', function(UserService){
-  console.log('navController');
+  console.log('NavController');
   var self = this;
   self.user = {};
 

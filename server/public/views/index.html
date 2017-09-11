@@ -3,19 +3,36 @@
 
 <head>
     <title>Fussbudget</title>
-    <link rel="stylesheet" href="vendors/bootstrap.min.css">
     
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="vendors/angular-material.min.css">
     <link rel="stylesheet" href="styles/style.css">
 
-    <script type="text/javascript" src="vendors/angular/angular.min.js"></script>
-    <script type="text/javascript" src="vendors/angular-route/angular-route.min.js"></script>
+    <!-- Angular & Angular-Route -->
+    <script type="text/javascript" src="vendors/angular.min.js"></script>
+    <script type="text/javascript" src="vendors/angular-route.min.js"></script>
+
+    <!-- Angular Material -->
+    <script src="vendors/angular-animate.min.js" charset="utf-8"></script>
+    <script src="vendors/angular-aria.min.js" charset="utf-8"></script>
+    <script src="vendors/angular-messages.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="vendors/angular-material.min.js"></script>
+
+    <!-- Client App -->
     <script type="text/javascript" src="scripts/client.js"></script>
+
+    <!-- Controllers -->
     <script type="text/javascript" src="scripts/controllers/schedule.controller.js"></script>
     <script type="text/javascript" src="scripts/controllers/login.controller.js"></script>
     <script type="text/javascript" src="scripts/controllers/user.controller.js"></script>
     <script type="text/javascript" src="scripts/controllers/nav.controller.js"></script>
+    <script type="text/javascript" src="scripts/controllers/client.controller.js"></script>
+
+    <!-- Services -->
     <script type="text/javascript" src="scripts/services/user.service.js"></script>
+    <script type="text/javascript" src="scripts/services/client.service.js"></script>
     <script type="text/javascript" src="scripts/services/schedule.service.js"></script>
+
 </head>
 
 <body ng-app="myApp">

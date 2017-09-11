@@ -1,0 +1,17 @@
+<div class="container">
+  <p>
+    Add Client
+  </p>
+  <form ng-submit="cc.addClient(client)">
+    <label>Name: 
+      <input ng-model="client.name">
+    </label>
+    <label>Date of Birth: 
+        <md-datepicker ng-model="client.dob" md-placeholder="Enter date"></md-datepicker>
+    </label>
+    <label>Notes: 
+      <input ng-model="client.notes">
+    </label>
+    <button>Submit</button>        
+  </form>
+</div>

@@ -1,8 +1,13 @@
-<div class="nav navbar-default" ng-controller="NavController as nc">
-  <a href="#" class="navbar-brand">Fussbudget</a>
-  <div class="pull-right">
-    <a href="#!/user-edit">
+<div ng-controller="NavController as nc">
+  <a href="#" >Fussbudget</a>
+  <div>
+    <a href="/user-edit">
         <img ng-src="{{nc.user.avatarUrl}}">
       </a>
+  </div>
+  <div>
+    <a href="#/add-client">
+      Add Client
+    </a>
   </div>
 </div>

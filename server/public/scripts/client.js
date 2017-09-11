@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngMaterial']);
 
 /// Routes ///
 myApp.config(function($routeProvider, $locationProvider) {
@@ -22,6 +22,15 @@ myApp.config(function($routeProvider, $locationProvider) {
         }
       }
     })
+    .when('/add-client', {
+      templateUrl: '/views/templates/add-client.html',
+      controller: 'ClientController as cc',
+      resolve: {
+        getuser : function(UserService){
+          return UserService.getuser();
+        }
+      }
+    })
     .when('/schedule', {
       templateUrl: '/views/templates/schedule.html',
       controller: 'ScheduleController as sc',
@@ -33,5 +42,5 @@ myApp.config(function($routeProvider, $locationProvider) {
     })
     .otherwise({
       redirectTo: 'home'
-    });
+    });    
 });
