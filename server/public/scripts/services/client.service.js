@@ -1,31 +1,31 @@
-myApp.service('ClientService', function($http, $location){
+myApp.service('ClientService', function ($http, $location) {
   console.log('ClientService Loaded');
   var self = this;
 
   self.currentClient = {};
 
-  self.clientList = [];
+  self.clientList = { list: [] };
 
   // REMOVE DEBUG DEFAULT PARAM
   self.getClient = (clientId = "59b7fecf2f675b95a5ad269c") => {
     console.log('ClientService.getClient', clientId);
 
-    $http.get('/client/' + clientId).then( (response) => {
+    $http.get('/client/' + clientId).then((response) => {
       console.log('client GET response', response);
-      self.currentClient = response;
+      self.currentClient = response.data;
       console.log('ClientService.currentClient', self.currentClient);
-    })
-  }
+    });
+  };
 
-  self.getClientList = (userId) => {
-    console.log('ClientService.getClient', userId);
-    
-        $http.get('/client/list/' + userId).then( (response) => {
-          console.log('client GET response', response);
-          self.clientList = response;
-          console.log('ClientService.clientList', self.clientList);
-        })
-      }
+  self.getClientList = () => {
+    console.log('ClientService.getClient');
+
+    $http.get('/client/list').then( (response) => {
+      console.log('client GET response', response);
+      self.clientList.list = response.data;
+      console.log('ClientService.clientList', self.clientList);
+    });
+  };
 
   self.addClient = (client) => {
     console.log('ClientService.addClient', client);
@@ -34,10 +34,10 @@ myApp.service('ClientService', function($http, $location){
     let then = new Date(client.date_of_birth);
     let timeDelta = Math.abs(now.getTime() - then.getTime());
     let ageInDays = Math.ceil(timeDelta / (1000 * 3600 * 24));
-    
+
     // console.log('ageInDays', ageInDays);
 
-    switch(true){
+    switch (true) {
       case (ageInDays <= 182):
         client.age = 'newborn';
         break;
@@ -61,8 +61,8 @@ myApp.service('ClientService', function($http, $location){
     }
 
     console.log('client age after calc', client.age);
-    
-    $http.post('/client', client).then( (response) => {
+
+    $http.post('/client', client).then((response) => {
       console.log('/client POST response', response);
     });
   }

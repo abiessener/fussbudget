@@ -2,10 +2,12 @@
   <h1>Client List</h1>
 </div>
 
+{{clc}}
+
 <div id="client-list-container">
-  <div ng-repeat="client in cc.clientList">
+  <div ng-repeat="client in clc.clientList.list">
     {{client.name}} | 
-    <button ng-click="cc.editClient(client)">
+    <button ng-click="clc.editClient(client)">
       Edit
     </button>
   </div>
