@@ -8,7 +8,7 @@ var DefaultSchedules = require('../models/defaultschedules.schema.js');
 router.post('/', (req,res) => {
   console.log('/client POST hit', req.body);
 
-  req.body.primary_caregiver = req.user.username;
+  req.body.primary_caregiver = req.user._id;
   
   // we have the user input in req.body, but we need to get our default schedule and put it on there or the schema will reject it
   let defaultSchedule = [];
@@ -37,12 +37,22 @@ router.post('/', (req,res) => {
       });
     }
   });
-
-
-
-  // ------------- DEBUG --------------- //
-  // res.sendStatus(201);
-
 })
 
+router.get('/list', (req,res) => {
+  console.log('\n------------------\n/list GET hit');
+
+  Client.find({primary_caregiver: req.user.id}, (err,data) => {
+    if (err){
+      console.log('/client find error:', err);
+      res.sendStatus(500);
+      return;
+    } else {
+      //happy path
+      console.log('data', data);
+      
+      res.send(data);
+    }
+  }); // end find
+})
 module.exports = router;
