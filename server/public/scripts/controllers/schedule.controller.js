@@ -1,18 +1,18 @@
-myApp.controller('ScheduleController', function(UserService, ScheduleService) {
+myApp.controller('ScheduleController', function(UserService, ScheduleService, ClientService) {
   console.log('ScheduleController created');
   var self = this;
 
-  self.loadedDefaultSchedule = { list: [] };
+  self.loadedScheduleTemplate = { list: [] };
   
-  self.getDefaultSchedule = (name = 'toddler-test') => {
-    console.log('schedulecontroller.GetDefaultSchedule');
+  self.getScheduleTemplate = (name = 'newborn') => {
+    console.log('schedulecontroller.getScheduleTemplate');
     
-    self.loadedDefaultSchedule = { list: [] };
-    ScheduleService.getDefaultSchedule(name);
-    self.loadedDefaultSchedule = ScheduleService.loadedDefaultSchedule;
+    self.loadedScheduleTemplate = { list: [] };
+    ScheduleService.getScheduleTemplate(name);
+    self.loadedScheduleTemplate = ScheduleService.loadedScheduleTemplate;
   }
 
   /**************DEBUG**************/
-  self.getDefaultSchedule();
+  self.getScheduleTemplate();
     
 });

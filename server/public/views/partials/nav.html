@@ -1,13 +1,34 @@
 <div ng-controller="NavController as nc">
-  <a href="#" >Fussbudget</a>
+  <a href="#">Fussbudget</a>
   <div>
     <a href="/user-edit">
         <img ng-src="{{nc.user.avatarUrl}}">
       </a>
   </div>
+
+  <!-- ******** THIS IS A TEMP NAV FOR DEBUGGING ********* -->
   <div>
     <a href="#/add-client">
       Add Client
     </a>
+    <br/>
+    <a href="#/client-list">
+      Client List
+    </a>
+    <br/>
+    <a href="#/schedule">
+      Schedule!
+    </a>
+    <br/>
+    <a href="#/home">
+      Home
+    </a>
+    <br/>
+    <a href="#/manage-client">
+      Manage Client
+    </a>
+
   </div>
+  <!-- ******** END TEMP NAV ********* -->
+
 </div>

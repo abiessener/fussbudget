@@ -2,6 +2,31 @@ myApp.service('ClientService', function($http, $location){
   console.log('ClientService Loaded');
   var self = this;
 
+  self.currentClient = {};
+
+  self.clientList = [];
+
+  // REMOVE DEBUG DEFAULT PARAM
+  self.getClient = (clientId = "59b7fecf2f675b95a5ad269c") => {
+    console.log('ClientService.getClient', clientId);
+
+    $http.get('/client/' + clientId).then( (response) => {
+      console.log('client GET response', response);
+      self.currentClient = response;
+      console.log('ClientService.currentClient', self.currentClient);
+    })
+  }
+
+  self.getClientList = (userId) => {
+    console.log('ClientService.getClient', userId);
+    
+        $http.get('/client/list/' + userId).then( (response) => {
+          console.log('client GET response', response);
+          self.clientList = response;
+          console.log('ClientService.clientList', self.clientList);
+        })
+      }
+
   self.addClient = (client) => {
     console.log('ClientService.addClient', client);
 
