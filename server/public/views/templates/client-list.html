@@ -1,0 +1,12 @@
+<div>
+  <h1>Client List</h1>
+</div>
+
+<div id="client-list-container">
+  <div ng-repeat="client in cc.clientList">
+    {{client.name}} | 
+    <button ng-click="cc.editClient(client)">
+      Edit
+    </button>
+  </div>
+</div>

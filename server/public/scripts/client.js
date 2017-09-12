@@ -31,6 +31,24 @@ myApp.config(function($routeProvider, $locationProvider) {
         }
       }
     })
+    .when('/manage-client', {
+      templateUrl: '/views/templates/manage-client.html',
+      controller: 'ManageClientController as mcc',
+      resolve: {
+        getuser : function(UserService){
+          return UserService.getuser();
+        }
+      }
+    })
+    .when('/client-list', {
+      templateUrl: '/views/templates/client-list.html',
+      controller: 'ClientListController as clc',
+      resolve: {
+        getuser : function(UserService){
+          return UserService.getuser();
+        }
+      }
+    })
     .when('/schedule', {
       templateUrl: '/views/templates/schedule.html',
       controller: 'ScheduleController as sc',

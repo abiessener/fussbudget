@@ -78,3 +78,11 @@ li a:hover {
   text-decoration: underline;
   color: #eee;
 }
+
+#client-list-container{
+  margin: auto;
+  width: 80%;
+  height: 150px;
+  border: 2px solid #ccc;
+  overflow-y: scroll;
+}
