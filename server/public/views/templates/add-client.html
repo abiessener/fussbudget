@@ -7,11 +7,52 @@
       <input ng-model="client.name">
     </label>
     <label>Date of Birth: 
-        <md-datepicker ng-model="client.dob" md-placeholder="Enter date"></md-datepicker>
+        <md-datepicker ng-model="client.date_of_birth" md-placeholder="Enter date"></md-datepicker>
     </label>
     <label>Notes: 
       <input ng-model="client.notes">
     </label>
+    <label>Avatar URL: 
+      <input ng-model="client.avatar_url">
+    </label>
     <button>Submit</button>        
   </form>
 </div>
+
+<!-- ******** FOR REFERENCE *********
+  ClientSchema = new Schema({
+    name: {type: String, required: true},
+    avatar_url: {type: String},
+    date_of_birth: {type: Date},
+    schedule_template: [
+      {
+        name: {type: String, required: true},
+        time: {type: Number, required: true},
+        duration: {type: Number, required: true},
+        notes: {type: String}
+      }
+    ],
+    schedule: [
+      {
+        name: {type: String, required: true},
+        time: {type: Number, required: true},
+        duration: {type: Number, required: true},
+        notes: {type: String}
+      }
+    ],
+    primary_caregiver: {type: String, required: true},
+    secondary_caregivers: [
+      {
+        name: {type: String}
+      }
+    ],
+    history: [
+      {
+        timestamp: {type: Date, default: Date.now},
+        event_name: {type: String, required: true},
+        interaction: {type: String, required: true},
+        times_snoozed: {type: Number, default: 0},
+        time_offset: {type: Number, default: 0}
+      }
+    ]
+  },

@@ -6,11 +6,11 @@ myApp.service('ClientService', function($http, $location){
     console.log('ClientService.addClient', client);
 
     let now = new Date();
-    let then = new Date(client.dob);
+    let then = new Date(client.date_of_birth);
     let timeDelta = Math.abs(now.getTime() - then.getTime());
     let ageInDays = Math.ceil(timeDelta / (1000 * 3600 * 24));
-
-    console.log('ageInDays', ageInDays);
+    
+    // console.log('ageInDays', ageInDays);
 
     switch(true){
       case (ageInDays <= 182):
