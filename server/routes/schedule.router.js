@@ -5,10 +5,12 @@ var path = require('path');
 var DefaultSchedules = require('../models/defaultschedules.schema.js');
 var Client = require('../models/client.schema.js');
 
-router.get('/defaults/:name', (req,res) => {
+router.get('/defaults/:name', (req, res) => {
   console.log('/schedule/defaults/' + req.params.name + 'hit');
-  DefaultSchedules.findOne({ 'name': req.params.name }, (err,data) => {
-    if (err){
+  DefaultSchedules.findOne({
+    'name': req.params.name
+  }, (err, data) => {
+    if (err) {
       console.log('/schedule/defaults find error:', err);
       res.sendStatus(500);
     } else {
@@ -18,10 +20,12 @@ router.get('/defaults/:name', (req,res) => {
   })
 });
 
-router.get('/template/:id', (req,res) => {
+router.get('/template/:id', (req, res) => {
   console.log('/schedule/template/' + req.params.id + 'hit');
-  Client.findOne({ '_id': req.params.id }, (err,data) => {
-    if (err){
+  Client.findOne({
+    '_id': req.params.id
+  }, (err, data) => {
+    if (err) {
       console.log('/schedule/template find error:', err);
       res.sendStatus(500);
     } else {
@@ -32,15 +36,40 @@ router.get('/template/:id', (req,res) => {
 });
 
 
-router.get('/:id', (req,res) => {
+router.get('/:id', (req, res) => {
   console.log('/schedule/' + req.params.id + 'hit');
-  Client.findOne({ '_id': req.params.id }, (err,data) => {
-    if (err){
+  Client.findOne({
+    '_id': req.params.id
+  }, (err, data) => {
+    if (err) {
       console.log('/schedule find error:', err);
       res.sendStatus(500);
     } else {
       //happy path
       res.send(data.schedule);
+    }
+  })
+});
+
+// takes an array of events and puts them into the client with the id route param's events array
+router.put('/:id', (req, res) => {
+  console.log('\n------------------\n/schedule/' + req.params.id + ' hit');
+  console.log('req.params.id', req.params.id);
+  console.log('req.body', req.body);
+  
+  Client.findByIdAndUpdate({
+    _id: req.params.id
+  }, {
+    $set: {
+      schedule: req.body
+    }
+  }, (err, data) => {
+    if (err) {
+      console.log('/schedule findByIdAndUpdate error:', err);
+      res.sendStatus(500);
+    } else {
+      //happy path
+      res.sendStatus(200);
     }
   })
 });

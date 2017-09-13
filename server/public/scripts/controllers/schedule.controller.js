@@ -2,10 +2,8 @@ myApp.controller('ScheduleController', function(UserService, ScheduleService, Cl
   console.log('ScheduleController created');
   var self = this;
 
-  self.loadedScheduleTemplate = { list: [] };
+  self.loadedSchedule = { list: [] };
   
-  ClientService.getCurrentClient($routeParams.id);
-
   self.getScheduleTemplate = (id) => {
     console.log('schedulecontroller.getScheduleTemplate');
     
@@ -14,10 +12,6 @@ myApp.controller('ScheduleController', function(UserService, ScheduleService, Cl
     self.loadedScheduleTemplate = ScheduleService.loadedScheduleTemplate;
   }
 
-  self.getScheduleTemplate($routeParams.id);
-  
-  self.loadedSchedule = { list: [] };
-  
   self.getSchedule = (client) => {
     console.log('schedulecontroller.getSchedule');
     
@@ -26,5 +20,12 @@ myApp.controller('ScheduleController', function(UserService, ScheduleService, Cl
     self.loadedSchedule = ScheduleService.loadedSchedule;
   }
 
+  // things to run on page load
+  ClientService.getCurrentClient($routeParams.id); // get the current client
+  
+  self.getScheduleTemplate($routeParams.id); // get the default schedule for our current client
+  
+  
+  
 
 });
