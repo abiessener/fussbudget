@@ -31,7 +31,7 @@ myApp.config(function($routeProvider, $locationProvider) {
         }
       }
     })
-    .when('/manage-client', {
+    .when('/manage-client/:id', {
       templateUrl: '/views/templates/manage-client.html',
       controller: 'ManageClientController as mcc',
       resolve: {

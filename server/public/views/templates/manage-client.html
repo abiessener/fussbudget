@@ -2,16 +2,28 @@
 
 <main>
   <div id="manage-client-avatar-container">
-    <img id="manage-client-avatar" ng-src="mcc.currentClient.avatar_url">
-    <p id="manage-client-avatar-text">(click picture to update)</p>
+    <img id="manage-client-avatar" ng-src="{{mcc.currentClient.client[0].avatar_url}}">
+    <span id="manage-client-avatar-text">(click picture to update)</span>
   </div>
+  <hr>
+  <div id="manage-client-form-container">
+    <form ng-submit="mcc.updateClient()">
+      <label for="manage-client-name-input">Name: </label>
+      <input id="manage-client-name-input" ng-model="mcc.currentClient.client[0].name">
+      <label for="manage-client-dob-input">Date of Birth: </label>
+      <input id="manage-client-dob-input" ng-model="mcc.currentClient.client[0].date_of_birth">
+      <label for="manage-client-note-input">Notes: </label>
+      <input id="manage-client-notes-input" ng-model="mcc.currentClient.client[0].notes">
+      <button ng-click="mcc.editCurrentClient()">Submit</button>
+    </form>
+  </div>
+  <hr>
+  <button ng-click="mcc.deleteCurrentClient.client[0]()">Delete</button>
 
-  <form ng-submit="mcc.updateClient">
-    <input ng-model="mcc.currentClient.name">
-    <input ng-model="mcc.currentClient.date_of_birth">
-    <input ng-model="mcc.currentClient.notes">
-  </form>
+  <!-- whoa this isn't working at all
+    need to figure out this primary caregiver nonsense
+    in the meantime, we'll just have the delete button without the ng-if -->
 
-  <button ng-model="mcc.deleteCurrentClient()" ng-if="mcc.isPrimaryCaregiver">Delete</button>
-  <button ng-model="mcc.leaveCurrentClient()" ng-if="!mcc.isPrimaryCaregiver">Leave</button>
+  <!-- <button ng-model="mcc.deleteCurrentClient.client[0]()" ng-if="mcc.isPrimaryCaregiver">Delete</button>
+  <button ng-model="mcc.leaveCurrentClient.client[0]()" ng-if="!mcc.isPrimaryCaregiver">Leave</button> -->
 </main>

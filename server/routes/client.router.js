@@ -55,4 +55,23 @@ router.get('/list', (req,res) => {
     }
   }); // end find
 })
+
+router.get('/:id', (req,res) => {
+  console.log('\n------------------\n/client GET hit with id:', req.params.id);
+
+  Client.find({_id: req.params.id}, (err,data) => {
+    if (err){
+      console.log('/client find error:', err);
+      res.sendStatus(500);
+      return;
+    } else {
+      //happy path
+      console.log('data', data);
+      
+      res.send(data);
+    }
+  }); // end find
+})
+
+
 module.exports = router;

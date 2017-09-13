@@ -2,24 +2,26 @@ myApp.service('ClientService', function ($http, $location) {
   console.log('ClientService Loaded');
   var self = this;
 
-  self.currentClient = {};
+  self.currentClient = {
+    client: []
+};
 
   self.clientList = {
     list: []
   };
 
-  // REMOVE DEBUG DEFAULT PARAM
-  self.getClient = (clientId) => {
+  // called from client-related controllers (manage-client) on page load. sets self.currentClient to the whole client object 
+  self.getCurrentClient = (clientId) => {
     console.log('ClientService.getClient', clientId);
 
     if (clientId != undefined) {
       $http.get('/client/' + clientId).then((response) => {
-        console.log('client GET response', response);
-        self.currentClient = response.data;
+        console.log('ClientService.getClient GET response', response);
+        self.currentClient.client = response.data;
         console.log('ClientService.currentClient', self.currentClient);
       });
     } else {
-      console.log('getClient needs a clientId! bail out!');
+      console.log('ClientService.getClient needs a clientId! bail out!');
     }
   };
 
@@ -88,6 +90,9 @@ myApp.service('ClientService', function ($http, $location) {
     })
   }; // end deleteCurrentClient()
 
+
+  // ------- LEAVE CLIENT IS NOT YET IMPLEMENTED -------
+  // ------- NEEDS SECONDARY CAREGIVER LOGIC, WHICH IS FOR LATER --------
 
   // called from manage-client view by the user clicking a button. 
   // comes from manage-client.controller.js. 
