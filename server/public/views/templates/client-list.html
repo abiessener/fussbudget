@@ -1,14 +1,12 @@
 <div>
   <h1>Client List</h1>
 </div>
-
-{{clc}}
-
 <div id="client-list-container">
   <div ng-repeat="client in clc.clientList.list">
     {{client.name}} | 
     <button ng-click="clc.editClient(client)">
       Edit
     </button>
+    <hr>
   </div>
 </div>
