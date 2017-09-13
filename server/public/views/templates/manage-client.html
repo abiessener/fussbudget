@@ -1,1 +1,17 @@
 <h1>Manage Client</h1>
+
+<main>
+  <div id="manage-client-avatar-container">
+    <img id="manage-client-avatar" ng-src="mcc.currentClient.avatar_url">
+    <p id="manage-client-avatar-text">(click picture to update)</p>
+  </div>
+
+  <form ng-submit="mcc.updateClient">
+    <input ng-model="mcc.currentClient.name">
+    <input ng-model="mcc.currentClient.date_of_birth">
+    <input ng-model="mcc.currentClient.notes">
+  </form>
+
+  <button ng-model="mcc.deleteCurrentClient()" ng-if="mcc.isPrimaryCaregiver">Delete</button>
+  <button ng-model="mcc.leaveCurrentClient()" ng-if="!mcc.isPrimaryCaregiver">Leave</button>
+</main>

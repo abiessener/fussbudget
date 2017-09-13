@@ -1,13 +1,13 @@
-myApp.controller('ClientController', function(UserService, ClientService, $location) {
-  console.log('ClientController created');
+myApp.controller('AddClientController', function(UserService, ClientService, $location) {
+  console.log('AddClientController created');
   var self = this;
   
   self.addClient = (clientToAdd) => {
-    console.log('ClientController.addClient', clientToAdd);
+    console.log('AddClientController.addClient', clientToAdd);
     
     ClientService.addClient(clientToAdd);
 
-    // $location.path('/schedule');
+    $location.path('/schedule');
   }
 
   /**************DEBUG**************/

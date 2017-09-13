@@ -4,23 +4,29 @@ myApp.service('ClientService', function ($http, $location) {
 
   self.currentClient = {};
 
-  self.clientList = { list: [] };
+  self.clientList = {
+    list: []
+  };
 
   // REMOVE DEBUG DEFAULT PARAM
-  self.getClient = (clientId = "59b7fecf2f675b95a5ad269c") => {
+  self.getClient = (clientId) => {
     console.log('ClientService.getClient', clientId);
 
-    $http.get('/client/' + clientId).then((response) => {
-      console.log('client GET response', response);
-      self.currentClient = response.data;
-      console.log('ClientService.currentClient', self.currentClient);
-    });
+    if (clientId != undefined) {
+      $http.get('/client/' + clientId).then((response) => {
+        console.log('client GET response', response);
+        self.currentClient = response.data;
+        console.log('ClientService.currentClient', self.currentClient);
+      });
+    } else {
+      console.log('getClient needs a clientId! bail out!');
+    }
   };
 
   self.getClientList = () => {
     console.log('ClientService.getClient');
 
-    $http.get('/client/list').then( (response) => {
+    $http.get('/client/list').then((response) => {
       console.log('client GET response', response);
       self.clientList.list = response.data;
       console.log('ClientService.clientList', self.clientList);
@@ -67,4 +73,34 @@ myApp.service('ClientService', function ($http, $location) {
     });
   }
 
+  // called from manage-client view by the user clicking a button. 
+  // comes from manage-client.controller.js. 
+  // only available if the user IS the primary caregiver. does what it says
+  self.deleteCurrentClient = () => {
+    console.log('ClientService.deleteCurrentClient() _id:', self.currentClient._id);
+
+    $http.delete('/client/' + self.currentClient._id).then((response) => {
+      // success
+      console.log('client deleted');
+    }, (response) => {
+      // failure - if this happens it's a serious error, the intended workflow does not include this possibility
+      console.log('client delete error, something is wrong');
+    })
+  }; // end deleteCurrentClient()
+
+
+  // called from manage-client view by the user clicking a button. 
+  // comes from manage-client.controller.js. 
+  // only available if the user IS NOT the primary caregiver. removes the user as a secondary caregiver of the current client
+  self.leaveCurrentClient = () => {
+    console.log('ClientService.leaveCurrentClient() _id:', self.currentClient._id);
+
+    $http.put('/client/' + self.currentClient._id).then((response) => {
+      // success
+      console.log('client left');
+    }, (response) => {
+      // failure - if this happens it's a serious error, the intended workflow does not include this possibility
+      console.log('client leave error, something is wrong');
+    })
+  }; // end leaveCurrentClient()
 })
