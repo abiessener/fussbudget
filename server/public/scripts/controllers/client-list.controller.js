@@ -14,5 +14,9 @@ myApp.controller('ClientListController', function(UserService, ClientService, $l
     $location.path('/manage-client/' + client._id);
   }
 
-
+  self.goToSchedule = (client) => {
+    console.log('ClientListController.goToSchedule:', client);
+    $location.path('/schedule/' + client._id);
+  }
+  
 });

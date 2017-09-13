@@ -3,10 +3,15 @@
 </div>
 <div id="client-list-container">
   <div ng-repeat="client in clc.clientList.list">
+    <div class="client-list-avatar-container" ng-click="clc.goToSchedule(client)">
+      <img class="client-list-avatar" ng-src="{{client.avatar_url}}">
+    </div>
+
     {{client.name}} | 
     <button ng-click="clc.editClient(client)">
       Edit
     </button>
     <hr>
-  </div>
+  </div> <!-- end ng-repeat -->
+
 </div>
