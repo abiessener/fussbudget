@@ -25,6 +25,26 @@ myApp.service('ClientService', function ($http, $location) {
     }
   };
 
+  // called from the manage-client view, takes in a whole client object and sends it to the ol' server
+  self.editCurrentClient = (client) => {
+    console.log('ClientService.editCurrentClient()', client);
+
+    // this if should never fail, ideally. and as we all know, everything is always ideal
+    if(client._id != undefined){
+      $http.put('/client', client).then((response => {
+        // success
+        console.log('client edited');
+      }), (response) => {
+        // server error
+        console.log('/client PUT server error:', response);
+      })
+    } else {
+      // sad path
+      console.log('ClientService.editClient needs a client! bail out!');
+    }
+    
+  } // end editCurrentClient()
+
   self.getClientList = () => {
     console.log('ClientService.getClient');
 

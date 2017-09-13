@@ -73,5 +73,29 @@ router.get('/:id', (req,res) => {
   }); // end find
 })
 
+router.put('/', (req,res) => {
+  console.log('\n------------------\n/client PUT hit with client:', req.body);
+
+  let clientToUpdate = req.body;
+
+  Client.findByIdAndUpdate({
+    _id: clientToUpdate._id
+  }, {
+    $set: {
+      name: clientToUpdate.name,
+      date_of_birth: clientToUpdate.date_of_birth,
+      notes: clientToUpdate.notes,
+      avatar_url: clientToUpdate.avatar_url
+    }
+  }, (err,data) => {
+    if (err){
+      console.log('findByIdAndUpdate error:', err);
+      res.sendStatus(500);
+    } else {
+      res.sendStatus(200);
+    }
+  }); // end findByIdAndUpdate
+  
+}); // end PUT route
 
 module.exports = router;
