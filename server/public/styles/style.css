@@ -86,3 +86,17 @@ li a:hover {
   border: 2px solid #ccc;
   overflow-y: scroll;
 }
+
+#manage-client-avatar-container{
+  width: 200px;
+  margin: auto;
+  height: 220px;
+  border: 2px solid grey;
+}
+
+#manage-client-avatar{
+  height: 200px;
+  width: 200px;
+  padding: 0;
+  margin: 0;
+}

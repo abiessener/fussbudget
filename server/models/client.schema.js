@@ -36,7 +36,8 @@ var ClientSchema = new Schema({
         times_snoozed: {type: Number, default: 0},
         time_offset: {type: Number, default: 0}
       }
-    ]
+    ],
+    notes: {type: String}
   },
   {
     collection: 'clients'

@@ -24,14 +24,14 @@ myApp.config(function($routeProvider, $locationProvider) {
     })
     .when('/add-client', {
       templateUrl: '/views/templates/add-client.html',
-      controller: 'ClientController as cc',
+      controller: 'AddClientController as acc',
       resolve: {
         getuser : function(UserService){
           return UserService.getuser();
         }
       }
     })
-    .when('/manage-client', {
+    .when('/manage-client/:id', {
       templateUrl: '/views/templates/manage-client.html',
       controller: 'ManageClientController as mcc',
       resolve: {

@@ -7,6 +7,12 @@ myApp.controller('ClientListController', function(UserService, ClientService, $l
   ClientService.getClientList();
   self.clientList = ClientService.clientList;
   
+  // called by button press in client-list.html
+  // sets the current client in ClientService, then sends the user to the manage-client view
+  self.editClient = (client) => {
+    console.log('ClientListController.editClient:', client);
+    $location.path('/manage-client/' + client._id);
+  }
 
 
 });
