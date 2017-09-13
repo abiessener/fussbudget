@@ -48,9 +48,7 @@ router.get('/list', (req,res) => {
       res.sendStatus(500);
       return;
     } else {
-      //happy path
-      console.log('data', data);
-      
+      //happy path      
       res.send(data);
     }
   }); // end find

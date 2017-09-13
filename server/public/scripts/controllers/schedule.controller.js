@@ -20,10 +20,16 @@ myApp.controller('ScheduleController', function(UserService, ScheduleService, Cl
     self.loadedSchedule = ScheduleService.loadedSchedule;
   }
 
+  self.schedulePageLoad = (clientId) => {
+    console.log('ScheduleController.schedulePageLoad', clientId);
+    ScheduleService.schedulePageLoad(clientId);
+    
+  }
+
   // things to run on page load
   ClientService.getCurrentClient($routeParams.id); // get the current client
   
-  self.getScheduleTemplate($routeParams.id); // get the default schedule for our current client
+  self.schedulePageLoad($routeParams.id); // do our page load stuff in the service
   
   
   
