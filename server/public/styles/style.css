@@ -126,3 +126,15 @@ li a:hover {
   height: 200px;
   width: 200px;
 }
+
+.event-complete{
+  background-color: grey;
+}
+
+.event-dismiss{
+  background-color: #DB2B2B;
+}
+
+.event-snooze{
+  background-color: #F3F576;
+}

@@ -26,6 +26,21 @@ myApp.controller('ScheduleController', function(UserService, ScheduleService, Cl
     
   }
 
+  self.completeEvent = (event) => {
+    event.class = 'event-complete';
+    //also database things    
+  }
+
+  self.dismissEvent = (event) => {
+    event.class = 'event-dismiss';
+    //also database things    
+  }
+
+  self.snoozeEvent = (event) => {
+    event.class = 'event-snooze';
+    //also database things    
+  }
+
   // things to run on page load
   ClientService.getCurrentClient($routeParams.id); // get the current client
   self.currentClient = ClientService.currentClient;
