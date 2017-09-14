@@ -127,6 +127,20 @@ li a:hover {
   width: 200px;
 }
 
+#nav-avatar-container{
+  height: 70px;
+  width: 70px;
+  padding: 0;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+#nav-avatar{
+  height: 100%;
+  width: 100%;
+}
+
+
 .event-complete{
   background-color: grey;
 }

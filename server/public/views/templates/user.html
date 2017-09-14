@@ -1,5 +1,30 @@
-<div class="container">
+<h1>Manage User</h1>
 
-    <h1 id="welcome" class="lead">Welcome, {{uc.userObject.userName}}!</h1>
-    <button class="btn btn-default" ng-click="uc.userService.logout()">Log Out</button>
-</div>
+<main>
+    <div id="manage-user-avatar-container">
+        <img id="manage-user-avatar" ng-src="{{uc.userObject.avatar_url}}">
+        <span id="manage-user-avatar-text">(click picture to update*)</span>
+    </div>
+    <hr>
+    <div id="manage-user-form-container">
+        <form>
+            <label for="manage-user-name-input">Name: </label>
+            <input id="manage-user-name-input" ng-model="uc.userObject.userName">
+            <br/>
+            <button ng-click="uc.editCurrentUser(uc.userObject.userName, uc.userObject.avatar_url)">Submit</button>
+        </form>
+    </div>
+    <hr>
+
+    <button ng-click="uc.userService.logout()">Log Out</button>
+
+</main>
+
+<footer>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <em>*whenever that functionality gets built. currently waiting for digging into angular material because this should be a pop-up, and also maybe we could be hosting on filestack eventually</em>
+</footer>

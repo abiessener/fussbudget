@@ -92,6 +92,7 @@ myApp.service('ClientService', function ($http, $location) {
 
     $http.post('/client', client).then((response) => {
       console.log('/client POST response', response);
+      $location.path('/client-list');
     });
   }
 

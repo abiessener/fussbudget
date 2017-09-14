@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var User = require('../models/user.schema');
 
 // Handles Ajax request for user information if user is authenticated
 router.get('/', function(req, res) {
@@ -9,7 +10,8 @@ router.get('/', function(req, res) {
     // send back user object from database
     console.log('logged in', req.user);
     var userInfo = {
-      username : req.user.username
+      username : req.user.username,
+      avatar_url: req.user.avatar_url
     };
     res.send(userInfo);
   } else {
@@ -26,6 +28,28 @@ router.get('/logout', function(req, res) {
   console.log('Logged out');
   req.logOut();
   res.sendStatus(200);
+});
+
+// update user information
+router.put('/', function(req,res){
+  console.log('/user PUT hit: ', req.body);
+
+  User.findByIdAndUpdate({
+    _id: req.user.id
+  }, {
+    $set: {
+      username: req.body.username,
+      avatar_url: req.body.avatar_url
+    }
+  }, (err, data) => {
+    if (err) {
+      console.log('/user PUT db error:', err);
+      res.sendStatus(500);
+    } else {
+      //happy path
+      res.sendStatus(200);
+    }
+  })
 });
 
 

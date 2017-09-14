@@ -3,24 +3,25 @@
     Schedule
   </h1>
   <div id="schedule-header">
-    <div id="schedule-avatar-container">
-      <img id="schedule-avatar" ng-src="{{sc.currentClient.client[0].avatar_url}}">
-      <strong>{{sc.currentClient.client[0].name}}</strong>
-    </div>
+    <a ng-href="#/manage-client/{{sc.currentClient.client[0]._id}}">
+      <div id="schedule-avatar-container">
+        <img id="schedule-avatar" ng-src="{{sc.currentClient.client[0].avatar_url}}">
+        <strong>{{sc.currentClient.client[0].name}}</strong>
+      </div>
+    </a>
   </div>
 
   <button ng-click="sc.editWakeUp()">edit wakeup</button>
   <button ng-click="sc.addEvent()">add event</button>
   <button ng-click="sc.saveAsDefault()">save as default</button>
-  
+
   <br/>
   <hr>
   <br/>
-  
+
   <div id="schedule-list-container">
     <div class="schedule-event" ng-class="event.class" ng-repeat="event in sc.loadedSchedule.list | orderBy: 'time'">
-      {{event.name}}<br/>
-      {{event.time | date: "hh:mm a" : "Z"}} 
+      {{event.name}}<br/> {{event.time | date: "hh:mm a" : "Z"}}
       <button ng-click="sc.modifyEvent(event, 'event-complete')">Complete</button>
       <button ng-click="sc.modifyEvent(event, 'event-dismiss')">Dismiss</button>
       <button ng-click="sc.modifyEvent(event, 'event-snooze')">Snooze</button>
