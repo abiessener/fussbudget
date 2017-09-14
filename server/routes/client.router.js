@@ -5,29 +5,31 @@ var path = require('path');
 var Client = require('../models/client.schema.js');
 var DefaultSchedules = require('../models/defaultschedules.schema.js');
 
-router.post('/', (req,res) => {
+router.post('/', (req, res) => {
   console.log('/client POST hit', req.body);
 
   req.body.primary_caregiver = req.user._id;
-  
+
   // we have the user input in req.body, but we need to get our default schedule and put it on there or the schema will reject it
   let defaultSchedule = [];
-  DefaultSchedules.findOne({ 'name': req.body.age }, (err,data) => {
-    if (err){
+  DefaultSchedules.findOne({
+    'name': req.body.age
+  }, (err, data) => {
+    if (err) {
       console.log('/client find error:', err);
       res.sendStatus(500);
       return;
     } else {
       //happy path
       // console.log('------------\ndata:', data);
-      
+
       req.body.schedule_template = data.events;
       // console.log('req.body.schedule_template:', req.body.schedule_template);
-      
+
       let clientToSave = new Client(req.body);
-      
-      clientToSave.save((err,data) => {
-        if (err){
+
+      clientToSave.save((err, data) => {
+        if (err) {
           console.log('/client POST save error:', err);
           res.sendStatus(500);
         } else {
@@ -39,11 +41,13 @@ router.post('/', (req,res) => {
   });
 })
 
-router.get('/list', (req,res) => {
+router.get('/list', (req, res) => {
   console.log('\n------------------\n/list GET hit');
 
-  Client.find({primary_caregiver: req.user.id}, (err,data) => {
-    if (err){
+  Client.find({
+    primary_caregiver: req.user.id
+  }, (err, data) => {
+    if (err) {
       console.log('/client find error:', err);
       res.sendStatus(500);
       return;
@@ -54,24 +58,26 @@ router.get('/list', (req,res) => {
   }); // end find
 })
 
-router.get('/:id', (req,res) => {
+router.get('/:id', (req, res) => {
   console.log('\n------------------\n/client GET hit with id:', req.params.id);
 
-  Client.find({_id: req.params.id}, (err,data) => {
-    if (err){
+  Client.find({
+    _id: req.params.id
+  }, (err, data) => {
+    if (err) {
       console.log('/client find error:', err);
       res.sendStatus(500);
       return;
     } else {
       //happy path
       // console.log('data', data);
-      
+
       res.send(data);
     }
   }); // end find
 })
 
-router.put('/', (req,res) => {
+router.put('/', (req, res) => {
   console.log('\n------------------\n/client PUT hit with client:', req.body);
 
   let clientToUpdate = req.body;
@@ -85,15 +91,31 @@ router.put('/', (req,res) => {
       notes: clientToUpdate.notes,
       avatar_url: clientToUpdate.avatar_url
     }
-  }, (err,data) => {
-    if (err){
+  }, (err, data) => {
+    if (err) {
       console.log('findByIdAndUpdate error:', err);
       res.sendStatus(500);
     } else {
       res.sendStatus(200);
     }
   }); // end findByIdAndUpdate
-  
+
 }); // end PUT route
+
+router.delete('/:id', (req, res) => {
+  console.log('\n------------------\n/client DELETE hit with id:', req.params.id);
+
+  Client.findByIdAndRemove({
+    _id: req.params.id
+  }, (err, data) => {
+    if (err){
+      console.log('findByIdAndRemove error:', err);
+      res.sendStatus(500);
+    } else {
+      res.sendStatus(200);
+    }
+  });
+
+}) // end DELETE route
 
 module.exports = router;

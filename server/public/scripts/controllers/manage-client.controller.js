@@ -20,8 +20,8 @@ myApp.controller('ManageClientController', function (UserService, ClientService,
   }
 
   // only available if the user IS the primary caregiver. does what it says and returns the user to the client-list view.
-  self.deleteCurrentClient = () => {
-    ClientService.deleteCurrentClient();
+  self.deleteClient = () => {
+    ClientService.deleteClient($routeParams.id);
     // $location.path('/client-list')
   }
 
