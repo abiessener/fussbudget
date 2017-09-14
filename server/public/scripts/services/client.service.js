@@ -98,12 +98,18 @@ myApp.service('ClientService', function ($http, $location) {
   // called from manage-client view by the user clicking a button. 
   // comes from manage-client.controller.js. 
   // only available if the user IS the primary caregiver. does what it says
-  self.deleteCurrentClient = () => {
-    console.log('ClientService.deleteCurrentClient() _id:', self.currentClient._id);
+  self.deleteClient = (clientId) => {
+    console.log('ClientService.deleteClient() clientId:', clientId);
 
-    $http.delete('/client/' + self.currentClient._id).then((response) => {
+    $http.delete('/client/' + clientId).then((response) => {
       // success
       console.log('client deleted');
+
+      //------------------
+      // TBD: Confirm modal
+      //------------------
+
+      $location.path('/client-list');
     }, (response) => {
       // failure - if this happens it's a serious error, the intended workflow does not include this possibility
       console.log('client delete error, something is wrong');
