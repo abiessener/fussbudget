@@ -119,4 +119,23 @@ router.put('/modify/:id', (req, res) => {
   })
 });
 
+router.put('/defaults/:id', (req, res) => {
+  console.log('\n-------------------\n/schedule/defaults/' + req.params.id + ' hit');
+  Client.findByIdAndUpdate({
+    _id: req.params.id
+  }, {
+    $set: {
+      schedule_template: req.body.schedule
+    }
+  }, (err, data) => {
+    if (err) {
+      console.log('/schedule/defaults find error:', err);
+      res.sendStatus(500);
+    } else {
+      //happy path
+      res.sendStatus(200);
+    }
+  })
+});
+
 module.exports = router;

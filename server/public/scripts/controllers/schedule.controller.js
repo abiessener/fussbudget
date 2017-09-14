@@ -42,6 +42,25 @@ myApp.controller('ScheduleController', function(UserService, ScheduleService, Cl
     self.pushSchedule(self.loadedSchedule.list, $routeParams.id)
   }
 
+  self.editWakeUp = () => {
+    // this will do things eventually
+    console.log('scheduleController.editWakeUp() NOT YET IMPLEMENTED');
+    
+  }
+
+  self.addEvent = () => {
+    // this will do things eventually
+    console.log('scheduleController.addEvent() NOT YET IMPLEMENTED');
+    
+  }
+
+  self.saveAsDefault = () => {
+    // this will do things eventually
+    console.log('scheduleController.saveAsDefault() NOT YET IMPLEMENTED');
+    ScheduleService.pushDefaultSchedule(self.loadedSchedule.list, $routeParams.id);
+    
+  }
+
   // things to run on page load
   ClientService.getCurrentClient($routeParams.id); // get the current client
   self.currentClient = ClientService.currentClient;

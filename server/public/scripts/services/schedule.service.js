@@ -78,4 +78,15 @@ myApp.service('ScheduleService', function ($http, $location) {
     }); // end PUT
   }
 
+  self.pushDefaultSchedule = (schedule, clientId) => {
+    console.log('ScheduleService.pushSchedule', schedule);
+
+    $http.put('/schedule/defaults/' + clientId, { schedule: schedule }).then((response) => {
+      console.log('/schedule/defaults PUT response', response);
+      self.getSchedule(clientId);
+    }, (response) => {
+      console.log('/schedule/defaults PUT error! bad!', response);
+    }); // end PUT
+  }
+
 })
