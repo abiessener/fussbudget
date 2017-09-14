@@ -50,6 +50,10 @@ myApp.service('ClientService', function ($http, $location) {
 
     $http.get('/client/list').then((response) => {
       console.log('client GET response', response);
+      if (response.data.length === 1){
+        $location.path('#/schedule/' + response.data[0]._id);
+        return;
+      }
       self.clientList.list = response.data;
       console.log('ClientService.clientList', self.clientList);
     });
