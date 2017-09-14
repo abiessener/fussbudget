@@ -9,7 +9,7 @@ var DefaultScheduleSchema = new Schema({
     events: [
       {
         name: {type: String, required: true},
-        time: {type: Number, required: true},
+        time: {type: Date, required: true},
         duration: {type: Number, required: true},
         notes: String
       }

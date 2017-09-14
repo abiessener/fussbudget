@@ -31,6 +31,7 @@ myApp.controller('ScheduleController', function(UserService, ScheduleService, Cl
   self.currentClient = ClientService.currentClient;
   
   self.schedulePageLoad($routeParams.id); // do our page load stuff in the service
+  self.loadedSchedule = ScheduleService.loadedSchedule;
   
   
   

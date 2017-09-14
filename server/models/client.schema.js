@@ -10,7 +10,7 @@ var ClientSchema = new Schema({
     schedule_template: [
       {
         name: {type: String, required: true},
-        time: {type: Number, required: true},
+        time: {type: Date, required: true},
         duration: {type: Number, required: true},
         notes: {type: String}
       }
@@ -18,7 +18,7 @@ var ClientSchema = new Schema({
     schedule: [
       {
         name: {type: String, required: true},
-        time: {type: Number, required: true},
+        time: {type: Date, required: true},
         duration: {type: Number, required: true},
         notes: {type: String}
       }

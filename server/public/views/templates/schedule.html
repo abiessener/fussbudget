@@ -1,11 +1,28 @@
 <div class="container">
   <h1>
-    In Schedule
+    Schedule
   </h1>
   <div id="schedule-header">
     <div id="schedule-avatar-container">
       <img id="schedule-avatar" ng-src="{{sc.currentClient.client[0].avatar_url}}">
+      <strong>{{sc.currentClient.client[0].name}}</strong>
     </div>
   </div>
-  <p>{{sc.loadedSchedule}}</p>
+  
+  <br/>
+  <hr>
+  <br/>
+  
+  <div id="schedule-list-container">
+    <div class="schedule-event" ng-repeat="event in sc.loadedSchedule.list">
+      {{event.name}}<br/>
+      {{event.time | date: "hh:mm a" : "Z"}} 
+      <button ng-click="sc.completeEvent(event)">Complete</button>
+      <button ng-click="sc.dismissEvent(event)">Dismiss</button>
+      <button ng-click="sc.snoozeEvent(event)">Snooze</button>
+      <br/>
+      <hr>
+    </div>
+
+  </div>
 </div>
