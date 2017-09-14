@@ -1,9 +1,9 @@
 <div ng-controller="NavController as nc">
   <a href="#">Fussbudget</a>
-  <div>
+  <div id="nav-avatar-container">
     <a href="#/user">
-        <img ng-src="{{nc.user.avatarUrl}}">
-      </a>
+      <img id="nav-avatar" ng-src="{{nc.userObject.avatar_url}}">
+    </a>
   </div>
 
   <!-- ******** THIS IS A TEMP NAV FOR DEBUGGING ********* -->
