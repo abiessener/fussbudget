@@ -35,6 +35,10 @@ myApp.controller('ScheduleController', function(UserService, ScheduleService, Cl
   self.modifyEvent = (event, type) => {
     event.class = type;
     //also database things
+    if (type == "event-snooze"){
+      oldTime = new Date(event.time);
+      event.time = new Date(oldTime.getTime() + 900000); // add 15 minutes to time
+    }
     self.pushSchedule(self.loadedSchedule.list, $routeParams.id)
   }
 
