@@ -113,3 +113,16 @@ li a:hover {
   height: 100%;
   width: 100%;
 }
+
+#schedule-avatar-container{
+  height: 200px;
+  width: 200px;
+  padding: 0;
+  margin: 0 5;
+  display: inline-block;
+}
+
+#schedule-avatar{
+  height: 100%;
+  width: 100%;
+}

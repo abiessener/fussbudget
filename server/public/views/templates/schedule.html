@@ -3,9 +3,9 @@
     In Schedule
   </h1>
   <div id="schedule-header">
-    <div class="avatar-container">
-      <img ng-src="sc.currentClient.avatar_url">
+    <div id="schedule-avatar-container">
+      <img id="schedule-avatar" ng-src="{{sc.currentClient.client[0].avatar_url}}">
     </div>
   </div>
-  {{sc.loadedSchedule}}
+  <p>{{sc.loadedSchedule}}</p>
 </div>

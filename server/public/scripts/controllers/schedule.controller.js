@@ -28,6 +28,7 @@ myApp.controller('ScheduleController', function(UserService, ScheduleService, Cl
 
   // things to run on page load
   ClientService.getCurrentClient($routeParams.id); // get the current client
+  self.currentClient = ClientService.currentClient;
   
   self.schedulePageLoad($routeParams.id); // do our page load stuff in the service
   
