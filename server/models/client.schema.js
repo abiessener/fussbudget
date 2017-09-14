@@ -20,7 +20,8 @@ var ClientSchema = new Schema({
         name: {type: String, required: true},
         time: {type: Date, required: true},
         duration: {type: Number, required: true},
-        notes: {type: String}
+        notes: {type: String},
+        class: {type: String}
       }
     ],
     primary_caregiver: {type: String, required: true},

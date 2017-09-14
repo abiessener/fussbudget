@@ -100,5 +100,23 @@ router.put('/page-load', (req, res) => {
   });
 });
 
+router.put('/modify/:id', (req, res) => {
+  console.log('\n-------------------\n/schedule/modify/' + req.params.id + ' hit');
+  Client.findByIdAndUpdate({
+    _id: req.params.id
+  }, {
+    $set: {
+      schedule: req.body.schedule
+    }
+  }, (err, data) => {
+    if (err) {
+      console.log('/schedule/template find error:', err);
+      res.sendStatus(500);
+    } else {
+      //happy path
+      res.sendStatus(200);
+    }
+  })
+});
 
 module.exports = router;

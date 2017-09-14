@@ -17,9 +17,9 @@
     <div class="schedule-event" ng-class="event.class" ng-repeat="event in sc.loadedSchedule.list">
       {{event.name}}<br/>
       {{event.time | date: "hh:mm a" : "Z"}} 
-      <button ng-click="sc.completeEvent(event)">Complete</button>
-      <button ng-click="sc.dismissEvent(event)">Dismiss</button>
-      <button ng-click="sc.snoozeEvent(event)">Snooze</button>
+      <button ng-click="sc.modifyEvent(event, 'event-complete')">Complete</button>
+      <button ng-click="sc.modifyEvent(event, 'event-dismiss')">Dismiss</button>
+      <button ng-click="sc.modifyEvent(event, 'event-snooze')">Snooze</button>
       <br/>
       <hr>
     </div>

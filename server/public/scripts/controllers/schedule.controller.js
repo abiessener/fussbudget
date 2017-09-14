@@ -26,19 +26,16 @@ myApp.controller('ScheduleController', function(UserService, ScheduleService, Cl
     
   }
 
-  self.completeEvent = (event) => {
-    event.class = 'event-complete';
-    //also database things    
+  self.pushSchedule = (schedule, clientId) => {
+    console.log('ScheduleController.pushSchedule schedule', schedule);
+    console.log('ScheduleController.pushSchedule clientId', clientId);
+    ScheduleService.pushSchedule(schedule, clientId);
   }
 
-  self.dismissEvent = (event) => {
-    event.class = 'event-dismiss';
-    //also database things    
-  }
-
-  self.snoozeEvent = (event) => {
-    event.class = 'event-snooze';
-    //also database things    
+  self.modifyEvent = (event, type) => {
+    event.class = type;
+    //also database things
+    self.pushSchedule(self.loadedSchedule.list, $routeParams.id)
   }
 
   // things to run on page load
