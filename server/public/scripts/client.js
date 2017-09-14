@@ -49,7 +49,7 @@ myApp.config(function($routeProvider, $locationProvider) {
         }
       }
     })
-    .when('/schedule', {
+    .when('/schedule/:id', {
       templateUrl: '/views/templates/schedule.html',
       controller: 'ScheduleController as sc',
       resolve: {

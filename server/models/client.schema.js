@@ -4,12 +4,13 @@ var Schema = mongoose.Schema;
 // Mongoose Schema
 var ClientSchema = new Schema({
     name: {type: String, required: true},
-    avatar_url: {type: String},
+    avatar_url: {type: String, default: "https://www.prlog.org/11382934-super-full-moon-small.jpg"},
     date_of_birth: {type: Date},
+    last_awoken: {type: Date, default: new Date('1990-01-01')},
     schedule_template: [
       {
         name: {type: String, required: true},
-        time: {type: Number, required: true},
+        time: {type: Date, required: true},
         duration: {type: Number, required: true},
         notes: {type: String}
       }
@@ -17,9 +18,10 @@ var ClientSchema = new Schema({
     schedule: [
       {
         name: {type: String, required: true},
-        time: {type: Number, required: true},
+        time: {type: Date, required: true},
         duration: {type: Number, required: true},
-        notes: {type: String}
+        notes: {type: String},
+        class: {type: String}
       }
     ],
     primary_caregiver: {type: String, required: true},

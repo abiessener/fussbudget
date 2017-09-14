@@ -100,3 +100,41 @@ li a:hover {
   padding: 0;
   margin: 0;
 }
+
+.client-list-avatar-container{
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  margin: 0 5;
+  display: inline-block;
+}
+
+.client-list-avatar{
+  height: 100%;
+  width: 100%;
+}
+
+#schedule-avatar-container{
+  height: 220px;
+  width: 200px;
+  padding: 0;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+#schedule-avatar{
+  height: 200px;
+  width: 200px;
+}
+
+.event-complete{
+  background-color: grey;
+}
+
+.event-dismiss{
+  background-color: #DB2B2B;
+}
+
+.event-snooze{
+  background-color: #F3F576;
+}
