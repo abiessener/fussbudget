@@ -92,4 +92,19 @@ myApp.service('ScheduleService', function ($http, $location) {
     }); // end PUT
   }
 
+  self.deleteEvent = (clientId) => {
+    console.log('\n\n\ndeleteEvent', clientId);
+    console.log('self.eventToEdit', self.eventToEdit);
+    console.log('self.loadedSchedule', self.loadedSchedule);
+    for (let i = 0; i < self.loadedSchedule.list.length; i++) {
+      if (self.eventToEdit._id == self.loadedSchedule.list[i]._id){
+        console.log('match: ', i);
+        self.loadedSchedule.list.splice(i, 1);
+        console.log('self.loadedSchedule', self.loadedSchedule);
+        break;
+      }
+    }
+    self.pushSchedule(self.loadedSchedule.list, clientId);
+  }
+
 })
