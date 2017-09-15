@@ -56,4 +56,4 @@ Should be pretty straightforward to deploy to whatever Node environment you like
 * Thanks to my excellent classmates and instructors at Prime Digital Academy for all their advice, answers, and encouragement throughout the development process!
 
 ## Icons
-Favicon courtesy of www.icons8.com. Default user and client avatars made by Freepik from www.flaticon.com.
+Favicon, default user avatar, and default client avatar made by Freepik from www.flaticon.com.
