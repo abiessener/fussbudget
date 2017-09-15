@@ -49,9 +49,18 @@ myApp.controller('ScheduleController', function(UserService, ScheduleService, Cl
   }
 
   self.addEvent = () => {
-    // this will do things eventually
-    console.log('scheduleController.addEvent() NOT YET IMPLEMENTED');
+    console.log('scheduleController.addEvent()');
     $location.path('/add-event/' + $routeParams.id);
+  }
+
+  self.editEvent = (event) => {
+    console.log('scheduleController.editEvent()');
+    let time = new Date(event.time);
+    event.time = new Date (1970, 0, 1, time.getHours(), time.getMinutes());
+    event.time.setTime(event.time.getTime() + event.time.getTimezoneOffset()*60*1000);
+    
+    ScheduleService.eventToEdit = event;
+    $location.path('/edit-event/' + $routeParams.id);
   }
 
   self.saveAsDefault = () => {
