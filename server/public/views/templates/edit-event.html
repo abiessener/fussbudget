@@ -1,0 +1,24 @@
+<h1>Edit Event</h1>
+
+<div>
+  <div id="Edit-event-image-container">
+    <!-- some kind of graphic? -->
+  </div>
+  <hr>
+  <div id="edit-event-form-container">
+    <form novalidate ng-submit="eec.editEvent()" >
+      <label for="edit-event-name-input">Name: </label>
+      <input id="edit-event-name-input" ng-model="eec.eventToEdit.name">
+      <br/>
+      <input ng-model="eec.eventToEdit.time" type="time" ></input>
+      <br/>
+      <label for="edit-event-notes-input">Notes: </label>
+      <input id="edit-event-notes-input" ng-model="eec.eventToEdit.notes">
+      <br/>
+      <br/>
+      <button type="button" ng-click="eec.cancelEditEvent()">Cancel</button>
+      <button type="submit">Edit Event</button>
+    </form>
+  </div>
+  <button type="button" ng-click="eec.deleteEvent()">Delete</button>
+</div>
