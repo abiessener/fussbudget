@@ -7,7 +7,7 @@ var SALT_WORK_FACTOR = 10;
 var UserSchema = new Schema({
     username: {type: String, required: true, index: {unique: true}},
     password: {type: String, required: true},
-    avatar_url: {type: String, default: "https://avatars3.githubusercontent.com/u/28632815?v=4&u=74221393881e9d2886c2085195192f073a50226d"}
+    avatar_url: {type: String, default: "/images/user_default.png"}
 });
 
 // Called before adding a new user to the DB. Encrypts password.

@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 // Mongoose Schema
 var ClientSchema = new Schema({
     name: {type: String, required: true},
-    avatar_url: {type: String, default: "https://www.prlog.org/11382934-super-full-moon-small.jpg"},
+    avatar_url: {type: String, default: "/images/client_default.png"},
     date_of_birth: {type: Date},
     last_awoken: {type: Date, default: new Date('1990-01-01')},
     schedule_template: [

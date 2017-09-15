@@ -1,10 +1,16 @@
-# Name of Project
+# Fussbudget
 
-One Paragraph of project description goes here. Link to the live version of the app if it's hosted on Heroku.
+Fussbudget is a lightweight scheduling webapp that helps caregivers stay on top of the daily schedules of their charges and adapts to the unique challenges each day presents. Fussbudget builds out a schedule based on accepted general principles and gives caregivers the ability to modify it manually, as well as dynamically adapting to different wake-up times.
 
 ## Built With
 
-List technologies and frameworks here
+MEAN Stack
+* MongoDB
+* Express
+* AngularJS
+* Node.js
+
+Angular Material
 
 ## Getting Started
 
@@ -12,46 +18,42 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-Link to software that is required to install the app (e.g. node).
-
 - [Node.js](https://nodejs.org/en/)
-- List other prerequisites here
-
+- [npm] (https://www.npmjs.com)
 
 ### Installing
 
-Steps to get the development environment running.
-
-## Screen Shot
-
-Include one or two screen shots of your project here (optional). Remove if unused.
-
-## Documentation
-
-Link to a read-only version of your scope document or other relevant documentation here (optional). Remove if unused.
+1. Clone this repo down to your local machine.
+2. `npm install`
+3. Modify db.config.js to point to a valid MongoDB instance.
+4. Launch server.js (I suggest `nodemon` myself, but your IDE's debugger or just `node server/server.js` from a command shell is fine)
 
 ### Completed Features
 
-High level list of items completed.
-
-- [x] Feature a
-- [x] Feature b
+- [x] Manage multiple clients and interact with their schedules
+- [ ] Automatically adjust schedule for different wakeup time
+- [ ] Angular Material UI
 
 ### Next Steps
 
 Features that you would like to add at some point in the future.
 
-- [ ] Feature c
+- [ ] Dynamically adjust schedule as users interact with events (snoozing, completing, dismissing, adding)
+- [ ] Invite people to become 'secondary' caregivers via email (nodemailer)
+- [ ] Generate day-end reports of interactions with a client's schedule, display in-app, and optionally email to primary and/or secondary caregivers
+- [ ] Deploy as captive webview Android app
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Should be pretty straightforward to deploy to whatever Node environment you like. Just make sure you're connected to a MongoDB.
 
-## Authors
+## Author
 
-* Name of author(s)
-
+* Adam Biessener
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
+* Thanks to my excellent classmates and instructors at Prime Digital Academy for all their advice, answers, and encouragement throughout the development process!
+
+## Icons
+Favicon, default user avatar, and default client avatar made by Freepik from www.flaticon.com.

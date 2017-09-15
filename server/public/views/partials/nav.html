@@ -1,6 +1,6 @@
 <div ng-controller="NavController as nc">
-  <a href="#">Fussbudget</a>
-  <div id="nav-avatar-container">
+  <a href="#/client-list">Fussbudget</a>
+  <div ng-if="nc.userObject.avatar_url" id="nav-avatar-container">
     <a href="#/user">
       <img id="nav-avatar" ng-src="{{nc.userObject.avatar_url}}">
     </a>
@@ -15,13 +15,7 @@
     <a href="#/client-list">
       Client List
     </a>
-    <br/>
-    <br/>
-    <a href="#/home">
-      Home
-    </a>
-    <br/>
-
+    <hr>
   </div>
   <!-- ******** END TEMP NAV ********* -->
 
