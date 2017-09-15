@@ -1,0 +1,23 @@
+<h1>Add Event</h1>
+
+<div>
+  <div id="add-event-image-container">
+    <!-- some kind of graphic? -->
+  </div>
+  <hr>
+  <div id="add-event-form-container">
+    <form novalidate ng-submit="aec.addEvent()" >
+      <label for="add-event-name-input">Name: </label>
+      <input id="add-event-name-input" ng-model="aec.eventToAdd.name">
+      <br/>
+      <input ng-model="aec.eventToAdd.time" type="time" ></input>
+      <br/>
+      <label for="add-event-notes-input">Notes: </label>
+      <input id="add-event-notes-input" ng-model="aec.eventToAdd.notes">
+      <br/>
+      <br/>
+      <button type="button" ng-click="aec.cancelAddEvent()">Cancel</button>
+      <button type="submit">Add Event</button>
+    </form>
+  </div>
+</div>

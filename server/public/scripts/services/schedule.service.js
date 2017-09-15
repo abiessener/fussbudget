@@ -43,6 +43,7 @@ myApp.service('ScheduleService', function ($http, $location) {
     $http.get('/schedule/' + clientId).then((response) => {
       console.log('/schedule GET response', response);
       self.loadedSchedule.list = response.data;
+      $location.path('/schedule/' + clientId)
     });
   }
 
