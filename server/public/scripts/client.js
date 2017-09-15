@@ -40,6 +40,15 @@ myApp.config(function($routeProvider, $locationProvider) {
         }
       }
     })
+    .when('/edit-event/:id', {
+      templateUrl: '/views/templates/edit-event.html',
+      controller: 'EditEventController as eec',
+      resolve: {
+        getuser : function(UserService){
+          return UserService.getuser();
+        }
+      }
+    })
     .when('/manage-client/:id', {
       templateUrl: '/views/templates/manage-client.html',
       controller: 'ManageClientController as mcc',

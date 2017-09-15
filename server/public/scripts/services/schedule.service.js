@@ -14,6 +14,8 @@ myApp.service('ScheduleService', function ($http, $location) {
     list: []
   };
 
+  self.eventToEdit = {};
+
 
   // gets the schedule template for the client with the passed id, and stores it in self.loadedScheduleTemplate.list
   self.getScheduleTemplate = function (id) {
