@@ -1,4 +1,4 @@
-myApp.controller('ScheduleController', function(UserService, ScheduleService, ClientService, $routeParams) {
+myApp.controller('ScheduleController', function(UserService, ScheduleService, ClientService, $routeParams, $location) {
   console.log('ScheduleController created');
   var self = this;
 
@@ -51,7 +51,7 @@ myApp.controller('ScheduleController', function(UserService, ScheduleService, Cl
   self.addEvent = () => {
     // this will do things eventually
     console.log('scheduleController.addEvent() NOT YET IMPLEMENTED');
-    
+    $location.path('/add-event/' + $routeParams.id);
   }
 
   self.saveAsDefault = () => {

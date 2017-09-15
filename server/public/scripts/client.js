@@ -31,6 +31,15 @@ myApp.config(function($routeProvider, $locationProvider) {
         }
       }
     })
+    .when('/add-event/:id', {
+      templateUrl: '/views/templates/add-event.html',
+      controller: 'AddEventController as aec',
+      resolve: {
+        getuser : function(UserService){
+          return UserService.getuser();
+        }
+      }
+    })
     .when('/manage-client/:id', {
       templateUrl: '/views/templates/manage-client.html',
       controller: 'ManageClientController as mcc',
