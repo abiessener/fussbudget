@@ -27,6 +27,6 @@ myApp.controller('EditEventController', function(ScheduleService, ClientService,
 
   self.deleteEvent = () => {
     // NYI
-    $location.path('/schedule/' + $routeParams.id);
+    ScheduleService.deleteEvent($routeParams.id);
   }
 });
