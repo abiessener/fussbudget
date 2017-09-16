@@ -1,3 +1,6 @@
+// client.router.js
+// handles client-related requests
+
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
@@ -5,8 +8,9 @@ var path = require('path');
 var Client = require('../models/client.schema.js');
 var DefaultSchedules = require('../models/defaultschedules.schema.js');
 
+// handles creating new clients
 router.post('/', (req, res) => {
-  console.log('/client POST hit', req.body);
+  // console.log('/client POST hit', req.body);
 
   req.body.primary_caregiver = req.user._id;
 
@@ -41,8 +45,9 @@ router.post('/', (req, res) => {
   });
 })
 
+// returns a list of clients associated with a user
 router.get('/list', (req, res) => {
-  console.log('\n------------------\n/list GET hit');
+  // console.log('\n------------------\n/list GET hit');
 
   Client.find({
     primary_caregiver: req.user.id
@@ -58,8 +63,9 @@ router.get('/list', (req, res) => {
   }); // end find
 })
 
+// returns a client with the id passed in the URL parameter
 router.get('/:id', (req, res) => {
-  console.log('\n------------------\n/client GET hit with id:', req.params.id);
+  // console.log('\n------------------\n/client GET hit with id:', req.params.id);
 
   Client.find({
     _id: req.params.id
@@ -70,15 +76,14 @@ router.get('/:id', (req, res) => {
       return;
     } else {
       //happy path
-      // console.log('data', data);
-
       res.send(data);
     }
   }); // end find
 })
 
+// updates a Client entry
 router.put('/', (req, res) => {
-  console.log('\n------------------\n/client PUT hit with client:', req.body);
+  // console.log('\n------------------\n/client PUT hit with client:', req.body);
 
   let clientToUpdate = req.body;
 
@@ -100,10 +105,11 @@ router.put('/', (req, res) => {
     }
   }); // end findByIdAndUpdate
 
-}); // end PUT route
+});
 
+// deletes a Client from the db
 router.delete('/:id', (req, res) => {
-  console.log('\n------------------\n/client DELETE hit with id:', req.params.id);
+  // console.log('\n------------------\n/client DELETE hit with id:', req.params.id);
 
   Client.findByIdAndRemove({
     _id: req.params.id
