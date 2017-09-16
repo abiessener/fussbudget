@@ -1,15 +1,14 @@
 myApp.controller('EditEventController', function(ScheduleService, ClientService, $location, $routeParams) {
-  console.log('EditEventController created');
+  // console.log('EditEventController created');
+
   var self = this;
+  
   self.eventToEdit = ScheduleService.eventToEdit;
   self.loadedSchedule = ScheduleService.loadedSchedule;
   self.currentClient = ClientService.currentClient;
 
-  // let now = new Date();
-  // self.eventToEdit.time = new Date (1970, 0, 1, now.getHours(), now.getMinutes());
-  // console.log('self.eventToEdit.time', self.eventToEdit.time);
-  
-
+  // takes user input, adjusts the date object we get out of the time picker to match the format we have everything stored in, and sends it all to the service for pushing up to db.
+  // user ends up at /schedule
   self.editEvent = () => {
     if(self.eventToEdit.name == undefined){
       window.alert('please enter an event name!');
@@ -26,7 +25,6 @@ myApp.controller('EditEventController', function(ScheduleService, ClientService,
   }
 
   self.deleteEvent = () => {
-    // NYI
     ScheduleService.deleteEvent($routeParams.id);
   }
 });

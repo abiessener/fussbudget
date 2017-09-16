@@ -1,3 +1,6 @@
+// index.router.js
+// handles login, /index routes
+
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');

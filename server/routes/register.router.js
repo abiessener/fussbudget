@@ -1,3 +1,6 @@
+// register.router.js
+// handles user registration
+
 var express = require('express');
 var router = express.Router();
 var Users = require('../models/user.schema.js');

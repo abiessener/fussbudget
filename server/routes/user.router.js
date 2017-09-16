@@ -1,3 +1,6 @@
+// user.router.js
+// handles user registration, logout, and updateUser requests
+
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user.schema');

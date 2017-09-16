@@ -1,3 +1,6 @@
+// schedule.router.js
+// serves back schedule defaults, templates, client schedules, and handles the wake-up logic on page-load for the schedule view
+
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
@@ -5,8 +8,10 @@ var path = require('path');
 var DefaultSchedules = require('../models/defaultschedules.schema.js');
 var Client = require('../models/client.schema.js');
 
+// sends back the default schedule for the passed name param
+// not actually used in the current implementation - defaults are only ever accessed here on the server
 router.get('/defaults/:name', (req, res) => {
-  console.log('/schedule/defaults/' + req.params.name + 'hit');
+  // console.log('/schedule/defaults/' + req.params.name + 'hit');
   DefaultSchedules.findOne({
     'name': req.params.name
   }, (err, data) => {
@@ -20,8 +25,9 @@ router.get('/defaults/:name', (req, res) => {
   })
 });
 
+// serves back a client's schedule template
 router.get('/template/:id', (req, res) => {
-  console.log('/schedule/template/' + req.params.id + 'hit');
+  // console.log('/schedule/template/' + req.params.id + 'hit');
   Client.findOne({
     '_id': req.params.id
   }, (err, data) => {
@@ -35,9 +41,9 @@ router.get('/template/:id', (req, res) => {
   })
 });
 
-
+// serves back a client's schedule
 router.get('/:id', (req, res) => {
-  console.log('/schedule/' + req.params.id + 'hit');
+  // console.log('/schedule/' + req.params.id + 'hit');
   Client.findOne({
     '_id': req.params.id
   }, (err, data) => {
@@ -51,10 +57,10 @@ router.get('/:id', (req, res) => {
   })
 });
 
-// takes an array of events and puts them into the client with the id route param's events array
+// checks to see if a client has woken up today. if not, sets the last_awoken timestamp and loads its schedule template as the client's schedule (aka gives them a fresh schedule for the day)
 router.put('/page-load', (req, res) => {
-  console.log('\n------------------\nPUT /schedule/page-load hit', req.body.id);
-  console.log('req.body', req.body.id);
+  // console.log('\n------------------\nPUT /schedule/page-load hit', req.body.id);
+  // console.log('req.body', req.body.id);
 
   var clientToUpdate = {};
 
@@ -100,6 +106,7 @@ router.put('/page-load', (req, res) => {
   });
 });
 
+// modifies a schedule. used by the editEvent, addEvent, and user schedule interactions 
 router.put('/modify/:id', (req, res) => {
   console.log('\n-------------------\n/schedule/modify/' + req.params.id + ' hit');
   Client.findByIdAndUpdate({
@@ -119,8 +126,9 @@ router.put('/modify/:id', (req, res) => {
   })
 });
 
+// updates a client's schedule template (defaults. grr, bad names, so bad)
 router.put('/defaults/:id', (req, res) => {
-  console.log('\n-------------------\n/schedule/defaults/' + req.params.id + ' hit');
+  // console.log('\n-------------------\n/schedule/defaults/' + req.params.id + ' hit');
   Client.findByIdAndUpdate({
     _id: req.params.id
   }, {
