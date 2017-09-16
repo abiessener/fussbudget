@@ -1,10 +1,10 @@
 myApp.service('ClientService', function ($http, $location) {
-  console.log('ClientService Loaded');
+  // console.log('ClientService Loaded');
   var self = this;
 
   self.currentClient = {
     client: []
-};
+  };
 
   self.clientList = {
     list: []
@@ -12,13 +12,13 @@ myApp.service('ClientService', function ($http, $location) {
 
   // called from client-related controllers (manage-client) on page load. sets self.currentClient to the whole client object 
   self.getCurrentClient = (clientId) => {
-    console.log('ClientService.getClient', clientId);
+    // console.log('ClientService.getClient', clientId);
 
     if (clientId != undefined) {
       $http.get('/client/' + clientId).then((response) => {
-        console.log('ClientService.getClient GET response', response);
+        // console.log('ClientService.getClient GET response', response);
         self.currentClient.client = response.data;
-        console.log('ClientService.currentClient', self.currentClient);
+        // console.log('ClientService.currentClient', self.currentClient);
       });
     } else {
       console.log('ClientService.getClient needs a clientId! bail out!');
@@ -27,7 +27,7 @@ myApp.service('ClientService', function ($http, $location) {
 
   // called from the manage-client view, takes in a whole client object and sends it to the ol' server
   self.editCurrentClient = (client) => {
-    console.log('ClientService.editCurrentClient()', client);
+    // console.log('ClientService.editCurrentClient()', client);
 
     // this if should never fail, ideally. and as we all know, everything is always ideal
     if(client._id != undefined){
@@ -45,18 +45,20 @@ myApp.service('ClientService', function ($http, $location) {
     
   } // end editCurrentClient()
 
+  // gets the user's list of clients and puts it in clientList
   self.getClientList = () => {
-    console.log('ClientService.getClient');
+    // console.log('ClientService.getClient');
 
     $http.get('/client/list').then((response) => {
-      console.log('client GET response', response);
+      // console.log('client GET response', response);
       self.clientList.list = response.data;
-      console.log('ClientService.clientList', self.clientList);
+      // console.log('ClientService.clientList', self.clientList);
     });
   };
 
+  // adjusts the time to match our format (sigh), then assigns an `age` string based on the user's age (which the server uses to populate the client's initial schedule template), and sends to the server
   self.addClient = (client) => {
-    console.log('ClientService.addClient', client);
+    // console.log('ClientService.addClient', client);
 
     let now = new Date();
     let then = new Date(client.date_of_birth);
@@ -88,10 +90,10 @@ myApp.service('ClientService', function ($http, $location) {
         client.age = 'older'
     }
 
-    console.log('client age after calc', client.age);
+    // console.log('client age after calc', client.age);
 
     $http.post('/client', client).then((response) => {
-      console.log('/client POST response', response);
+      // console.log('/client POST response', response);
       $location.path('/client-list');
     });
   }
@@ -100,7 +102,7 @@ myApp.service('ClientService', function ($http, $location) {
   // comes from manage-client.controller.js. 
   // only available if the user IS the primary caregiver. does what it says
   self.deleteClient = (clientId) => {
-    console.log('ClientService.deleteClient() clientId:', clientId);
+    // console.log('ClientService.deleteClient() clientId:', clientId);
 
     $http.delete('/client/' + clientId).then((response) => {
       // success
@@ -120,12 +122,13 @@ myApp.service('ClientService', function ($http, $location) {
 
   // ------- LEAVE CLIENT IS NOT YET IMPLEMENTED -------
   // ------- NEEDS SECONDARY CAREGIVER LOGIC, WHICH IS FOR LATER --------
+  // ------- THIS METHOD IS NEVER CALLED -------
 
   // called from manage-client view by the user clicking a button. 
   // comes from manage-client.controller.js. 
   // only available if the user IS NOT the primary caregiver. removes the user as a secondary caregiver of the current client
   self.leaveCurrentClient = () => {
-    console.log('ClientService.leaveCurrentClient() _id:', self.currentClient._id);
+    // console.log('ClientService.leaveCurrentClient() _id:', self.currentClient._id);
 
     $http.put('/client/' + self.currentClient._id).then((response) => {
       // success
