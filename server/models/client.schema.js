@@ -12,6 +12,7 @@ var ClientSchema = new Schema({
         name: {type: String, required: true},
         time: {type: Date, required: true},
         duration: {type: Number, required: true},
+        priority: {type: Number, required: true},
         notes: {type: String}
       }
     ],
@@ -20,6 +21,7 @@ var ClientSchema = new Schema({
         name: {type: String, required: true},
         time: {type: Date, required: true},
         duration: {type: Number, required: true},
+        priority: {type: Number, required: true},
         notes: {type: String},
         class: {type: String}
       }

@@ -72,7 +72,7 @@ myApp.service('ClientService', function ($http, $location) {
         client.age = 'newborn';
         break;
       case (182 < ageInDays && ageInDays <= 365):
-        client.age = 'infanti';
+        client.age = 'infant';
         break;
       case (365 < ageInDays && ageInDays <= 730):
         client.age = 'oneyear';
