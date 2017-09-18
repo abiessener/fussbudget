@@ -11,7 +11,10 @@
     </a>
   </div>
 
-  <button ng-click="sc.editWakeUp()">edit wakeup</button>
+  <!-- <button ng-click="sc.editWakeUp()">edit wakeup</button> -->
+    <md-button ng-click="sc.editWakeUp($event)" class="md-raised">
+      Custom Dialog
+    </md-button>
   <button ng-click="sc.addEvent()">add event</button>
   <button ng-click="sc.saveAsDefault()">save as default</button>
 

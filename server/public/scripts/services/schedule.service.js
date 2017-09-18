@@ -100,4 +100,9 @@ myApp.service('ScheduleService', function ($http, $location) {
     self.pushSchedule(self.loadedSchedule.list, clientId);
   }
 
+  self.editWakeUp = (time) => {
+    console.log('ScheduleService.editWakeUp', time);
+    
+  }
+
 })
