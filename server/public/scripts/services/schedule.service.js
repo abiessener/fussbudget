@@ -117,9 +117,6 @@ myApp.service('ScheduleService', function ($http, $location) {
       console.log('/schedule/edit-wake PUT error! bad!', response);
     });
 
-    // self.eventToEdit.time = new Date(self.eventToEdit.time);
-    // self.eventToEdit.time.setTime(self.eventToEdit.time.getTime() - self.eventToEdit.time.getTimezoneOffset()*60*1000);
-
   }
 
 })

@@ -156,13 +156,37 @@ router.put('/edit-wake/:id', (req, res) => {
       res.sendStatus(500);
     } else {
       //happy path
-      let clientSchedule = data.schedule;
+      for (var i = 0; i < data.schedule.length; i++) {
+        if (data.schedule[i].name === 'wakeup') {
+          data.schedule[i].time = req.body.time;
+          break;
+        }
+      }
+      Client.findByIdAndUpdate({
+        _id: req.params.id
+      }, {
+        $set: {
+          schedule: data.schedule
+        }
+      }, (err, data) => {
+        if (err) {
+          console.log('/schedule/defaults find error:', err);
+          res.sendStatus(500);
+        } else {
+          //happy path
+          console.log('success');
+        }
+
+
+      }) // end findByIdAndUpdate
+
+
 
       //-----------------
       //   LOGIC 
       //-----------------
       console.log('edit-wake client schedule found:', data);
-      
+
       res.sendStatus(200);
     }
   })
