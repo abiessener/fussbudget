@@ -85,6 +85,23 @@ myApp.controller('ScheduleController', function (UserService, ScheduleService, C
     // ScheduleService.editWakeUp(adjTime);
   }
 
+  // takes user input, adjusts the date object we get out of the time picker to match the format we have everything stored in, and sends it all to the service for pushing up to db.
+  // user ends up at /schedule
+  self.editWakeup = () => {
+
+    let now = new Date();
+    console.log('now', now);
+    now.setTime(now.getTime() + now.getTimezoneOffset() * 60 * 1000);
+    console.log('now', now);
+
+    let adjTime = new Date(1970, 0, 1, now.getHours(), now.getMinutes());
+    console.log('adjTime', adjTime);
+
+    // self.eventToEdit.time = new Date(self.eventToEdit.time);
+    // self.eventToEdit.time.setTime(self.eventToEdit.time.getTime() - self.eventToEdit.time.getTimezoneOffset()*60*1000);
+
+  }
+
   // sends the user to the add-event view with the current client's id passed as a route param
   self.addEvent = () => {
     // console.log('scheduleController.addEvent()');
