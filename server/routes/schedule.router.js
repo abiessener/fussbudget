@@ -146,4 +146,27 @@ router.put('/defaults/:id', (req, res) => {
   })
 });
 
+// gets a client ID and a new wakeup time from the client, then adjusts that client's schedule to account for it
+router.put('/edit-wake/:id', (req, res) => {
+  Client.findById({
+    _id: req.params.id
+  }, (err, data) => {
+    if (err) {
+      console.log('/schedule/edit-wake find error:', err);
+      res.sendStatus(500);
+    } else {
+      //happy path
+      let clientSchedule = data.schedule;
+
+      //-----------------
+      //   LOGIC 
+      //-----------------
+      console.log('edit-wake client schedule found:', data);
+      
+      res.sendStatus(200);
+    }
+  })
+});
+
+
 module.exports = router;

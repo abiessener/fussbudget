@@ -6,6 +6,7 @@ myApp.controller('ScheduleController', function (UserService, ScheduleService, C
   self.loadedSchedule = {
     list: []
   };
+
   self.loadedScheduleTemplate = {
     list: []
   };
@@ -57,14 +58,10 @@ myApp.controller('ScheduleController', function (UserService, ScheduleService, C
   }
 
 
-  // takes a user-specified time, then tells the service to run a bunch of logic to adjust today's schedule to reflect that wake-up time
-  self.editWakeUp = (ev) => {
+  // pops the modal to get a user-inputted time to set wakeup to, then calls the editWakeUp function to execute that if the modal isn't cancelled
+  self.editWakeUpModal = (ev) => {
     // this will do things eventually
-    console.log('scheduleController.editWakeUp() NOT YET IMPLEMENTED');
-
-
-
-
+    console.log('scheduleController.editWakeUp()');
 
     $mdDialog.show({
         controller: 'EditWakeupController as ewc',
@@ -75,32 +72,15 @@ myApp.controller('ScheduleController', function (UserService, ScheduleService, C
         fullscreen: self.customFullscreen // Only for -xs, -sm breakpoints.
       })
       .then(function (answer) {
-        console.log('answer', answer);
-
+        console.log('modal response', answer);
+        ScheduleService.editWakeUp(answer, $routeParams.id);
       }, function () {
         console.log('cancel');
       });
 
-
-    // ScheduleService.editWakeUp(adjTime);
   }
 
-  // takes user input, adjusts the date object we get out of the time picker to match the format we have everything stored in, and sends it all to the service for pushing up to db.
-  // user ends up at /schedule
-  self.editWakeup = () => {
 
-    let now = new Date();
-    console.log('now', now);
-    now.setTime(now.getTime() + now.getTimezoneOffset() * 60 * 1000);
-    console.log('now', now);
-
-    let adjTime = new Date(1970, 0, 1, now.getHours(), now.getMinutes());
-    console.log('adjTime', adjTime);
-
-    // self.eventToEdit.time = new Date(self.eventToEdit.time);
-    // self.eventToEdit.time.setTime(self.eventToEdit.time.getTime() - self.eventToEdit.time.getTimezoneOffset()*60*1000);
-
-  }
 
   // sends the user to the add-event view with the current client's id passed as a route param
   self.addEvent = () => {
