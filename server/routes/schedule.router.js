@@ -150,15 +150,19 @@ router.put('/defaults/:id', (req, res) => {
 router.put('/edit-wake/:id', (req, res) => {
   Client.findById({
     _id: req.params.id
-  }, (err, data) => {
+  }, (err, findData) => {
     if (err) {
       console.log('/schedule/edit-wake find error:', err);
       res.sendStatus(500);
     } else {
       //happy path
-      for (var i = 0; i < data.schedule.length; i++) {
-        if (data.schedule[i].name === 'wakeup') {
-          data.schedule[i].time = req.body.time;
+
+      for (var i = 0; i < findData.schedule.length; i++) {
+        if (findData.schedule[i].name === 'wakeup') {
+          var oldWakeTime = findData.schedule[i].time; // store this for later
+          findData.schedule[i].time = req.body.time;
+          var newWakeTime = findData.schedule[i].time; // store this for later
+
           break;
         }
       }
@@ -166,28 +170,61 @@ router.put('/edit-wake/:id', (req, res) => {
         _id: req.params.id
       }, {
         $set: {
-          schedule: data.schedule
+          schedule: findData.schedule
         }
-      }, (err, data) => {
+      }, (err, updateData) => {
         if (err) {
           console.log('/schedule/defaults find error:', err);
           res.sendStatus(500);
         } else {
           //happy path
-          console.log('success');
+
+          /*----------------------------------
+           *              LOGIC
+           * 
+           * calc old interval
+           * calc new interval
+           * 
+           * while((oldInterval - newInterval) > 0.4){
+           * //remove lowest priority
+           * //recalculate average
+           * }
+           * 
+           * move shit around lol
+          
+
+          ----------------------------------*/
+          console.log('oldWakeTime', oldWakeTime);
+          console.log('newWakeTime', newWakeTime);
+
+
+          // calculate avg interval between events
+
+          for (var i = 0; i < updateData.schedule.length; i++) {
+            if (updateData.schedule[i].name === 'sleep') {
+              var sleepTime = updateData.schedule[i].time;
+            }
+          }
+
+          console.log('sleepTime', sleepTime);
+
+
+          var oldAwakeTime = sleepTime.getTime() - oldWakeTime.getTime();
+          var newAwakeTime = sleepTime.getTime() - newWakeTime.getTime();
+          
+          console.log('oldAwakeTime', oldAwakeTime);
+          console.log('newAwakeTime', newAwakeTime);
+          
+
+
+
+          res.sendStatus(200);
+
         }
 
 
       }) // end findByIdAndUpdate
 
-
-
-      //-----------------
-      //   LOGIC 
-      //-----------------
-      console.log('edit-wake client schedule found:', data);
-
-      res.sendStatus(200);
     }
   })
 });
