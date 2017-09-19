@@ -152,3 +152,11 @@ li a:hover {
 .event-snooze{
   background-color: #F3F576;
 }
+
+.event-wakeup {
+  background-color: #52ECEC
+}
+
+.event-sleep {
+  background-color: #F89D47
+}
