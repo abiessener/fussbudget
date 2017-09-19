@@ -179,8 +179,8 @@ router.put('/edit-wake/:id', (req, res) => {
         } else {
           //happy path
 
-          console.log('oldWakeTime', oldWakeTime);
-          console.log('newWakeTime', newWakeTime);
+          // console.log('oldWakeTime', oldWakeTime);
+          // console.log('newWakeTime', newWakeTime);
 
           // calculate avg interval between events
 
@@ -198,13 +198,15 @@ router.put('/edit-wake/:id', (req, res) => {
           // console.log('oldAwakeTime', oldAwakeTime);
           // console.log('newAwakeTime', newAwakeTime);
 
-          var oldIntervalMinutes = (oldAwakeTime / 1000 / 60) / updateData.schedule.length;
-          var newIntervalMinutes = (newAwakeTime / 1000 / 60) / updateData.schedule.length;
+          var numEvents = updateData.schedule.length;
+
+          var oldIntervalMinutes = (oldAwakeTime / 1000 / 60) / numEvents;
+          var newIntervalMinutes = (newAwakeTime / 1000 / 60) / numEvents;
 
           // console.log('oldIntervalMinutes', oldIntervalMinutes);
           // console.log('newIntervalMinutes', newIntervalMinutes);
 
-          var intervalDiff = (oldIntervalMinutes - newIntervalMinutes);
+          var intervalDiff = oldIntervalMinutes - newIntervalMinutes;
           var intervalFactor = (newIntervalMinutes - oldIntervalMinutes) / oldIntervalMinutes;
 
           // now that we've spliced anything superfluous out of the schedule, we adjust the remaining times
@@ -255,12 +257,17 @@ router.put('/edit-wake/:id', (req, res) => {
               }
             }
           }
-
-          console.log('intervalDiff', intervalDiff);
           
-          while (intervalDiff > 15) {
+          intervalFactor = Math.abs(intervalFactor)
+          
+          while (intervalFactor < 0.2) {
             //find the lowest priority item in the schedule and remove it
-            console.log('interval difference too high, removing items...');
+            console.log('interval difference too high, removing items...', intervalFactor);
+
+            //recalc intervalFactor
+            var oldIntervalMinutes = (oldAwakeTime / 1000 / 60) / numEvents;
+            
+            intervalFactor = Math.abs((newIntervalMinutes - oldIntervalMinutes) / oldIntervalMinutes);
 
             var lowestPriority = 99;
             var lowestIndex = -1;
@@ -276,7 +283,7 @@ router.put('/edit-wake/:id', (req, res) => {
             if (lowestPriority < 99) {
               // remove the lowest-priority item
               console.log('removing index', lowestIndex);
-
+              numEvents--;              
               oldSchedule.splice(lowestIndex, 1);
             } else {
               console.log('tried to remove items, but no sub-100 priority items exist');
@@ -285,6 +292,8 @@ router.put('/edit-wake/:id', (req, res) => {
             }
 
           } // end while intervalDiff > 10          
+
+          intervalFactor = (newIntervalMinutes - oldIntervalMinutes) / oldIntervalMinutes;
 
           var oldIntervalArray = [0];
           for (var i = 1; i < oldSchedule.length; i++) {
@@ -318,7 +327,7 @@ router.put('/edit-wake/:id', (req, res) => {
                 newActualInterval = 900000;
                 intervalCarry -= 900000 - (newPerfectInterval % 900000);
 
-                console.log('newActualInterval floor 15m');
+                // console.log('newActualInterval floor 15m');
               } else {
                 intervalCarry = newPerfectInterval - newActualInterval;                
               }
