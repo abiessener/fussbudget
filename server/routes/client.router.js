@@ -30,7 +30,7 @@ router.post('/', (req, res) => {
       req.body.schedule_template = data.events;
       // console.log('req.body.schedule_template:', req.body.schedule_template);
 
-      let clientToSave = new Client(req.body);
+      let clientToSave = new Client(req.body);      
 
       clientToSave.save((err, data) => {
         if (err) {
