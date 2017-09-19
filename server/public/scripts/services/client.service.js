@@ -34,6 +34,7 @@ myApp.service('ClientService', function ($http, $location) {
       $http.put('/client', client).then((response => {
         // success
         console.log('client edited');
+        $location.path('/schedule/' + client._id);
       }), (response) => {
         // server error
         console.log('/client PUT server error:', response);
