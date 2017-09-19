@@ -109,21 +109,60 @@ router.put('/page-load', (req, res) => {
 // modifies a schedule. used by the editEvent, addEvent, and user schedule interactions 
 router.put('/modify/:id', (req, res) => {
   console.log('\n-------------------\n/schedule/modify/' + req.params.id + ' hit');
-  Client.findByIdAndUpdate({
-    _id: req.params.id
-  }, {
-    $set: {
-      schedule: req.body.schedule
-    }
-  }, (err, data) => {
-    if (err) {
-      console.log('/schedule/template find error:', err);
-      res.sendStatus(500);
-    } else {
-      //happy path
-      res.sendStatus(200);
-    }
-  })
+  if (req.isAuthenticated()) {
+    var wakeTime = 0;
+    var sleepTime = 0;
+    Client.findById({
+      _id: req.params.id
+    }, (err, findData) => {
+      if (err) {
+        console.log('/modify find error');
+      } else {
+        for (var i = 0; i < findData.schedule.length; i++) {
+          var element = findData.schedule[i];
+          if (element.name == 'sleep') {
+            sleepTime = element.time.getTime();
+          } else if (element.name == 'wakeup') {
+            wakeTime = element.time.getTime();
+          }
+        }
+        // so now we have sleepTime and wakeTime stored as integers
+        // console.log('sleepTime', sleepTime);
+        // console.log('wakeTime', wakeTime);
+
+        for (var i = 0; i < req.body.schedule.length; i++) {
+          var element = req.body.schedule[i];
+          if ((element.name != 'sleep') && (element.name != 'wakeup')) {
+            eventTime = new Date(element.time);
+            eventTime = eventTime.getTime();
+            if ((eventTime < wakeTime) || (eventTime > sleepTime)) {
+              console.log('bad schedule - out of sleep/wake bounds');
+              res.status(400).send('bad schedule');
+              return;
+            } 
+          }
+        }
+
+        Client.findByIdAndUpdate({
+          _id: req.params.id
+        }, {
+          $set: {
+            schedule: req.body.schedule
+          }
+        }, (err, data) => {
+          if (err) {
+            console.log('/modify update error:', err);
+            res.sendStatus(500);
+          } else {
+            //happy path
+            res.sendStatus(200);
+          }
+        }) // end findByIdAndUpdate
+
+      }
+    })
+
+  }
 });
 
 // updates a client's schedule template (defaults. grr, bad names, so bad)
@@ -257,16 +296,16 @@ router.put('/edit-wake/:id', (req, res) => {
               }
             }
           }
-          
+
           intervalFactor = Math.abs(intervalFactor)
-          
+
           while (intervalFactor < 0.2) {
             //find the lowest priority item in the schedule and remove it
             console.log('interval difference too high, removing items...', intervalFactor);
 
             //recalc intervalFactor
             var oldIntervalMinutes = (oldAwakeTime / 1000 / 60) / numEvents;
-            
+
             intervalFactor = Math.abs((newIntervalMinutes - oldIntervalMinutes) / oldIntervalMinutes);
 
             var lowestPriority = 99;
@@ -283,7 +322,7 @@ router.put('/edit-wake/:id', (req, res) => {
             if (lowestPriority < 99) {
               // remove the lowest-priority item
               console.log('removing index', lowestIndex);
-              numEvents--;              
+              numEvents--;
               oldSchedule.splice(lowestIndex, 1);
             } else {
               console.log('tried to remove items, but no sub-100 priority items exist');
@@ -301,7 +340,7 @@ router.put('/edit-wake/:id', (req, res) => {
           }
 
           // console.log('oldSchedule', oldSchedule);          
-          
+
           // iterate through the old schedule, building a new schedule from it
           for (var i = 1; i < oldSchedule.length; i++) {
             var currentEvent = oldSchedule[i];
@@ -329,7 +368,7 @@ router.put('/edit-wake/:id', (req, res) => {
 
                 // console.log('newActualInterval floor 15m');
               } else {
-                intervalCarry = newPerfectInterval - newActualInterval;                
+                intervalCarry = newPerfectInterval - newActualInterval;
               }
               // console.log('intervalFactor', intervalFactor);
               // console.log('oldInterval', oldInterval);
@@ -356,7 +395,13 @@ router.put('/edit-wake/:id', (req, res) => {
 
           // console.log('newSchedule', newSchedule);
 
-          Client.findByIdAndUpdate({_id: req.params.id}, {$set: {schedule: newSchedule}}, (err,finalUpdateData) => {
+          Client.findByIdAndUpdate({
+            _id: req.params.id
+          }, {
+            $set: {
+              schedule: newSchedule
+            }
+          }, (err, finalUpdateData) => {
             if (err) {
               console.log('finalUpdate error', err);
               res.sendStatus(500);
@@ -365,7 +410,7 @@ router.put('/edit-wake/:id', (req, res) => {
             }
           })
 
-        } 
+        }
       }) // end findByIdAndUpdate
     }
   })
