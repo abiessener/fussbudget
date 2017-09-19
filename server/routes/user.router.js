@@ -7,11 +7,11 @@ var User = require('../models/user.schema');
 
 // Handles Ajax request for user information if user is authenticated
 router.get('/', function(req, res) {
-  console.log('get /user route');
+  // console.log('get /user route');
   // check if logged in
   if(req.isAuthenticated()) {
     // send back user object from database
-    console.log('logged in', req.user);
+    // console.log('logged in', req.user);
     var userInfo = {
       username : req.user.username,
       avatar_url: req.user.avatar_url
@@ -35,7 +35,7 @@ router.get('/logout', function(req, res) {
 
 // update user information
 router.put('/', function(req,res){
-  console.log('/user PUT hit: ', req.body);
+  // console.log('/user PUT hit: ', req.body);
 
   User.findByIdAndUpdate({
     _id: req.user.id
