@@ -20,6 +20,18 @@ myApp.controller('AddEventController', function(ScheduleService, ClientService, 
     } 
     self.eventToAdd.time = new Date(self.eventToAdd.time);
     self.eventToAdd.time.setTime(self.eventToAdd.time.getTime() - self.eventToAdd.time.getTimezoneOffset()*60*1000);
+
+    let highestPriority = 0;
+
+    //find the highest priority less than 100 (reserved for un-removable events) in the schedule
+    for (var i = 0; i < self.loadedSchedule.list.length; i++) {
+      var element = self.loadedSchedule.list[i];
+      if ((element.priority > highestPriority)&& (element.priority < 100)) {
+        highestPriority = element.priority;
+      }
+    }
+
+    self.eventToAdd.priority = highestPriority + 1;
     
     self.loadedSchedule.list.push(self.eventToAdd);
     ScheduleService.pushSchedule(self.loadedSchedule.list, self.currentClient.client[0]._id);
