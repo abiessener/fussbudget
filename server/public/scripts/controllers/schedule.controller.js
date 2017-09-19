@@ -96,13 +96,16 @@ myApp.controller('ScheduleController', function (UserService, ScheduleService, C
 
   // takes the event object passed from the view, adjusts its time (because the HTML5 time picker hates me) to match the way we store everything else, and passes it up to the service. Finally the user gets sent to the edit-event view
   self.editEvent = (event) => {
-    // console.log('scheduleController.editEvent()');
-    let time = new Date(event.time);
-    event.time = new Date(1970, 0, 1, time.getHours(), time.getMinutes());
-    event.time.setTime(event.time.getTime() + event.time.getTimezoneOffset() * 60 * 1000);
 
-    ScheduleService.eventToEdit = event;
-    $location.path('/edit-event/' + $routeParams.id);
+    if ((event.name != 'wakeup' && (event.name != 'sleep'))) {
+      // console.log('scheduleController.editEvent()');
+      let time = new Date(event.time);
+      event.time = new Date(1970, 0, 1, time.getHours(), time.getMinutes());
+      event.time.setTime(event.time.getTime() + event.time.getTimezoneOffset() * 60 * 1000);
+
+      ScheduleService.eventToEdit = event;
+      $location.path('/edit-event/' + $routeParams.id);
+    }
   }
 
   // saves the current schedule as the client's template (default, ugh, we have a naming issue here)
