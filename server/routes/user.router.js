@@ -6,14 +6,14 @@ var router = express.Router();
 var User = require('../models/user.schema');
 
 // Handles Ajax request for user information if user is authenticated
-router.get('/', function(req, res) {
+router.get('/', function (req, res) {
   // console.log('get /user route');
   // check if logged in
-  if(req.isAuthenticated()) {
+  if (req.isAuthenticated()) {
     // send back user object from database
     // console.log('logged in', req.user);
     var userInfo = {
-      username : req.user.username,
+      username: req.user.username,
       avatar_url: req.user.avatar_url
     };
     res.send(userInfo);
@@ -26,7 +26,7 @@ router.get('/', function(req, res) {
 });
 
 // clear all server session information about this user
-router.get('/logout', function(req, res) {
+router.get('/logout', function (req, res) {
   // Use passport's built-in method to log out the user
   console.log('Logged out');
   req.logOut();
@@ -34,25 +34,27 @@ router.get('/logout', function(req, res) {
 });
 
 // update user information
-router.put('/', function(req,res){
+router.put('/', function (req, res) {
   // console.log('/user PUT hit: ', req.body);
+  if (req.isAuthenticated()) {
 
-  User.findByIdAndUpdate({
-    _id: req.user.id
-  }, {
-    $set: {
-      username: req.body.username,
-      avatar_url: req.body.avatar_url
-    }
-  }, (err, data) => {
-    if (err) {
-      console.log('/user PUT db error:', err);
-      res.sendStatus(500);
-    } else {
-      //happy path
-      res.sendStatus(200);
-    }
-  })
+    User.findByIdAndUpdate({
+      _id: req.user.id
+    }, {
+      $set: {
+        username: req.body.username,
+        avatar_url: req.body.avatar_url
+      }
+    }, (err, data) => {
+      if (err) {
+        console.log('/user PUT db error:', err);
+        res.sendStatus(500);
+      } else {
+        //happy path
+        res.sendStatus(200);
+      }
+    })
+  }
 });
 
 
