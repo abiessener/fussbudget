@@ -47,11 +47,17 @@ myApp.controller('ScheduleController', function (UserService, ScheduleService, C
 
   // sets the `type` property of the passed event (used for styling), adjusts the time if it's a `snooze` interaction, then pushes the newly updated schedule up to the db
   self.modifyEvent = (event, type) => {
-    event.class = type;
 
     if (type == "event-snooze") {
+      event.class = type;
       oldTime = new Date(event.time);
       event.time = new Date(oldTime.getTime() + 900000); // add 15 minutes to time
+    } else {
+      if (event.class == type) {
+        event.class = '';
+      } else {
+        event.class = type;
+      }
     }
 
     self.pushSchedule(self.loadedSchedule.list, $routeParams.id)
