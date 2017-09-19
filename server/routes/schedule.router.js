@@ -179,24 +179,8 @@ router.put('/edit-wake/:id', (req, res) => {
         } else {
           //happy path
 
-          /*----------------------------------
-           *              LOGIC
-           * 
-           * calc old interval
-           * calc new interval
-           * 
-           * while((oldInterval - newInterval) > 0.4){
-           * //remove lowest priority
-           * //recalculate average
-           * }
-           * 
-           * move shit around lol
-          
-
-          ----------------------------------*/
           console.log('oldWakeTime', oldWakeTime);
           console.log('newWakeTime', newWakeTime);
-
 
           // calculate avg interval between events
 
@@ -206,50 +190,22 @@ router.put('/edit-wake/:id', (req, res) => {
             }
           }
 
-          console.log('sleepTime', sleepTime);
+          // console.log('sleepTime', sleepTime);
 
           var oldAwakeTime = sleepTime.getTime() - oldWakeTime.getTime();
           var newAwakeTime = sleepTime.getTime() - newWakeTime.getTime();
 
-          console.log('oldAwakeTime', oldAwakeTime);
-          console.log('newAwakeTime', newAwakeTime);
+          // console.log('oldAwakeTime', oldAwakeTime);
+          // console.log('newAwakeTime', newAwakeTime);
 
           var oldIntervalMinutes = (oldAwakeTime / 1000 / 60) / updateData.schedule.length;
           var newIntervalMinutes = (newAwakeTime / 1000 / 60) / updateData.schedule.length;
 
-          console.log('oldIntervalMinutes', oldIntervalMinutes);
-          console.log('newIntervalMinutes', newIntervalMinutes);
+          // console.log('oldIntervalMinutes', oldIntervalMinutes);
+          // console.log('newIntervalMinutes', newIntervalMinutes);
 
-          var intervalDiff = oldIntervalMinutes - newIntervalMinutes;
-          var intervalFactor = (oldIntervalMinutes - newIntervalMinutes) / oldIntervalMinutes;
-
-          while (intervalDiff > 15) {
-            //find the lowest priority item in the schedule and remove it
-            console.log('interval difference too high, removing items...');
-
-            var lowestPriority = 99;
-            var lowestIndex = -1;
-            for (var i = 0; i < updateData.schedule.length; i++) {
-              var element = updateData.schedule[i];
-              if (element.priority < lowestPriority) {
-                lowestIndex = i;
-                lowestPriority = element.priority;
-              }
-            }
-
-            // don't remove anything if everything is > 99
-            if (lowestPriority < 99) {
-              // remove the lowest-priority item
-              console.log('removing index', lowestIndex);
-
-              updateData.schedule.splice(lowestIndex, 1);
-            } else {
-              console.log('tried to remove items, but no sub-100 priority items exist');
-
-              break;
-            }
-
-          } // end while intervalDiff > 15
+          var intervalDiff = (oldIntervalMinutes - newIntervalMinutes);
+          var intervalFactor = (newIntervalMinutes - oldIntervalMinutes) / oldIntervalMinutes;
 
           // now that we've spliced anything superfluous out of the schedule, we adjust the remaining times
 
@@ -272,7 +228,6 @@ router.put('/edit-wake/:id', (req, res) => {
           var intervalCarry = 0;
           var newPerfectInterval = 0;
           var newActualInterval = 0;
-          var intervalDiff = 0;
           var oldSchedule = [];
           var lowestId = '';
 
@@ -300,129 +255,108 @@ router.put('/edit-wake/:id', (req, res) => {
               }
             }
           }
-          console.log('oldSchedule', oldSchedule);
 
+          console.log('intervalDiff', intervalDiff);
+          
+          while (intervalDiff > 15) {
+            //find the lowest priority item in the schedule and remove it
+            console.log('interval difference too high, removing items...');
 
+            var lowestPriority = 99;
+            var lowestIndex = -1;
+            for (var i = 0; i < oldSchedule.length; i++) {
+              var element = oldSchedule[i];
+              if (element.priority < lowestPriority) {
+                lowestIndex = i;
+                lowestPriority = element.priority;
+              }
+            }
 
+            // don't remove anything if everything is > 99
+            if (lowestPriority < 99) {
+              // remove the lowest-priority item
+              console.log('removing index', lowestIndex);
+
+              oldSchedule.splice(lowestIndex, 1);
+            } else {
+              console.log('tried to remove items, but no sub-100 priority items exist');
+
+              break;
+            }
+
+          } // end while intervalDiff > 10          
+
+          var oldIntervalArray = [0];
+          for (var i = 1; i < oldSchedule.length; i++) {
+            oldIntervalArray.push(oldSchedule[i].time.getTime() - oldSchedule[i - 1].time.getTime());
+          }
+
+          // console.log('oldSchedule', oldSchedule);          
+          
           // iterate through the old schedule, building a new schedule from it
-          for (var i = 0; i < oldSchedule.length; i++) {
-            var event = oldSchedule[i];
-            
-            console.log('\n\n\n\n\nin while 279', debugLoopLimit);
+          for (var i = 1; i < oldSchedule.length; i++) {
+            var currentEvent = oldSchedule[i];
 
-            // reset values
-            var lowestId = '';
-            var nextEventId = '';
-            var oldInterval = 0;
-            var lowestTime = lowestTime + 85500000;
+            oldInterval = oldIntervalArray[i];
 
-            // find the earliest item in the schedule
-            for (var i = 0; i < updateData.schedule.length; i++) {
-              var event = updateData.schedule[i];
-              // console.log('lowestTime', lowestTime);              
-              // console.log('event', event);
-              // console.log('event.time.getTime()', event.time.getTime());
+            // console.log('\n\n\n\n\n in for 311', i);
+            // console.log('currentEvent', currentEvent);
 
-              if (event.time.getTime() < lowestTime) {
+            if (currentEvent.name == 'sleep') {
+              // if it's sleep, don't move it, just push it
+              newSchedule.push(currentEvent);
+            } else {
+              //otherwise, find the new interval
+              // console.log('intervalCarry', intervalCarry);
 
-                if (lowestId.length > 0) { // put the old lowest event into nextEvent
-                  nextEventId = lowestId;
-                }
+              intervalDiff = (intervalFactor * oldInterval);
+              newPerfectInterval = oldInterval + intervalDiff + intervalCarry;
+              newActualInterval = 900000 * (Math.floor(newPerfectInterval / 900000));
 
-                lowestTime = event.time.getTime();
-                lowestId = event._id;
-              }
-            }
+              // gotta have at least 15m interval
+              if (newActualInterval < 900000) {
+                newActualInterval = 900000;
+                intervalCarry -= 900000 - (newPerfectInterval % 900000);
 
-            // console.log('lowestId', lowestId);
-            // console.log('nextEventId', nextEventId);
-            console.log('lowestTime', lowestTime);
-
-
-
-            // find nextEvent by its _id and use its timestamp to get the old interval
-            for (var j = 0; j < updateData.schedule.length; j++) {
-              var nextEvent = updateData.schedule[j];
-              if (nextEvent._id == lowestId) {
-                oldInterval = nextEvent.time.getTime() - lowestTime;
-                console.log('oldInterval 324: ', oldInterval);
-
-              }
-            }
-
-            // set currentEvent to the one we just found and remove it from the old schedule
-            var currentEvent = {};
-
-            for (var i = 0; i < updateData.schedule.length; i++) {
-              // console.log('for 317');
-
-              var event = updateData.schedule[i];
-              if (event._id == lowestId) {
-                currentEvent = {
-                  time: event.time,
-                  name: event.name,
-                  _id: event._id,
-                  priority: event.priority,
-                  duration: event.duration,
-                  notes: event.notes
-                };
-                // remove that event from the old schedule
-                console.log('removing index', i);
-
-                updateData.schedule.splice(i, 1);
-                break;
-              }
-            }
-
-            console.log('currentEvent', currentEvent);
-            // console.log('updateData.schedule', updateData.schedule);
-
-            // if it's wakeup - ignore it
-            if (currentEvent.name != 'wakeup') {
-              if (currentEvent.name == 'sleep') {
-                // if it's sleep, don't move it, just push it
-                newSchedule.push(currentEvent);
+                console.log('newActualInterval floor 15m');
               } else {
-                //otherwise, find the new interval
-                intervalDiff = (intervalFactor * oldInterval) + intervalCarry;
-                newPerfectInterval = oldInterval + intervalDiff;
-                newActualInterval = Math.floor(newPerfectInterval / 15);
-                intervalCarry = newPerfectInterval % 15;
-                console.log('intervalFactor', intervalFactor);
-                console.log('oldInterval', oldInterval);
-                console.log('intervalDiff', intervalDiff);
-                console.log('newPerfectInterval', newPerfectInterval);
-                console.log('newActualInterval', newActualInterval);
-                console.log('intervalCarry', intervalCarry);
-                // we now have the newActualInterval and the intervalCarry so we can set the new time
-
-                currentEvent.time = new Date(currentTime + newActualInterval);
-
-                newSchedule.push(currentEvent);
+                intervalCarry = newPerfectInterval - newActualInterval;                
               }
-              console.log('newSchedule', newSchedule);
+              // console.log('intervalFactor', intervalFactor);
+              // console.log('oldInterval', oldInterval);
+              // console.log('intervalDiff', intervalDiff);
+              // console.log('newPerfectInterval', newPerfectInterval);
+              // console.log('newActualInterval', newActualInterval);
+              // console.log('intervalCarry', intervalCarry);
+              // we now have the newActualInterval and the intervalCarry so we can set the new time
 
-            } // end if for pushing currentEvent to newSchedule
+              prevTime = newSchedule[i - 1].time.getTime();
 
+              currentEvent.time = new Date(prevTime + newActualInterval);
 
+              // console.log('currentEvent.time', currentEvent.time);
 
-          } // end while loop for building new schedule
+              newSchedule.push(currentEvent);
+            } // end if statement pushing currentEvent to newSchedule
 
+            // console.log('newSchedule', newSchedule);
 
-
-
-          /*----------------- WHITEBOARD -----------------*/
-
-          // we do this back when we calc the avg intervals
-          // intervalFactor = (avgNewInterval = avgOldInterval) / avgOldInterval;
-
-
+          } // end for loop for building new schedule
 
           // TODO: PUSH NEW SCHEDULE
 
-          res.sendStatus(200);
+          // console.log('newSchedule', newSchedule);
 
-        } // end happy path
+          Client.findByIdAndUpdate({_id: req.params.id}, {$set: {schedule: newSchedule}}, (err,finalUpdateData) => {
+            if (err) {
+              console.log('finalUpdate error', err);
+              res.sendStatus(500);
+            } else {
+              res.sendStatus(200);
+            }
+          })
+
+        } 
       }) // end findByIdAndUpdate
     }
   })
