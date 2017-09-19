@@ -74,7 +74,10 @@ myApp.service('ScheduleService', function ($http, $location) {
       // console.log('/schedule/modify PUT response', response);
       self.getSchedule(clientId);
     }, (response) => {
-      console.log('/schedule/modify PUT error! bad!', response);
+      if (response.data == 'bad schedule'){
+        window.alert('No events before wakeup or after bedtime, please!');
+        location.reload();
+      }
     });
   }
 
