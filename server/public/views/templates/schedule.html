@@ -22,11 +22,17 @@
   <br/>
 
   <div id="schedule-list-container">
-    <div class="schedule-event" ng-class="event.class" ng-repeat="event in sc.loadedSchedule.list | orderBy: 'time'">
+    <div class="schedule-event" 
+      ng-class="{'event-complete': event.class == 'event-complete',
+                 'event-snooze': event.class == 'event-snooze',
+                 'event-dismiss': event.class == 'event-dismiss',
+                 'event-wakeup': event.name == 'wakeup',
+                 'event-sleep': event.name == 'sleep'}" 
+      ng-repeat="event in sc.loadedSchedule.list | orderBy: 'time'">
       <div ng-click="sc.editEvent(event)">{{event.name}}<br/> {{event.time | date: "hh:mm a" : "Z"}}</div>
-      <button ng-click="sc.modifyEvent(event, 'event-complete')">Complete</button>
-      <button ng-click="sc.modifyEvent(event, 'event-dismiss')">Dismiss</button>
-      <button ng-click="sc.modifyEvent(event, 'event-snooze')">Snooze</button>
+      <button ng-click="sc.modifyEvent(event, 'event-complete')" ng-if="event.name != 'wakeup'">Complete</button>
+      <button ng-click="sc.modifyEvent(event, 'event-dismiss')" ng-if="(event.name != 'wakeup') && (event.name != 'sleep') ">Dismiss</button>
+      <button ng-click="sc.modifyEvent(event, 'event-snooze')" ng-if="event.name != 'wakeup'">Snooze</button>
       <br/>
       <hr>
     </div>
