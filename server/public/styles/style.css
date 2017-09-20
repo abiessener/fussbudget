@@ -127,15 +127,29 @@ li a:hover {
   width: 200px;
 }
 
+#nav-container{
+  padding-left: 5px;
+}
+
 #nav-avatar-container{
   height: 48px;
   width: 48px;
-  padding: 0;
+  /* padding: 0;
   margin-left: auto;
   margin-top: 0;
   margin-bottom: 0;
   margin-right: 0;
-  display: inline-block;
+  display: inline-block; */
+}
+
+#nav-avatar-container :hover{
+  cursor: pointer;
+}
+  
+
+#nav-brand-container{
+  font-family: 'Nothing You Could Do', cursive;
+  font-size:2.4em;  
 }
 
 #nav-avatar{
@@ -162,4 +176,8 @@ li a:hover {
 
 .event-sleep {
   background-color: #F89D47
+}
+
+hr {
+  margin: 0;
 }
