@@ -8,7 +8,7 @@ body, html {
 .full-height{
   height: 100%
 }
-h2 {
+h1,h2 {
   font-family: 'Nothing You Could Do', cursive;
   /* color: #453BA5; */
 }
