@@ -17,20 +17,16 @@ h2 {
   position: absolute;
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
+  scroll-behavior: none;
 }
+
 #index-main {
 }
 
 #index-content {
   position: fixed; 
   right: 0;
-}
-#client-list-container{
-  margin: auto;
-  width: 80%;
-  height: 150px;
-  border: 2px solid #ccc;
-  overflow-y: scroll;
 }
 
 #manage-client-avatar-container{
@@ -47,17 +43,38 @@ h2 {
   margin: 0;
 }
 
-.client-list-avatar-container{
+#client-list-avatar-container{
   height: 40px;
   width: 40px;
   padding: 0;
-  margin: 0 5;
   display: inline-block;
+  cursor: pointer;
 }
 
-.client-list-avatar{
+#client-list-avatar{
   height: 100%;
   width: 100%;
+}
+
+#client-list-container{
+  /* margin: auto;
+  width: 80%;
+  height: 150px;
+  border: 2px solid #ccc;*/
+  overflow-y: scroll;
+  width: 50%;
+}
+
+.client-list-name-container{
+  width: 60%;
+  height: 100%;
+}
+
+.client-list-name-container:hover{
+  cursor: pointer;
+}
+#client-list-spacer{
+  height: 10vh;
 }
 
 #schedule-avatar-container{
