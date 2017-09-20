@@ -56,17 +56,13 @@ h1,h2 {
 }
 
 #client-list-container{
-  /* margin: auto;
-  width: 80%;
-  height: 150px;
-  border: 2px solid #ccc;*/
   overflow-y: scroll;
   width: 50%;
+  min-width: 240px;
 }
 
 .client-list-name-container{
-  width: 60%;
-  height: 100%;
+  max-width: 75px;
 }
 
 .client-list-name-container:hover{
