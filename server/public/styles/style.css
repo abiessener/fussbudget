@@ -157,6 +157,13 @@ li a:hover {
   width: 100%;
 }
 
+md-sidenav, 
+md-sidenav.md-locked-open, 
+md-sidenav.md-closed.md-locked-open-add-active {
+    min-width: 150px !important;
+    width: 25vw !important;
+    max-width: 300px !important;
+} 
 
 .event-complete{
   background-color: grey;
