@@ -1,7 +1,7 @@
 <div ng-controller="NavController as nc" layout="column">
-  <section layout="row" flex layout="row" layout-align="space-between center" aria-label="navigation bar" id="nav-container">
-    <div id="nav-brand-container" ng-click="nc.go('/user')">
-      <span>Fussbudget</span>
+  <section layout="row" flex layout-align="space-between center" aria-label="navigation bar" id="nav-container">
+    <div id="nav-brand-container" ng-click="nc.go('/user')" class="md-primary">
+      <span >Fussbudget</span>
     </div>
 
     <div ng-if="nc.userObject.avatar_url" id="nav-avatar-container" aria-label="user avatar" ng-click="nc.openNav()">
@@ -18,7 +18,7 @@
             <md-button ng-click="nc.go('/user')" aria-label="User Prefs">User Prefs</md-button>
           </md-list-item>
           <md-list-item>
-            <md-button ng-click="nc.go('/client-list')" aria-label="client list" class="md-raised" id="nav-client-list-button">Client List</md-button>
+            <md-button ng-click="nc.go('/client-list')" aria-label="client list" class="md-raised md-primary" id="nav-client-list-button">Client List</md-button>
           </md-list-item>
 
         </md-list>
@@ -33,7 +33,6 @@
   </section>
 
 </div>
-<hr>
 
 
 
