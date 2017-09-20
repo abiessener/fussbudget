@@ -34,7 +34,7 @@ myApp.factory('UserService', function ($http, $location) {
         avatar_url: avatar_url
       }).then(function (response) {
           // console.log('UserService PUT request response:', response);
-          $location.path('/user')
+          $location.path('/client-list')
         },
         function (response) {
           console.log('UserService PUT request ERROR SEND UP THE FLARES EVERYTHING IS TERRIBLE');

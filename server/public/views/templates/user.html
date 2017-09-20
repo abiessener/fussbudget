@@ -1,30 +1,22 @@
-<h1>Manage User</h1>
+<section layout="column" flex layout-align="space-between center" class="full-height">
 
-<main>
+    <h1>Manage User</h1>
+
+
     <div id="manage-user-avatar-container">
         <img id="manage-user-avatar" ng-src="{{uc.userObject.avatar_url}}">
-        <span id="manage-user-avatar-text">(click picture to update*)</span>
     </div>
-    <hr>
-    <div id="manage-user-form-container">
-        <form>
+
+    <form ng-submit="uc.editCurrentUser(uc.userObject.userName, uc.userObject.avatar_url)" id="manage-user-form-container" layout="column"
+        flex layout-align="space-around center" layout-padding layout-margin>
+        <md-input-container>
             <label for="manage-user-name-input">Name: </label>
             <input id="manage-user-name-input" ng-model="uc.userObject.userName">
-            <br/>
-            <md-button ng-click="uc.editCurrentUser(uc.userObject.userName, uc.userObject.avatar_url)">Submit</md-button>
-        </form>
-    </div>
-    <hr>
+        </md-input-container>
+        <div layout="row" layout-align="space-around center" id="manage-user-button-container">
+            <md-button ng-click="uc.userService.logout()">Log Out</md-button>
 
-    <md-button ng-click="uc.userService.logout()">Log Out</md-button>
-
-</main>
-
-<footer>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <em>*whenever that functionality gets built. currently waiting for digging into angular material because this should be a pop-up, and also maybe we could be hosting on filestack eventually</em>
-</footer>
+            <md-button class="md-raised md-primary" ng-click="uc.editCurrentUser(uc.userObject.userName, uc.userObject.avatar_url)">Submit</md-button>
+        </div>
+    </form>
+</section>

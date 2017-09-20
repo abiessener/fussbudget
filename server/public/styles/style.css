@@ -35,7 +35,29 @@ h1,h2 {
   border: 2px solid grey;
 }
 
+#manage-client-avatar-container:hover{
+  cursor: pointer;
+}
+  
 #manage-client-avatar{
+  height: 196px;
+  width: 196px;
+  padding: 0;
+  margin: 0;
+}
+
+#manage-user-avatar-container{
+  width: 200px;
+  margin: auto;
+  height: 200px;
+  border: 2px solid grey;
+}
+
+#manage-user-avatar-container:hover{
+  cursor: pointer;
+}
+
+#manage-user-avatar{
   height: 196px;
   width: 196px;
   padding: 0;
