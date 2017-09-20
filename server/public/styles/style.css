@@ -8,7 +8,7 @@ body, html {
 .full-height{
   height: 100%
 }
-h1,h2 {
+h1,h2,h3 {
   font-family: 'Nothing You Could Do', cursive;
   /* color: #453BA5; */
 }
@@ -95,16 +95,25 @@ h1,h2 {
 }
 
 #schedule-avatar-container{
-  height: 220px;
   width: 200px;
-  padding: 0;
-  margin: 0 auto;
-  display: inline-block;
+  margin: auto;
+  height: 200px;
+  border: 2px solid grey;
 }
+
+#schedule-avatar-container:hover{
+  cursor: pointer;
+}  
 
 #schedule-avatar{
   height: 200px;
   width: 200px;
+  padding: 0;
+  margin: 0;
+}
+
+#schedule-list-container{
+  margin-top: 15px;
 }
 
 #nav-container{
