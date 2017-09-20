@@ -1,39 +1,43 @@
 <div ng-controller="NavController as nc" layout="column">
   <section layout="row" flex layout="row" layout-align="space-between center" aria-label="navigation bar" id="nav-container">
-      <div id="nav-brand-container">
-        <a href="#/client-list">Fussbudget</a>
-      </div>
+    <div id="nav-brand-container" ng-click="nc.go('/user')">
+      <span>Fussbudget</span>
+    </div>
 
-      <div ng-if="nc.userObject.avatar_url" id="nav-avatar-container" aria-label="user avatar" ng-click="nc.openNav()">
-        <img id="nav-avatar" ng-src="{{nc.userObject.avatar_url}}">
-      </div>
+    <div ng-if="nc.userObject.avatar_url" id="nav-avatar-container" aria-label="user avatar" ng-click="nc.openNav()">
+      <img id="nav-avatar" ng-src="{{nc.userObject.avatar_url}}">
+    </div>
 
-      <md-sidenav class="md-sidenav-right" md-component-id="right" layout="column" layout-align="end end">
-        <md-content>
-          <md-list>
-            <md-list-item>
-              <md-button ng-click="nc.go('/add-client')" aria-label="add client">Add Client</md-button>
-            </md-list-item>
-            <md-list-item>
-              <md-button ng-click="nc.go('/client-list')" aria-label="client list">Client List</md-button>
-            </md-list-item>
-          </md-list>
-        </md-content>
+    <md-sidenav class="md-sidenav-right" md-component-id="right" layout="column" layout-align="end end">
+      <md-content>
+        <md-list>
+          <md-list-item>
+            <md-button ng-click="nc.go('/add-client')" aria-label="add client">Add Client</md-button>
+          </md-list-item>
+          <md-list-item>
+            <md-button ng-click="nc.go('/user')" aria-label="User Prefs">User Prefs</md-button>
+          </md-list-item>
+          <md-list-item>
+            <md-button ng-click="nc.go('/client-list')" aria-label="client list" class="md-raised" id="nav-client-list-button">Client List</md-button>
+          </md-list-item>
 
-        <md-button ng-click="nc.closeNav()" class="md-primary">
-          Close
-        </md-button>
-      </md-sidenav>
+        </md-list>
+      </md-content>
+
+      <md-button ng-click="nc.closeNav()" class="md-primary">
+        Close
+      </md-button>
+    </md-sidenav>
 
 
   </section>
 
-  </div>
-  <hr>
+</div>
+<hr>
 
 
 
 
-  <!-- <md-nav-item md-nav-href="#/add-client" aria-label="add client" name="add-client">+Client</md-nav-item>
+<!-- <md-nav-item md-nav-href="#/add-client" aria-label="add client" name="add-client">+Client</md-nav-item>
     <md-nav-item md-nav-href="#/client-list" aria-label="client list" name="client-list">Clients</md-nav-item>
  -->

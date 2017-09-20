@@ -150,8 +150,19 @@ li a:hover {
 #nav-brand-container{
   font-family: 'Nothing You Could Do', cursive;
   font-size:2.4em;  
+
 }
 
+#nav-brand-container:hover{
+  cursor: pointer;
+}
+  
+#nav-brand-container > span{
+  font-weight: 700;
+  color: #453BA5;
+  text-decoration: underline;
+}
+  
 #nav-avatar{
   height: 100%;
   width: 100%;
@@ -164,6 +175,10 @@ md-sidenav.md-closed.md-locked-open-add-active {
     width: 25vw !important;
     max-width: 300px !important;
 } 
+
+#nav-client-list-button{
+  background-color: #AEA7E7
+}
 
 .event-complete{
   background-color: grey;
