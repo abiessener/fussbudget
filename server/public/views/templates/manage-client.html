@@ -1,41 +1,32 @@
-<h1>Manage Client</h1>
+<section layout="column" flex layout-align="space-between center" class="full-height">
+  <h1>Manage Client</h1>
 
-<main>
   <div id="manage-client-avatar-container">
     <img id="manage-client-avatar" ng-src="{{mcc.currentClient.client[0].avatar_url}}">
-    <span id="manage-client-avatar-text">(click picture to update*)</span>
   </div>
-  <hr>
-  <div id="manage-client-form-container">
-    <form>
-      <label for="manage-client-name-input">Name: </label>
-      <input id="manage-client-name-input" ng-model="mcc.currentClient.client[0].name">
-      <br/>
+
+  <form ng-submit="mcc.editCurrentClient()" id="manage-client-form-container" layout="column" flex layout-align="space-around center"
+    layout-padding layout-margin>
+    <md-input-container>
+      <label>Name: </label>
+      <input ng-model="mcc.currentClient.client[0].name">
+    </md-input-container>
+    <md-input-container>
+      <label>Date of Birth: </label>
       <md-datepicker ng-model="mcc.currentClient.client[0].date_of_birth" md-placeholder="Enter date"></md-datepicker>
-      <br/>
-      <label for="manage-client-note-input">Notes: </label>
-      <input id="manage-client-notes-input" ng-model="mcc.currentClient.client[0].notes">
-      <br/>
-      <br/>
-      <md-button ng-click="mcc.editCurrentClient()">Submit</md-button>
-    </form>
-  </div>
-  <hr>
-  <md-button ng-click="mcc.deleteClient()">Delete</md-button>
+    </md-input-container>
+    <md-input-container>
+      <label>Notes:</label>
+      <input ng-model="mcc.currentClient.client[0].notes">
+    </md-input-container>
+    <div layout="row" layout-align="space-around center" id="manage-client-button-container">
+      <md-button class="md-warn" ng-click="mcc.deleteClient()">Delete</md-button>
+      <md-button ng-href="#/client-list">Cancel</md-button>
+      <md-button class="md-raised md-primary" ng-click="mcc.editCurrentClient()">Submit</md-button>
+      
+    </div>
 
-  <!-- whoa this isn't working at all
-    need to figure out this primary caregiver nonsense
-    in the meantime, we'll just have the delete button without the ng-if -->
 
-  <!-- <button ng-model="mcc.deleteCurrentClient.client[0]()" ng-if="mcc.isPrimaryCaregiver">Delete</button>
-  <button ng-model="mcc.leaveCurrentClient.client[0]()" ng-if="!mcc.isPrimaryCaregiver">Leave</button> -->
-</main>
+  </form>
 
-<footer>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <em>*whenever that functionality gets built. currently waiting for digging into angular material because this should be a pop-up, and also maybe we could be hosting on filestack eventually</em>
-</footer>
+</section>

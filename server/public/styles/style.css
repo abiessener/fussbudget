@@ -31,13 +31,13 @@ h1,h2 {
 #manage-client-avatar-container{
   width: 200px;
   margin: auto;
-  height: 220px;
+  height: 200px;
   border: 2px solid grey;
 }
 
 #manage-client-avatar{
-  height: 200px;
-  width: 200px;
+  height: 196px;
+  width: 196px;
   padding: 0;
   margin: 0;
 }
