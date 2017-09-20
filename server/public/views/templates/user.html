@@ -11,12 +11,12 @@
             <label for="manage-user-name-input">Name: </label>
             <input id="manage-user-name-input" ng-model="uc.userObject.userName">
             <br/>
-            <button ng-click="uc.editCurrentUser(uc.userObject.userName, uc.userObject.avatar_url)">Submit</button>
+            <md-button ng-click="uc.editCurrentUser(uc.userObject.userName, uc.userObject.avatar_url)">Submit</md-button>
         </form>
     </div>
     <hr>
 
-    <button ng-click="uc.userService.logout()">Log Out</button>
+    <md-button ng-click="uc.userService.logout()">Log Out</md-button>
 
 </main>
 
