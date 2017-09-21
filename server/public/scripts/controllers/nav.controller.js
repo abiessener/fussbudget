@@ -18,4 +18,9 @@ myApp.controller('NavController', ['UserService', '$mdSidenav', '$location', fun
     $location.path(url);
     $mdSidenav('right').close();
   }
+
+  self.logout = () => {
+    UserService.logout();
+  }
+  
 }]);
