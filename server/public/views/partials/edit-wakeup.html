@@ -2,30 +2,30 @@
   <form ng-cloak>
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h2>Edit Wakeup</h2>
+        <h1>Edit Wakeup</h1>
         <span flex></span>
       </div>
     </md-toolbar>
+    <div layout-fill layout="column" layout-align="center center">
+      <md-dialog-content>
+        <div class="md-dialog-content">
+          <h2>Enter Time</h2>
+          <input ng-model="ewc.wakeUpTime" type="time"></input>
+        </div>
+      </md-dialog-content>
 
-    <md-dialog-content>
-      <div class="md-dialog-content">
-        <h2>Enter Time</h2>
-        <input ng-model="ewc.wakeUpTime" type="time" ></input>
-        {{ewc.wakeUpTime}}
-      </div>
-    </md-dialog-content>
-
-    <md-dialog-actions layout="row">
-      <md-button ng-click="$mdDialog.hide()" md-autofocus>
-        Cancel
-      </md-button>
-      <span flex></span>
-      <md-button ng-click="ewc.setWakeUpNow()">
-        Now
-      </md-button>
-      <md-button ng-click="ewc.editWakeUp()">
-        Edit
-      </md-button>
-    </md-dialog-actions>
+      <md-dialog-actions id="edit-wakeup-buttons-container" layout="row" layout-align="space-around center" layout-fill>
+        <md-button ng-click="$mdDialog.hide()" md-autofocus>
+          Cancel
+        </md-button>
+        <span flex></span>
+        <md-button class="md-primary md-raised" ng-click="ewc.setWakeUpNow()">
+          Now
+        </md-button>
+        <md-button ng-click="ewc.editWakeUp()">
+          Edit
+        </md-button>
+      </md-dialog-actions>
+    </div>
   </form>
 </md-dialog>

@@ -1,18 +1,25 @@
-<div class="container">
-  <h1 >Login</h1>
-    <h1 ng-if="lc.message != ''">{{lc.message}}</h2>
-    <form ng-submit="lc.login()">
-      <div>
-          <label for="username">Username:</label>
-          <input type="text" ng-model="lc.user.username" />
-      </div>
-      <div>
-          <label for="password">Password:</label>
-          <input type="password" ng-model="lc.user.password" />
-      </div>
-      <div>
-          <input type="submit" name="submit" value="Log In" />
-          <a href="#register">Register</a>
-      </div>
+<section layout="column" flex layout-align="space-between center" class="full-height">
+    <h1>
+        Login
+    </h1>
+
+    <h2 ng-if="lc.message != ''">{{lc.message}}</h2>
+    <div id="login-form-container" >
+            
+    <form ng-submit="lc.login()" layout="column" layout-align="center center">
+        <md-input-container>
+            <label for="username">Username:</label>
+            <input type="text" ng-model="lc.user.username" />
+        </md-input-container>
+        <md-input-container>
+            <label for="password">Password:</label>
+            <input type="password" ng-model="lc.user.password" />
+        </md-input-container>
+        <div>
+            <a ng-href="#register">Register</a>
+            <md-button class="md-primary md-raised" ng-click="lc.login()">Log In</md-button>
+        </div>
     </form>
-</div>
+        
+    </div>
+</section>

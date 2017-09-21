@@ -1,23 +1,33 @@
-<div class="container">
-  <p>
+<section layout="column" flex layout-align="center center" class="full-height">
+  <h2>
     Add Client
-  </p>
-  <form ng-submit="acc.addClient(client)">
-    <label>Name: 
+  </h2>
+
+
+  <form ng-submit="acc.addClient(client)" id="add-client-form-container" layout="column" flex layout-align="space-around start"
+    layout-padding layout-margin>
+    <md-input-container>
+      <label>Name: </label>
       <input ng-model="client.name">
-    </label>
-    <label>Date of Birth: 
-        <md-datepicker ng-model="client.date_of_birth" md-placeholder="Enter date"></md-datepicker>
-    </label>
-    <label>Notes: 
+    </md-input-container>
+    <md-input-container>
+      <label>Date of Birth: </label>
+      <md-datepicker ng-model="client.date_of_birth" md-placeholder="Enter date"></md-datepicker>
+    </md-input-container>
+    <md-input-container>
+      <label>Notes: </label>
       <input ng-model="client.notes">
-    </label>
-    <label>Avatar URL: 
+    </md-input-container>
+    <md-input-container>
+      <label>Avatar URL:     </label>
       <input ng-model="client.avatar_url">
-    </label>
-    <button>Submit</button>        
+    </md-input-container>
+    <div layout="row" layout-align="space-around center" id="add-client-button-container">
+      <md-button class="md-raised md-primary" ng-click="acc.addClient(client)">Submit</md-button>
+    </div>
   </form>
-</div>
+
+</section>
 
 <!-- ******** FOR REFERENCE *********
   ClientSchema = new Schema({

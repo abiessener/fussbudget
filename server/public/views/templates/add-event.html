@@ -1,23 +1,36 @@
-<h1>Add Event</h1>
+<section layout="column" flex layout-align="space-between center" class="full-height">
+  <h2>
+    Add Event
+  </h2>
 
-<div>
-  <div id="add-event-image-container">
-    <!-- some kind of graphic? -->
+
+  <div>
+    <div id="add-event-image-container">
+      <!-- some kind of graphic? -->
+    </div>
+
+    <div id="add-event-form-container">
+      <form novalidate ng-submit="aec.addEvent()" layout="column" flex layout-align="space-around start" layout-padding layout-margin>
+
+        <md-input-container>
+          <label for="add-event-name-input">Name: </label>
+          <input id="add-event-name-input" ng-model="aec.eventToAdd.name">
+        </md-input-container>
+
+        <md-input-container>
+          <label>Time: </label>
+          <input ng-model="aec.eventToAdd.time" type="time"></input>
+        </md-input-container>
+
+        <md-input-container>
+          <label for="add-event-notes-input">Notes: </label>
+          <input id="add-event-notes-input" ng-model="aec.eventToAdd.notes">
+        </md-input-container>
+
+        <div layout="row" layout-align="space-around center">
+          <md-button type="button" ng-click="aec.cancelAddEvent()">Cancel</md-button>
+          <md-button class="md-raised md-primary" ng-click="aec.addEvent()">Add Event</md-button>
+        </div>
+      </form>
+    </div>
   </div>
-  <hr>
-  <div id="add-event-form-container">
-    <form novalidate ng-submit="aec.addEvent()" >
-      <label for="add-event-name-input">Name: </label>
-      <input id="add-event-name-input" ng-model="aec.eventToAdd.name">
-      <br/>
-      <input ng-model="aec.eventToAdd.time" type="time" ></input>
-      <br/>
-      <label for="add-event-notes-input">Notes: </label>
-      <input id="add-event-notes-input" ng-model="aec.eventToAdd.notes">
-      <br/>
-      <br/>
-      <button type="button" ng-click="aec.cancelAddEvent()">Cancel</button>
-      <button type="submit">Add Event</button>
-    </form>
-  </div>
-</div>

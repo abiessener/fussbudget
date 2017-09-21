@@ -14,6 +14,8 @@ myApp.controller('AddEventController', function(ScheduleService, ClientService, 
   
   // takes the user input, adjusts the time to Z timezone to match the way we store our event objects, then pushes it onto the loaded schedule array. the pushSchedule method in the service sends it to the server to be stored and then refreshes the view. user ends up at /schedule
   self.addEvent = () => {
+    console.log('ctrl addevent');
+    
     if(self.eventToAdd.name == undefined){
       window.alert('please enter an event name!');
       return;
@@ -34,7 +36,7 @@ myApp.controller('AddEventController', function(ScheduleService, ClientService, 
     self.eventToAdd.priority = highestPriority + 1;
     
     self.loadedSchedule.list.push(self.eventToAdd);
-    ScheduleService.pushSchedule(self.loadedSchedule.list, self.currentClient.client[0]._id);
+    ScheduleService.pushSchedule(self.loadedSchedule.list, $routeParams.id);
   }
 
   self.cancelAddEvent = () => {

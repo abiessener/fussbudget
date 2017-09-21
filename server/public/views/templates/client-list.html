@@ -1,17 +1,30 @@
-<div>
-  <h1>Client List</h1>
-</div>
-<div id="client-list-container">
-  <div ng-repeat="client in clc.clientList.list">
-    <div class="client-list-avatar-container" ng-click="clc.goToSchedule(client)">
-      <img class="client-list-avatar" ng-src="{{client.avatar_url}}">
+<section layout="column" flex layout-align="start center" layout-fill>
+  <h2>
+    Client List
+  </h2>
+
+  <div id="client-list-container">
+    <div ng-repeat="client in clc.clientList.list" layout="row" flex layout-align="space-between center" layout-fill>
+      <div id="client-list-avatar-container" ng-click="clc.goToSchedule(client)" layout="row">
+        <img id="client-list-avatar" ng-src="{{client.avatar_url}}">
+      </div>
+      <div class="client-list-name-container">
+        {{client.name}}
+
+      </div>
+      <div>
+        <md-button class="md-fab md-mini md-primary md-hue-3" ng-click="clc.editClient(client)" aria-label="edit client button">
+          <md-icon md-svg-src="images/ic_build_black_18px.svg"></md-icon>
+        </md-button>
+        
+        <md-button class="md-fab md-mini md-primary" ng-click="clc.goToSchedule(client)" aria-label="schedule button">
+          <md-icon md-svg-src="images/ic_schedule_black_18px.svg"></md-icon>
+        </md-button>
+
+      </div>
     </div>
 
-    {{client.name}} | 
-    <button ng-click="clc.editClient(client)">
-      Edit
-    </button>
-    <hr>
-  </div> <!-- end ng-repeat -->
+    <!-- <div id="client-list-spacer"> </div> -->
 
-</div>
+  </div>
+</section>

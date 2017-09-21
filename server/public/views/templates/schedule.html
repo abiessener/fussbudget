@@ -1,41 +1,50 @@
-<div class="container">
-  <h1>
-    Schedule
-  </h1>
-  <div id="schedule-header">
-    <a ng-href="#/manage-client/{{sc.currentClient.client[0]._id}}">
-      <div id="schedule-avatar-container">
-        <img id="schedule-avatar" ng-src="{{sc.currentClient.client[0].avatar_url}}">
-        <strong>{{sc.currentClient.client[0].name}}</strong>
-      </div>
-    </a>
+<section layout="column" flex layout-align="space-between center">
+
+  <h1>Schedule</h1>
+
+  <div id="schedule-header" ng-href="#/manage-client/{{sc.currentClient.client[0]._id}}" layout="column" layout-align="center center">
+    <div id="schedule-avatar-container">
+      <img id="schedule-avatar" ng-src="{{sc.currentClient.client[0].avatar_url}}" alt="Go" aria-label="user avatar">
+    </div>
+    <h3>{{sc.currentClient.client[0].name}}</h3>
+
   </div>
 
-  <md-button ng-click="sc.editWakeUpModal($event)" class="md-raised">
-    Edit Wakeup
-  </md-button>
-  <button ng-click="sc.addEvent()">add event</button>
-  <button ng-click="sc.saveAsDefault()">save as default</button>
+  <div id="schedule-buttons-container">
+    <md-button ng-click="sc.editWakeUpModal($event)" class="md-fab md-mini md-hue-1" aria-label="edit wakeup button">
+      <md-icon md-svg-src="images/ic_access_alarms_black_18px.svg"></md-icon>
+    </md-button>
 
-  <br/>
-  <hr>
-  <br/>
+    <md-button ng-click="sc.addEvent()" class="md-fab md-mini md-primary" aria-label="add event button">
+      <md-icon md-svg-src="images/ic_add_alert_black_18px.svg"></md-icon>
+    </md-button>
 
-  <div id="schedule-list-container">
-    <div class="schedule-event" 
-      ng-class="{'event-complete': event.class == 'event-complete',
+    <md-button ng-click="sc.saveAsDefault()" class="md-fab md-mini md-warn md-hue-1" aria-label="save as default schedule button">
+      <md-icon md-svg-src="images/ic_save_black_18px.svg"></md-icon>
+    </md-button>
+  </div>
+
+  <md-list id="schedule-list-container">
+    <md-list-item class="schedule-event" ng-click="sc.editEvent(event)" ng-class="{
+                 'event-complete': event.class == 'event-complete',
                  'event-snooze': event.class == 'event-snooze',
                  'event-dismiss': event.class == 'event-dismiss',
                  'event-wakeup': event.name == 'wakeup',
-                 'event-sleep': event.name == 'sleep'}" 
-      ng-repeat="event in sc.loadedSchedule.list | orderBy: 'time'">
-      <div ng-click="sc.editEvent(event)">{{event.name}}<br/> {{event.time | date: "hh:mm a" : "Z"}}</div>
-      <button ng-click="sc.modifyEvent(event, 'event-complete')" ng-if="event.name != 'wakeup'">Complete</button>
-      <button ng-click="sc.modifyEvent(event, 'event-dismiss')" ng-if="(event.name != 'wakeup') && (event.name != 'sleep') ">Dismiss</button>
-      <button ng-click="sc.modifyEvent(event, 'event-snooze')" ng-if="event.name != 'wakeup'">Snooze</button>
-      <br/>
-      <hr>
-    </div>
+                 'event-sleep': event.name == 'sleep'}" ng-repeat="event in sc.loadedSchedule.list | orderBy: 'time'">
 
-  </div>
-</div>
+      <div class="schedule-list-info-wrapper">
+        <span class="schedule-list-event-time">{{event.time | date: "HH:mm" : "Z"}}</span>
+        <span class="schedule-list-event-name">| {{event.name}}</span>
+      </div>
+      <md-icon class="md-secondary" ng-click="sc.modifyEvent(event, 'event-dismiss')" ng-if="(event.name != 'wakeup') && (event.name != 'sleep')"
+        aria-label="dismiss event button" alt="dismiss" md-svg-icon="images/ic_cancel_black_24px.svg">
+      </md-icon>
+      <md-icon class="md-secondary" ng-click="sc.modifyEvent(event, 'event-snooze')" ng-if="event.name != 'wakeup'" aria-label="snooze event icon"
+        alt="snooze" md-svg-icon="images/ic_snooze_black_24px.svg"></md-icon>
+      <md-icon class="md-secondary" ng-click="sc.modifyEvent(event, 'event-complete')" ng-if="event.name != 'wakeup'" aria-label="Complete event button"
+        alt="complete">
+        <md-icon md-svg-icon="images/ic_done_black_24px.svg"></md-icon>
+      </md-icon>
+    </md-list-item>
+  </md-list>
+</section>

@@ -1,162 +1,236 @@
 body, html {
-  margin: 0;
+  /* margin: 0;
   padding: 0;
   font-family: sans-serif;
-  font-size: 14px;
+  font-size: 14px; */
+
+}
+.full-height{
+  height: 100%
+}
+h1,h2,h3 {
+  font-family: 'Nothing You Could Do', cursive;
+  /* color: #453BA5; */
 }
 
-.instructions .container h1 {
-  font-size: 32px;
-  font-weight: 600;
-}
-
-.instructions {
-  background-color: #333333;
-  color: #DDDDDD;
-  padding: 15px;
-}
-
-#entryForm {
-  margin-top: 14px;
-}
-
-#container {
-  margin-top: 10px;
-}
-
-.container p{
-  margin-top : 14px;
-}
-
-.message {
-  padding: 10px 0;
-}
-
-.message p {
-  margin-left: 10px;
-}
-
-.message:nth-child(odd) {
-   background-color: #eeeeee;
-}
-
-.message:nth-child(even) {
-  background-color: #f8f8f8;
-}
-
-.btn-danger{
-  margin-left: 10px;
-}
-
-.navbar {
-  background-color: #333333;
-  width: 100%;
-  border-radius: 0px;
-}
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+#outer-layer {
+  /* position: absolute; */
+  height: 100vh;
+  width: 100vw;
   overflow: hidden;
 }
 
-li {
-  float: left;
+#index-main {
 }
 
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-/* Change the link color to #111 (black) on hover */
-li a:hover {
-  text-decoration: underline;
-  color: #eee;
-}
-
-#client-list-container{
-  margin: auto;
-  width: 80%;
-  height: 150px;
-  border: 2px solid #ccc;
-  overflow-y: scroll;
+#index-content {
+  /* position: fixed; 
+  right: 0; */
 }
 
 #manage-client-avatar-container{
   width: 200px;
   margin: auto;
-  height: 220px;
+  height: 200px;
   border: 2px solid grey;
 }
 
+#manage-client-avatar-container:hover{
+  cursor: pointer;
+}
+  
 #manage-client-avatar{
+  height: 196px;
+  width: 196px;
+  padding: 0;
+  margin: 0;
+}
+
+#manage-user-avatar-container{
+  width: 200px;
+  margin: auto;
+  height: 200px;
+  border: 2px solid grey;
+}
+
+#manage-user-avatar-container:hover{
+  cursor: pointer;
+}
+
+#manage-user-avatar{
+  height: 196px;
+  width: 196px;
+  padding: 0;
+  margin: 0;
+}
+
+#client-list-avatar-container{
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  display: inline-block;
+  cursor: pointer;
+}
+
+#client-list-avatar{
+  height: 100%;
+  width: 100%;
+}
+
+#client-list-container{
+  overflow-y: scroll;
+  width: 50%;
+  min-width: 240px;
+}
+
+.client-list-name-container{
+  max-width: 75px;
+}
+
+.client-list-name-container:hover{
+  cursor: pointer;
+}
+#client-list-spacer{
+  height: 10vh;
+}
+
+#edit-wakeup-buttons-container{
+  padding: 0px 5px !important;
+}
+#schedule-avatar-container{
+  width: 200px;
+  margin: auto;
+  height: 200px;
+}
+
+#schedule-avatar-container:hover{
+  cursor: pointer;
+}  
+
+#schedule-avatar{
   height: 200px;
   width: 200px;
   padding: 0;
   margin: 0;
 }
 
-.client-list-avatar-container{
-  height: 40px;
-  width: 40px;
-  padding: 0;
-  margin: 0 5;
-  display: inline-block;
+#schedule-list-container{
+  margin-top: 15px;
+  width: 90%;
+  max-width: 400px;
 }
 
-.client-list-avatar{
-  height: 100%;
-  width: 100%;
+.schedule-event{
+  padding: 6px 16px !important;
 }
 
-#schedule-avatar-container{
-  height: 220px;
-  width: 200px;
-  padding: 0;
-  margin: 0 auto;
-  display: inline-block;
+.schedule-list-event-name{
+  font-family: 'Cabin', sans-serif;  
 }
 
-#schedule-avatar{
-  height: 200px;
-  width: 200px;
+.schedule-list-event-time{
+  font-family: 'Pacifico', cursive;
+  border-radius: 5px;
+  height: 24px;
+}
+
+.schedule-list-info-wrapper{
+  background-color: rgba(0,0,0,0.1);
+  padding: 0px 10px;
+  border-radius: 5px;
+  max-height: 48px !important;
+}
+
+.md-list-item-inner{
+  max-height: 48px !important;
+}
+#nav-container{
+  padding-left: 5px;
+  background-color: #673AB7;
+  color: white;
 }
 
 #nav-avatar-container{
-  height: 70px;
-  width: 70px;
-  padding: 0;
-  margin: 0 auto;
-  display: inline-block;
+  height: 48px;
+  width: 48px;
+  /* padding: 0;
+  margin-left: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 0;
+  display: inline-block; */
 }
 
+#nav-avatar-container :hover{
+  cursor: pointer;
+}
+  
+
+#nav-brand-container{
+  font-family: 'Nothing You Could Do', cursive;
+  font-size:2.1em;  
+
+}
+
+#nav-brand-container:hover{
+  cursor: pointer;
+}
+  
+#nav-brand-container > span{
+  font-weight: 700;
+  /* color: #453BA5; */
+  text-decoration: underline;
+}
+  
 #nav-avatar{
   height: 100%;
   width: 100%;
 }
 
+md-sidenav, 
+md-sidenav.md-locked-open, 
+md-sidenav.md-closed.md-locked-open-add-active {
+    min-width: 150px !important;
+    width: 25vw !important;
+    max-width: 300px !important;
+} 
+
+#nav-client-list-button{
+  /* background-color: #AEA7E7 */
+}
 
 .event-complete{
-  background-color: grey;
+  background-color: #d1c4e9;
 }
 
 .event-dismiss{
-  background-color: #DB2B2B;
+  background-color: #ffa4a2;
 }
 
 .event-snooze{
-  background-color: #F3F576;
+  background-color: #ffe082;
 }
 
 .event-wakeup {
-  background-color: #52ECEC
+  background-color: #9a67ea
 }
 
 .event-sleep {
-  background-color: #F89D47
+  background-color: #ffc046
+}
+
+hr {
+  margin: 0;
+  /* border-color: #707022; */
+}
+
+#add-client-button-container{
+  width: 100%;
+}
+
+#add-client-form-container {
+}
+
+#add-client-form-container > * {
+  width: 100%;
 }

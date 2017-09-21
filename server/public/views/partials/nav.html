@@ -1,22 +1,45 @@
-<div ng-controller="NavController as nc">
-  <a ng-href="#/client-list">Fussbudget</a>
-  <div ng-if="nc.userObject.avatar_url" id="nav-avatar-container">
-    <a href="#/user">
-      <img id="nav-avatar" ng-src="{{nc.userObject.avatar_url}}">
-    </a>
-  </div>
+<div ng-controller="NavController as nc" layout="column">
+  <section layout="row" flex layout-align="space-between center" aria-label="navigation bar" id="nav-container">
+    <div id="nav-brand-container" ng-click="nc.go('/user')" class="md-primary">
+      <span >Fussbudget</span>
+    </div>
 
-  <!-- ******** THIS IS A (probably) TEMP NAV FOR DEBUGGING ********* -->
-  <div>
-    <a href="#/add-client">
-      Add Client
-    </a>
-    <br/>
-    <a href="#/client-list">
-      Client List
-    </a>
-    <hr>
-  </div>
-  <!-- ******** END TEMP NAV ********* -->
+    <div ng-if="nc.userObject.avatar_url" id="nav-avatar-container" aria-label="user avatar" ng-click="nc.openNav()">
+      <img id="nav-avatar" ng-src="{{nc.userObject.avatar_url}}">
+    </div>
+
+    <md-sidenav class="md-sidenav-right" md-component-id="right" layout="column" layout-align="end end">
+      <md-content>
+        <md-list>
+          <md-list-item>
+            <md-button ng-click="nc.logout()" aria-label="log out">Log Out</md-button>
+          </md-list-item>
+          <md-list-item>
+            <md-button ng-click="nc.go('/add-client')" aria-label="add client">Add Client</md-button>
+          </md-list-item>
+          <md-list-item>
+            <md-button ng-click="nc.go('/user')" aria-label="User Prefs">User Prefs</md-button>
+          </md-list-item>
+          <md-list-item>
+            <md-button ng-click="nc.go('/client-list')" aria-label="client list" class="md-raised md-primary" id="nav-client-list-button">Client List</md-button>
+          </md-list-item>
+
+        </md-list>
+      </md-content>
+
+      <md-button ng-click="nc.closeNav()" class="md-primary">
+        Close
+      </md-button>
+    </md-sidenav>
+
+
+  </section>
 
 </div>
+
+
+
+
+<!-- <md-nav-item md-nav-href="#/add-client" aria-label="add client" name="add-client">+Client</md-nav-item>
+    <md-nav-item md-nav-href="#/client-list" aria-label="client list" name="client-list">Clients</md-nav-item>
+ -->
