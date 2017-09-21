@@ -98,7 +98,6 @@ h1,h2,h3 {
   width: 200px;
   margin: auto;
   height: 200px;
-  border: 2px solid grey;
 }
 
 #schedule-avatar-container:hover{
@@ -114,8 +113,34 @@ h1,h2,h3 {
 
 #schedule-list-container{
   margin-top: 15px;
+  width: 90%;
+  max-width: 400px;
 }
 
+.schedule-event{
+  padding: 6px 16px !important;
+}
+
+.schedule-list-event-name{
+  font-family: 'Cabin', sans-serif;  
+}
+
+.schedule-list-event-time{
+  font-family: 'Pacifico', cursive;
+  border-radius: 5px;
+  height: 24px;
+}
+
+.schedule-list-info-wrapper{
+  background-color: rgba(0,0,0,0.1);
+  padding: 0px 10px;
+  border-radius: 5px;
+  max-height: 48px !important;
+}
+
+.md-list-item-inner{
+  max-height: 48px !important;
+}
 #nav-container{
   padding-left: 5px;
   background-color: #673AB7;
@@ -172,23 +197,23 @@ md-sidenav.md-closed.md-locked-open-add-active {
 }
 
 .event-complete{
-  background-color: grey;
+  background-color: #d1c4e9;
 }
 
 .event-dismiss{
-  background-color: #DB2B2B;
+  background-color: #ffa4a2;
 }
 
 .event-snooze{
-  background-color: #F3F576;
+  background-color: #ffe082;
 }
 
 .event-wakeup {
-  background-color: #52ECEC
+  background-color: #9a67ea
 }
 
 .event-sleep {
-  background-color: #F89D47
+  background-color: #ffc046
 }
 
 hr {
@@ -202,6 +227,7 @@ hr {
 
 #add-client-form-container {
 }
+
 #add-client-form-container > * {
   width: 100%;
 }
