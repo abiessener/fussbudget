@@ -118,7 +118,18 @@ myApp.controller('ScheduleController', function (UserService, ScheduleService, C
   // saves the current schedule as the client's template (default, ugh, we have a naming issue here)
   self.saveAsDefault = () => {
     // console.log('scheduleController.saveAsDefault()');
+    var confirm = $mdDialog.confirm()
+    .title('Confirm Set Default')
+    .textContent('Do you really want to set this as your default schedule? This cannot be undone!')
+    .ariaLabel('set default confirm dialog')
+    .targetEvent(event)
+    .ok('Update')
+    .cancel('Cancel');
+
+  $mdDialog.show(confirm).then( () => {
     ScheduleService.pushDefaultSchedule(self.loadedSchedule.list, $routeParams.id);
+  },()=>{});
+
   }
 
   // things to run on page load
