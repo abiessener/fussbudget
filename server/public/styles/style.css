@@ -124,12 +124,16 @@ h1,h2,h3 {
 
 #schedule-list-container{
   margin-top: 15px;
-  width: 95%;
+  width: 96%;
   max-width: 400px;
 }
 
 .schedule-event{
   padding: 6px 0px !important;
+}
+
+.md-no-style{
+  padding: 0px 3px !important;
 }
 
 .schedule-list-event-name{
@@ -147,6 +151,9 @@ h1,h2,h3 {
   padding: 0px 10px;
   border-radius: 5px;
   max-height: 48px !important;
+  /* white-space: nowrap;
+  max-width: 40vw;
+  overflow: hidden; */
 }
 
 .md-list-item-inner{
