@@ -28,6 +28,16 @@ h1,h2,h3 {
   right: 0; */
 }
 
+#home-graphic-container{
+  width: 200px;
+  height: 200px;  
+}
+
+#home-graphic-img{
+  height: 100%;
+  width: 100%;
+}
+
 #manage-client-avatar-container{
   width: 200px;
   margin: auto;
