@@ -47,12 +47,21 @@ myApp.service('ClientService', function ($http, $location) {
   } // end editCurrentClient()
 
   // gets the user's list of clients and puts it in clientList
-  self.getClientList = () => {
+  self.getClientList = (fromLogin) => {
     // console.log('ClientService.getClient');
 
     $http.get('/client/list').then((response) => {
       // console.log('client GET response', response);
       self.clientList.list = response.data;
+      if (fromLogin) {
+        if (self.clientList.list.length === 1) {
+          $location.path('/schedule/' + self.clientList.list[0]._id)
+        } else if (self.clientList.list.length === 0) {
+          $location.path('/add-client');
+        } else {
+          $location.path('/client-list');
+        }
+      }
       // console.log('ClientService.clientList', self.clientList);
     });
   };

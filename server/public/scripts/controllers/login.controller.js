@@ -1,4 +1,4 @@
-myApp.controller('LoginController', function ($http, $location, UserService) {
+myApp.controller('LoginController', function ($http, $location, UserService, ClientService) {
   // console.log('LoginController created');
   
   var self = this;
@@ -7,6 +7,8 @@ myApp.controller('LoginController', function ($http, $location, UserService) {
     username: '',
     password: ''
   };
+
+  self.clientList = ClientService.clientList;
   
   self.message = '';
 
@@ -20,7 +22,7 @@ myApp.controller('LoginController', function ($http, $location, UserService) {
         if (response.data.username) {
           // console.log('LoginController -- login -- success: ', response.data);
           // location works with SPA (ng-route)
-          $location.path('/client-list'); // http://localhost:5000/#/user
+          ClientService.getClientList(true);
         } else {
           // console.log('LoginController -- login -- failure: ', response);
           self.message = "Wrong!!";
