@@ -5,8 +5,12 @@ myApp.factory('UserService', function ($http, $location) {
 
   var userObject = {};
 
+  var fileStack = filestack.init('A7WAgJVAQ4S4JdB1w30hFz');
+
   return {
     userObject: userObject,
+
+    fileStack: fileStack,
 
     getuser: function () {
       // console.log('UserService -- getuser');
