@@ -35,4 +35,7 @@ myApp.controller('EditWakeupController', function (ScheduleService, ClientServic
     $mdDialog.hide(self.wakeUpTime);
   }
 
+  self.cancel = () => {
+    $mdDialog.cancel();
+  }
 });
