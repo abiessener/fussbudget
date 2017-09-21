@@ -94,6 +94,9 @@ h1,h2,h3 {
   height: 10vh;
 }
 
+#edit-wakeup-buttons-container{
+  padding: 0px 5px !important;
+}
 #schedule-avatar-container{
   width: 200px;
   margin: auto;
