@@ -78,11 +78,18 @@ myApp.controller('ScheduleController', function (UserService, ScheduleService, C
         fullscreen: self.customFullscreen // Only for -xs, -sm breakpoints.
       })
       .then(function (answer) {
-        console.log('modal response', answer);
-        ScheduleService.editWakeUp(answer, $routeParams.id);
-      }, function () {
-        console.log('cancel');
-      });
+        var confirm = $mdDialog.confirm()
+          .title('Confirm Edit Wakeup')
+          .textContent('Change today\'s wake-up time? This will adjust today\'s schedule and cannot be undone!')
+          .ariaLabel('edit wakeup confirm dialog')
+          .targetEvent(event)
+          .ok('Confirm')
+          .cancel('Cancel');
+
+        $mdDialog.show(confirm).then(() => {
+          ScheduleService.editWakeUp(answer, $routeParams.id);
+        }, () => {});
+      }, function () {});
 
   }
 

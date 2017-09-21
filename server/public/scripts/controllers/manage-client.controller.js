@@ -1,4 +1,4 @@
-myApp.controller('ManageClientController', function (UserService, ClientService, $location, $routeParams) {
+myApp.controller('ManageClientController', function (UserService, ClientService, $location, $routeParams, $mdDialog) {
   // console.log('ManageClientController');
 
   var self = this;
@@ -16,8 +16,20 @@ myApp.controller('ManageClientController', function (UserService, ClientService,
 
   // only available if the user IS the primary caregiver. does what it says. Service returns the user to the client-list view.
   // CURRENT IMPLEMENTATION: everyone is the primary caregiver, there are no secondaries
-  self.deleteClient = () => {
-    ClientService.deleteClient($routeParams.id);
+  self.deleteClient = (event) => {
+
+    var confirm = $mdDialog.confirm()
+      .title('Confirm Delete')
+      .textContent('Do you really want to delete this client? This cannot be undone!')
+      .ariaLabel('delete confirm dialog')
+      .targetEvent(event)
+      .ok('Delete')
+      .cancel('Cancel');
+
+    $mdDialog.show(confirm).then( () => {
+      ClientService.deleteClient($routeParams.id);      
+    },()=>{});
+
   }
 
   // only available if NOT the primary caregiver of the current client. Removes the user as a caregiver and returns the user to the client-list view.

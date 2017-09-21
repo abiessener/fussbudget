@@ -20,7 +20,7 @@
       <input ng-model="mcc.currentClient.client[0].notes">
     </md-input-container>
     <div layout="row" layout-align="space-around center" id="manage-client-button-container">
-      <md-button class="md-warn" ng-click="mcc.deleteClient()">Delete</md-button>
+      <md-button class="md-warn" ng-click="mcc.deleteClient($event)">Delete</md-button>
       <md-button ng-href="#/client-list">Cancel</md-button>
       <md-button class="md-raised md-primary" ng-click="mcc.editCurrentClient()">Submit</md-button>
       
