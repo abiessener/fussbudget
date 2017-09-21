@@ -32,11 +32,29 @@ myApp.controller('ManageClientController', function (UserService, ClientService,
 
   }
 
-  // only available if NOT the primary caregiver of the current client. Removes the user as a caregiver and returns the user to the client-list view.
-  // CURRENTLY NOT USED - THERE ARE NO SECONDARY CAREGIVERS
-  self.leaveCurrentClient = () => {
-    ClientService.leaveCurrentClient();
+  self.pickAvatar = (event) => {    
+    var confirm = $mdDialog.confirm()
+    .title('Confirm Set Avatar')
+    .textContent('Upload or link an avatar to represent this client in Fussbudget.\n\nNOTE: Images will be cropped to 200x200 pixels.')
+    .ariaLabel('Confirm Set Avatar')
+    .targetEvent(event)
+    .ok('Proceed')
+    .cancel('Cancel');
+
+  $mdDialog.show(confirm).then( () => {
+    UserService.fileStack.pick().then((result) => {
+      console.log('result', result);
+      let convertedUrl = 'https://cdn.filestackcontent.com/' + 
+                          'resize=w:200,h:200,f:crop/' +
+                          result.filesUploaded[0].handle;
+      self.currentClient.client[0].avatar_url = convertedUrl;
+      ClientService.editCurrentClient(self.currentClient.client[0]);
+    })
+    },()=>{});
+
+
   }
+
 
 
 
