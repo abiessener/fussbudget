@@ -3,7 +3,7 @@
     <h1>Manage User</h1>
 
 
-    <div id="manage-user-avatar-container">
+    <div id="manage-user-avatar-container" ng-click="uc.pickAvatar($event)">
         <img id="manage-user-avatar" ng-src="{{uc.userObject.avatar_url}}">
     </div>
 

@@ -118,10 +118,6 @@ myApp.service('ClientService', function ($http, $location) {
       // success
       console.log('client deleted');
 
-      //------------------
-      // TBD: Confirm modal
-      //------------------
-
       $location.path('/client-list');
     }, (response) => {
       // failure - if this happens it's a serious error, the intended workflow does not include this possibility
@@ -129,23 +125,4 @@ myApp.service('ClientService', function ($http, $location) {
     })
   }; // end deleteCurrentClient()
 
-
-  // ------- LEAVE CLIENT IS NOT YET IMPLEMENTED -------
-  // ------- NEEDS SECONDARY CAREGIVER LOGIC, WHICH IS FOR LATER --------
-  // ------- THIS METHOD IS NEVER CALLED -------
-
-  // called from manage-client view by the user clicking a button. 
-  // comes from manage-client.controller.js. 
-  // only available if the user IS NOT the primary caregiver. removes the user as a secondary caregiver of the current client
-  self.leaveCurrentClient = () => {
-    // console.log('ClientService.leaveCurrentClient() _id:', self.currentClient._id);
-
-    $http.put('/client/' + self.currentClient._id).then((response) => {
-      // success
-      console.log('client left');
-    }, (response) => {
-      // failure - if this happens it's a serious error, the intended workflow does not include this possibility
-      console.log('client leave error, something is wrong');
-    })
-  }; // end leaveCurrentClient()
 })

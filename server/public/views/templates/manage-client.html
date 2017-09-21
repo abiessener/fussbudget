@@ -1,7 +1,7 @@
 <section layout="column" flex layout-align="space-between center" class="full-height">
   <h1>Manage Client</h1>
 
-  <div id="manage-client-avatar-container">
+  <div id="manage-client-avatar-container" ng-click="mcc.pickAvatar($event)">
     <img id="manage-client-avatar" ng-src="{{mcc.currentClient.client[0].avatar_url}}">
   </div>
 
