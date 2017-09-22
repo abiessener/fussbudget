@@ -1,4 +1,4 @@
-myApp.service('ClientService', function ($http, $location) {
+myApp.service('ClientService', function ($http, $location, $mdToast) {
   // console.log('ClientService Loaded');
   var self = this;
 
@@ -33,7 +33,11 @@ myApp.service('ClientService', function ($http, $location) {
     if(client._id != undefined){
       $http.put('/client', client).then((response => {
         // success
-        console.log('client edited');
+        $mdToast.show(
+          $mdToast.simple()
+          .textContent('Client updated.')
+          .hideDelay(3000)
+        );
         $location.path('/schedule/' + client._id);
       }), (response) => {
         // server error
@@ -104,6 +108,12 @@ myApp.service('ClientService', function ($http, $location) {
 
     $http.post('/client', client).then((response) => {
       // console.log('/client POST response', response);
+      $mdToast.show(
+        $mdToast.simple()
+        .textContent('Client created!')
+        .hideDelay(3000)
+      );
+
       $location.path('/client-list');
     });
   }
@@ -116,8 +126,11 @@ myApp.service('ClientService', function ($http, $location) {
 
     $http.delete('/client/' + clientId).then((response) => {
       // success
-      console.log('client deleted');
-
+      $mdToast.show(
+        $mdToast.simple()
+        .textContent('Client deleted.')
+        .hideDelay(3000)
+      );
       $location.path('/client-list');
     }, (response) => {
       // failure - if this happens it's a serious error, the intended workflow does not include this possibility
