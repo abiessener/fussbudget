@@ -2,9 +2,11 @@
 
   <h1>Schedule</h1>
 
-  <div id="schedule-header" ng-href="#/manage-client/{{sc.currentClient.client[0]._id}}" layout="column" layout-align="center center">
+  <div id="schedule-header"  layout="column" layout-align="center center">
     <div id="schedule-avatar-container">
-      <img id="schedule-avatar" ng-src="{{sc.currentClient.client[0].avatar_url}}" alt="Go" aria-label="user avatar">
+      <a ng-href="#/manage-client/{{sc.currentClient.client[0]._id}}">
+        <img id="schedule-avatar" ng-src="{{sc.currentClient.client[0].avatar_url}}" aria-label="user avatar">
+      </a>
     </div>
     <h3>{{sc.currentClient.client[0].name}}</h3>
 
