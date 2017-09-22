@@ -276,3 +276,12 @@ hr {
 #add-client-form-container>* {
   width: 100%;
 }
+
+#about-wrapper-div{
+  width: 95%;
+  max-width: 500px;
+}
+
+#about-list{
+  padding-top: 3px !important;
+}

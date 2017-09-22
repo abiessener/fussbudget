@@ -2,6 +2,9 @@
 
 Fussbudget is a lightweight scheduling webapp that helps caregivers stay on top of the daily schedules of their charges and adapts to the unique challenges each day presents. Fussbudget builds out a schedule based on accepted general principles and gives caregivers the ability to modify it manually, as well as dynamically adapting to different wake-up times.
 
+## Deployed
+Interact with a fully deployed and functional version of [Fussbudget on the web] (https://fussbudget.herokuapp.com).
+
 ## Built With
 
 MEAN Stack
@@ -31,14 +34,13 @@ These instructions will get you a copy of the project up and running on your loc
 ### Completed Features
 
 - [x] Manage multiple clients and interact with their schedules
-- [ ] Automatically adjust schedule for different wakeup time
-- [ ] Angular Material UI
+- [x] Automatically adjust schedule for different wakeup time
+- [x] Angular Material UI
 
 ### Next Steps
 
-Features that you would like to add at some point in the future.
+Features that I would like to add at some point in the future.
 
-- [ ] Dynamically adjust schedule as users interact with events (snoozing, completing, dismissing, adding)
 - [ ] Invite people to become 'secondary' caregivers via email (nodemailer)
 - [ ] Generate day-end reports of interactions with a client's schedule, display in-app, and optionally email to primary and/or secondary caregivers
 - [ ] Deploy as captive webview Android app
