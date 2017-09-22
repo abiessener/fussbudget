@@ -2,24 +2,26 @@
 
   <h1>Schedule</h1>
 
-  <div id="schedule-header" ng-href="#/manage-client/{{sc.currentClient.client[0]._id}}" layout="column" layout-align="center center">
+  <div id="schedule-header"  layout="column" layout-align="center center">
     <div id="schedule-avatar-container">
-      <img id="schedule-avatar" ng-src="{{sc.currentClient.client[0].avatar_url}}" alt="Go" aria-label="user avatar">
+      <a ng-href="#/manage-client/{{sc.currentClient.client[0]._id}}">
+        <img id="schedule-avatar" ng-src="{{sc.currentClient.client[0].avatar_url}}" aria-label="user avatar">
+      </a>
     </div>
     <h3>{{sc.currentClient.client[0].name}}</h3>
 
   </div>
 
   <div id="schedule-buttons-container">
-    <md-button ng-click="sc.editWakeUpModal($event)" class="md-fab md-mini md-hue-1" aria-label="edit wakeup button">
+    <md-button id="schedule-edit-wakeup-button" ng-click="sc.editWakeUpModal($event)" class="md-fab md-mini md-primary" aria-label="edit wakeup button">
       <md-icon md-svg-src="images/ic_access_alarms_black_18px.svg"></md-icon>
     </md-button>
 
-    <md-button ng-click="sc.addEvent()" class="md-fab md-mini md-primary" aria-label="add event button">
+    <md-button id="schedule-add-event-button" ng-click="sc.addEvent()" class="md-fab md-mini" aria-label="add event button">
       <md-icon md-svg-src="images/ic_add_alert_black_18px.svg"></md-icon>
     </md-button>
 
-    <md-button ng-click="sc.saveAsDefault()" class="md-fab md-mini md-warn md-hue-1" aria-label="save as default schedule button">
+    <md-button ng-click="sc.saveAsDefault()" class="md-fab md-mini" aria-label="save as default schedule button">
       <md-icon md-svg-src="images/ic_save_black_18px.svg"></md-icon>
     </md-button>
   </div>
@@ -36,6 +38,9 @@
         <span class="schedule-list-event-time">{{event.time | date: "HH:mm" : "Z"}}</span>
         <span class="schedule-list-event-name">| {{event.name}}</span>
       </div>
+      <!-- <div ng-if="event.name=='wakeup'">
+        {{Date.now()}}
+      </div> -->
       <md-icon class="md-secondary" ng-click="sc.modifyEvent(event, 'event-dismiss')" ng-if="(event.name != 'wakeup') && (event.name != 'sleep')"
         aria-label="dismiss event button" alt="dismiss" md-svg-icon="images/ic_cancel_black_24px.svg">
       </md-icon>

@@ -1,4 +1,4 @@
-myApp.service('ScheduleService', function ($http, $location) {
+myApp.service('ScheduleService', function ($http, $location, $mdToast) {
   // console.log('ScheduleService Loaded');
 
   var self = this;
@@ -72,6 +72,11 @@ myApp.service('ScheduleService', function ($http, $location) {
       schedule: schedule
     }).then((response) => {
       // console.log('/schedule/modify PUT response', response);
+      $mdToast.show(
+        $mdToast.simple()
+        .textContent('Schedule updated.')
+        .hideDelay(3000)
+      );
       self.getSchedule(clientId);
     }, (response) => {
       if (response.data == 'bad schedule'){
@@ -89,6 +94,11 @@ myApp.service('ScheduleService', function ($http, $location) {
       schedule: schedule
     }).then((response) => {
       // console.log('/schedule/defaults PUT response', response);
+      $mdToast.show(
+        $mdToast.simple()
+        .textContent('Default schedule updated!')
+        .hideDelay(3000)
+      );
       self.getSchedule(clientId);
     }, (response) => {
       console.log('/schedule/defaults PUT error! bad!', response);
@@ -115,6 +125,11 @@ myApp.service('ScheduleService', function ($http, $location) {
     console.log('ScheduleService.editWakeUp', time);
 
     $http.put('/schedule/edit-wake/' + clientId, {time: time}).then((response) => {
+      $mdToast.show(
+        $mdToast.simple()
+        .textContent('Wake-up time and schedule adjusted!')
+        .hideDelay(3000)
+      );
       self.getSchedule(clientId);
     }, (response) => {
       console.log('/schedule/edit-wake PUT error! bad!', response);

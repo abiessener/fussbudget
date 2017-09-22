@@ -1,6 +1,6 @@
 // this is almost entirely taken from the provided starter repo. implements basic local-strategy passport.js functionality as well as our editUser AJAX
 
-myApp.factory('UserService', function ($http, $location) {
+myApp.factory('UserService', function ($http, $location, $mdToast) {
   // console.log('UserService Loaded');
 
   var userObject = {};
@@ -38,6 +38,11 @@ myApp.factory('UserService', function ($http, $location) {
         avatar_url: avatar_url
       }).then(function (response) {
           // console.log('UserService PUT request response:', response);
+          $mdToast.show(
+            $mdToast.simple()
+            .textContent('User updated!')
+            .hideDelay(3000)
+          );
           $location.path('/client-list')
         },
         function (response) {
@@ -49,6 +54,12 @@ myApp.factory('UserService', function ($http, $location) {
       // console.log('UserService -- logout');
       $http.get('/user/logout').then(function (response) {
         // console.log('UserService -- logout -- logged out');
+        userObject.avatar_url = false;
+        $mdToast.show(
+          $mdToast.simple()
+          .textContent('Logged out.')
+          .hideDelay(3000)
+        );
         $location.path("/home");
       });
     }
