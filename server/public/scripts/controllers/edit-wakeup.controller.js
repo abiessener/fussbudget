@@ -20,10 +20,10 @@ myApp.controller('EditWakeupController', function (ScheduleService, ClientServic
 
   self.setWakeUpNow = () => {
     let now = new Date();
-    console.log('now', now);
+    // console.log('now', now);
     
     now = new Date(1970,0,1,now.getHours(), now.getMinutes());
-    console.log('now', now);
+    // console.log('now', now);
     
     now.setTime(now.getTime() - now.getTimezoneOffset() * 60 * 1000);
     

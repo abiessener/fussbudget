@@ -124,6 +124,15 @@ myApp.service('ScheduleService', function ($http, $location, $mdToast) {
   self.editWakeUp = (time, clientId) => {
     console.log('ScheduleService.editWakeUp', time);
 
+    remainder = time.getTime() % 900000;
+
+    if (remainder > 450000) {
+      time = new Date(time.getTime() + (900000 - remainder));
+    } else {
+      time = new Date(time.getTime() - remainder);
+    }
+    console.log('time', time);
+    
     $http.put('/schedule/edit-wake/' + clientId, {time: time}).then((response) => {
       $mdToast.show(
         $mdToast.simple()
