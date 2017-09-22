@@ -36,6 +36,9 @@
         <span class="schedule-list-event-time">{{event.time | date: "HH:mm" : "Z"}}</span>
         <span class="schedule-list-event-name">| {{event.name}}</span>
       </div>
+      <!-- <div ng-if="event.name=='wakeup'">
+        {{Date.now()}}
+      </div> -->
       <md-icon class="md-secondary" ng-click="sc.modifyEvent(event, 'event-dismiss')" ng-if="(event.name != 'wakeup') && (event.name != 'sleep')"
         aria-label="dismiss event button" alt="dismiss" md-svg-icon="images/ic_cancel_black_24px.svg">
       </md-icon>

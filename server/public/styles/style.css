@@ -165,6 +165,12 @@ h1,h2,h3 {
   color: white;
 }
 
+#nav-menu-icon{
+  position: absolute;
+  right: 10px;
+  top: 12px;
+  color: white;
+}
 #nav-avatar-container{
   height: 48px;
   width: 48px;
