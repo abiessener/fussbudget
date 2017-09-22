@@ -15,8 +15,7 @@
         </md-input-container>
         <div layout="row" layout-align="space-around center" id="manage-user-button-container">
             <md-button ng-click="uc.userService.logout()">Log Out</md-button>
-
-            <md-button class="md-raised md-primary" ng-click="uc.editCurrentUser(uc.userObject.userName, uc.userObject.avatar_url)">Submit</md-button>
+            <md-button class="md-raised md-primary" type="submit">Submit</md-button>
         </div>
     </form>
 </section>
