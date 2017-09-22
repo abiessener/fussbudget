@@ -1,13 +1,20 @@
 <div ng-controller="NavController as nc" layout="column">
   <section layout="row" flex layout-align="space-between center" aria-label="navigation bar" id="nav-container">
     <div id="nav-brand-container" ng-click="nc.go('/client-list')" class="md-primary">
-      <span >Fussbudget</span>
+      <span>Fussbudget</span>
     </div>
 
     <!-- <md-icon id="nav-menu-icon" aria-label="open side nav" md-svg-icon="images/ic_menu_black_24px.svg"></md-icon> -->
-    
-    <div ng-if="nc.userObject.avatar_url" id="nav-avatar-container" aria-label="user avatar" ng-click="nc.openNav()">
-      <img id="nav-avatar" ng-src="{{nc.userObject.avatar_url}}">
+
+    <div id="nav-right-bumper" ng-if="nc.userObject.avatar_url" layout="row" layout-align="end center">
+
+      <span>{{nc.userObject.userName}}</span>
+
+      <div id="nav-avatar-container" aria-label="user avatar" ng-click="nc.openNav()">
+        <img id="nav-avatar" ng-src="{{nc.userObject.avatar_url}}">
+      </div>
+
+
     </div>
 
     <md-sidenav class="md-sidenav-right" md-component-id="right" layout="column" layout-align="end end">

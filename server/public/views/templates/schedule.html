@@ -13,15 +13,15 @@
   </div>
 
   <div id="schedule-buttons-container">
-    <md-button ng-click="sc.editWakeUpModal($event)" class="md-fab md-mini md-hue-1" aria-label="edit wakeup button">
+    <md-button id="schedule-edit-wakeup-button" ng-click="sc.editWakeUpModal($event)" class="md-fab md-mini md-primary" aria-label="edit wakeup button">
       <md-icon md-svg-src="images/ic_access_alarms_black_18px.svg"></md-icon>
     </md-button>
 
-    <md-button ng-click="sc.addEvent()" class="md-fab md-mini md-primary" aria-label="add event button">
+    <md-button id="schedule-add-event-button" ng-click="sc.addEvent()" class="md-fab md-mini" aria-label="add event button">
       <md-icon md-svg-src="images/ic_add_alert_black_18px.svg"></md-icon>
     </md-button>
 
-    <md-button ng-click="sc.saveAsDefault()" class="md-fab md-mini md-warn md-hue-1" aria-label="save as default schedule button">
+    <md-button ng-click="sc.saveAsDefault()" class="md-fab md-mini" aria-label="save as default schedule button">
       <md-icon md-svg-src="images/ic_save_black_18px.svg"></md-icon>
     </md-button>
   </div>
