@@ -81,6 +81,9 @@ myApp.config(function($routeProvider, $locationProvider, $mdThemingProvider, $md
         }
       }
     })
+    .when('/about', {
+      templateUrl: '/views/templates/about.html',
+    })
     .otherwise({
       redirectTo: 'home'
     });    

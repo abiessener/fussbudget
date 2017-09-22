@@ -1,6 +1,6 @@
 <div ng-controller="NavController as nc" layout="column">
   <section layout="row" flex layout-align="space-between center" aria-label="navigation bar" id="nav-container">
-    <div id="nav-brand-container" ng-click="nc.go('/client-list')" class="md-primary">
+    <div id="nav-brand-container" ng-click="nc.go('/about')" class="md-primary">
       <span>Fussbudget</span>
     </div>
 
@@ -14,7 +14,6 @@
         <img id="nav-avatar" ng-src="{{nc.userObject.avatar_url}}">
       </div>
 
-
     </div>
 
     <md-sidenav class="md-sidenav-right" md-component-id="right" layout="column" layout-align="end end">
@@ -22,6 +21,9 @@
         <md-list>
           <md-list-item>
             <md-button ng-click="nc.logout()" aria-label="log out">Log Out</md-button>
+          </md-list-item>
+          <md-list-item>
+            <md-button ng-click="nc.go('/about')" aria-label="about">About</md-button>
           </md-list-item>
           <md-list-item>
             <md-button ng-click="nc.go('/add-client')" aria-label="add client">Add Client</md-button>

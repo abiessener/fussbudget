@@ -1,0 +1,49 @@
+<section layout="column" flex layout-align="space-between center" class="full-height">
+  <h1>About Fussbudget</h1>
+
+  <div id="home-graphic-container">
+    <img id="home-graphic-img" src="images/client_default.png">
+  </div>
+
+  <div id="about-wrapper-div">
+    <h3>
+      <md-button id="schedule-add-event-button" class="md-fab md-mini" aria-label="add event button">
+        <md-icon md-svg-src="images/ic_add_alert_black_18px.svg"></md-icon>
+      </md-button>
+      Caregiver Scheduling</h3>
+    <p>Fussbudget is a lightweight, mobile-first scheduling webapp that helps caregivers stay on top of the daily schedules of their charges
+      and adapts to the unique challenges each day presents.</p>
+    <h3>
+      <md-button ng-click="sc.saveAsDefault()" class="md-fab md-mini" aria-label="save as default schedule button">
+        <md-icon md-svg-src="images/ic_save_black_18px.svg"></md-icon>
+      </md-button>
+      Smart Defaults
+    </h3>
+    <p>Fussbudget builds out a rough default schedule based on the client's date of birth. Caregivers can modify each client's
+      individual schedule manually, and save that as the client's default schedule to be loaded on each day's login.</p>
+
+    <h3>
+      <md-button id="schedule-edit-wakeup-button" class="md-fab md-mini md-primary" aria-label="edit wakeup button">
+        <md-icon md-svg-src="images/ic_access_alarms_black_18px.svg"></md-icon>
+      </md-button>
+      Wakes Up With You
+
+    </h3>
+    <p>Users can change the day's wake-up time, and Fussbudget will dynamically rebuild the client's schedule for the day. If
+      the schedule gets too packed, Fussbudget will remove lower-priority events automatically.</p>
+      <hr>
+    <h3>
+      Technologies
+    </h3>
+    <p>Fussbudget is built on a modern, full stack of flexible web technologies.</p>
+    <md-list>
+      <md-list-item class="about-list">MongoDB</md-list-item>
+      <md-list-item class="about-list">Express</md-list-item>
+      <md-list-item class="about-list">AngularJS</md-list-item>
+      <md-list-item class="about-list">Node.js</md-list-item>
+      <md-list-item class="about-list">Angular Material</md-list-item>
+      <md-list-item class="about-list">Passport.js</md-list-item>
+      <md-list-item class="about-list">Filestack</md-list-item>
+    </md-list>
+  </div>
+</section>
