@@ -7,6 +7,8 @@ var passport = require('passport');
 var path = require('path');
 var Client = require('../models/client.schema.js');
 var DefaultSchedules = require('../models/defaultschedules.schema.js');
+var nodeMailer = require('nodemailer');
+
 
 // handles creating new clients
 router.post('/', (req, res) => {
@@ -133,4 +135,9 @@ router.delete('/:id', (req, res) => {
   }
 }) // end DELETE route
 
+router.post('/invite', (req,res) => {
+  let transporter = nodeMailer.createTransport({
+    host: 'smtp.gmail.com'
+  })
+})
 module.exports = router;
