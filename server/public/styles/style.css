@@ -56,6 +56,7 @@ h3 {
   width: 196px;
   padding: 0;
   margin: 0;
+  border-radius: 10px;
 }
 
 #manage-user-avatar-container {
@@ -73,6 +74,7 @@ h3 {
   width: 196px;
   padding: 0;
   margin: 0;
+  border-radius: 10px;
 }
 
 #client-list-avatar-container {
@@ -86,6 +88,7 @@ h3 {
 #client-list-avatar {
   height: 100%;
   width: 100%;
+  border-radius: 10px;
 }
 
 #client-list-container {
@@ -125,6 +128,7 @@ h3 {
   width: 200px;
   padding: 0;
   margin: 0;
+  border-radius: 10px;
 }
 
 #schedule-list-container {
@@ -226,6 +230,8 @@ h3 {
 #nav-avatar {
   height: 100%;
   width: 100%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 
 md-sidenav,
