@@ -282,6 +282,11 @@ hr {
   max-width: 500px;
 }
 
-#about-list{
-  padding-top: 3px !important;
+.about-list{
+  /* padding-top: 3px !important; */
+  list-style: none;
+}
+
+#about-link{
+  font-family: 'Cabin', sans-serif;  
 }
