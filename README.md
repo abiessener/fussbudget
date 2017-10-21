@@ -3,7 +3,7 @@
 Fussbudget is a lightweight scheduling webapp that helps caregivers stay on top of the daily schedules of their charges and adapts to the unique challenges each day presents. Fussbudget builds out a schedule based on accepted general principles and gives caregivers the ability to modify it manually, as well as dynamically adapting to different wake-up times.
 
 ## Deployed
-Interact with a fully deployed and functional version of [Fussbudget on the web] (https://fussbudget.herokuapp.com).
+Interact with a fully deployed and functional version of [Fussbudget on the web](https://fussbudget.herokuapp.com).
 
 ## Built With
 
@@ -23,7 +23,7 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/en/)
-- [npm] (https://www.npmjs.com)
+- [npm](https://www.npmjs.com)
 
 ### Installing
 
