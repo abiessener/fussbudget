@@ -202,6 +202,23 @@ router.put('/defaults/:id', (req, res) => {
 });
 
 // gets a client ID and a new wakeup time from the client, then adjusts that client's schedule to account for it
+
+/*
+  [1] Find out how long the old and new days are (wake-to-sleep time)
+  [2] Find out the average interval between events on both the old and new days (numEvents / wakeTime)
+  [3] Figure out the intervalFactor (coefficient relating old and new average intervals, so we can multiply our new intervals appropriately)
+  [4] Order the old schedule by time
+  [5] Kick out lowest-priority event until threshold is reached
+  [6] Push the old wake event into the new schedule
+  [7] Push the rest of the old schedule into the new (loop):
+    [7a] Multiply the current event's interval (time from previous event) by (1 + intervalFactor)
+    [7b] Add in the (possibly negative) carryInterval
+    [7c] Round new interval down to the nearest 15min (min 15min)
+    [7d] Add the rounded-off value to carryInterval
+    [7e] Push the event into the new schedule at previous event time + calculated interval
+  [8] Push old sleep event into new schedule
+*/
+
 router.put('/edit-wake/:id', (req, res) => {
   if (req.isAuthenticated()) {
 
@@ -216,10 +233,9 @@ router.put('/edit-wake/:id', (req, res) => {
 
         for (var i = 0; i < findData.schedule.length; i++) {
           if (findData.schedule[i].name === 'wakeup') {
-            var oldWakeTime = findData.schedule[i].time; // store this for later
+            var oldWakeTime = findData.schedule[i].time; // store this for later [1]
             findData.schedule[i].time = req.body.time;
-            var newWakeTime = findData.schedule[i].time; // store this for later
-
+            var newWakeTime = findData.schedule[i].time; // store this for later [1]
             break;
           }
         }
@@ -239,7 +255,7 @@ router.put('/edit-wake/:id', (req, res) => {
             // console.log('oldWakeTime', oldWakeTime);
             // console.log('newWakeTime', newWakeTime);
 
-            // calculate avg interval between events
+            // [1] get sleep time
 
             for (var i = 0; i < updateData.schedule.length; i++) {
               if (updateData.schedule[i].name === 'sleep') {
@@ -249,30 +265,32 @@ router.put('/edit-wake/:id', (req, res) => {
 
             // console.log('sleepTime', sleepTime);
 
+            // [1] get old and new day lengths 
             var oldAwakeTime = sleepTime.getTime() - oldWakeTime.getTime();
             var newAwakeTime = sleepTime.getTime() - newWakeTime.getTime();
 
             // console.log('oldAwakeTime', oldAwakeTime);
             // console.log('newAwakeTime', newAwakeTime);
 
+            // [2] calulate average interval
             var numEvents = updateData.schedule.length;
-
             var oldIntervalMinutes = (oldAwakeTime / 1000 / 60) / numEvents;
             var newIntervalMinutes = (newAwakeTime / 1000 / 60) / numEvents;
 
-            // console.log('oldIntervalMinutes', oldIntervalMinutes);
-            // console.log('newIntervalMinutes', newIntervalMinutes);
+            console.log('oldIntervalMinutes', oldIntervalMinutes);
+            console.log('newIntervalMinutes', newIntervalMinutes);
 
+            // [3] get interval difference and factor
             var intervalDiff = oldIntervalMinutes - newIntervalMinutes;
             var intervalFactor = (newIntervalMinutes - oldIntervalMinutes) / oldIntervalMinutes;
-
-            // now that we've spliced anything superfluous out of the schedule, we adjust the remaining times
 
             var currentTime = newWakeTime;
             var lowestTime = newWakeTime.getTime() + 85500000;
 
+            console.log('intervalFactor', intervalFactor);
+            
 
-            // start a new schedule with the new wake time
+            // [6] start a new schedule with the new wake time
             var newSchedule = [];
             var newWakeEvent = {
               time: new Date(newWakeTime.getTime()),
@@ -284,19 +302,21 @@ router.put('/edit-wake/:id', (req, res) => {
 
             // console.log('newSchedule', newSchedule);
 
-            var intervalCarry = 0;
-            var newPerfectInterval = 0;
-            var newActualInterval = 0;
-            var oldSchedule = [];
+            var intervalCarry = 0; // whatever we round off newPerfectInterval (possibly negative)
+            var newPerfectInterval = 0; // non-rounded new interval
+            var newActualInterval = 0; // newPerfectInterval rounded to 15m floor (min 15m)
+            var oldSchedule = []; // to-be-built old schedule, ordered by time
             var lowestId = '';
 
-            //order old schedule by time
+            // [4] order old schedule by time
 
-            // DEBUG - end after 50 loops
+            // DEBUG - end after 100 loops
             var debugLoopLimit = 0;
 
-            while ((updateData.schedule.length > 0) && (debugLoopLimit < 50)) {
+            while ((updateData.schedule.length > 0) && (debugLoopLimit < 100)) {
               debugLoopLimit++;
+
+              // set lowestTime to a wake + 24h so it gets reset properly in the first for loop below
               var lowestTime = newWakeTime.getTime() + 85500000;
 
               // find the earliest event
@@ -307,25 +327,23 @@ router.put('/edit-wake/:id', (req, res) => {
                   lowestId = event._id;
                 }
               }
+
+              // push that earliest event into oldSchedule and remove it from updateData.schedule
               for (var i = 0; i < updateData.schedule.length; i++) {
                 if (updateData.schedule[i]._id == lowestId) {
                   oldSchedule.push(updateData.schedule[i]);
                   updateData.schedule.splice(i, 1);
                 }
               }
-            }
+            } // end while building oldSchedule
 
-            intervalFactor = Math.abs(intervalFactor)
+            // [5] if the schedule is too compressed, remove the lowest-priority item on a loop until it's no longer too compressed
+            var newIntervalFactor = intervalFactor;
+            while (newIntervalFactor < -0.1) {
+              
+              console.log('interval difference too high, removing items...', newIntervalFactor);
 
-            while (intervalFactor < 0.2) {
-              //find the lowest priority item in the schedule and remove it
-              console.log('interval difference too high, removing items...', intervalFactor);
-
-              //recalc intervalFactor
-              var oldIntervalMinutes = (oldAwakeTime / 1000 / 60) / numEvents;
-
-              intervalFactor = Math.abs((newIntervalMinutes - oldIntervalMinutes) / oldIntervalMinutes);
-
+              // find the lowest-priority item
               var lowestPriority = 99;
               var lowestIndex = -1;
               for (var i = 0; i < oldSchedule.length; i++) {
@@ -348,35 +366,49 @@ router.put('/edit-wake/:id', (req, res) => {
                 break;
               }
 
-            } // end while intervalDiff > 10          
+              //recalc intervalFactor
+              var newIntervalMinutes = (newAwakeTime / 1000 / 60) / numEvents;
+              newIntervalFactor = (newIntervalMinutes - oldIntervalMinutes) / oldIntervalMinutes;
 
-            intervalFactor = (newIntervalMinutes - oldIntervalMinutes) / oldIntervalMinutes;
+              console.log('newIntervalFactor after removing item', newIntervalFactor);
+              
 
+            } // end while          
+
+            // build an array of the old intervals (in milliseconds) for the remaining items in oldSchedule
             var oldIntervalArray = [0];
             for (var i = 1; i < oldSchedule.length; i++) {
               oldIntervalArray.push(oldSchedule[i].time.getTime() - oldSchedule[i - 1].time.getTime());
             }
 
-            // console.log('oldSchedule', oldSchedule);          
+            console.log('oldSchedule', oldSchedule);    console.log('oldIntervalArray', oldIntervalArray);
+                  
 
-            // iterate through the old schedule, building a new schedule from it
+            // [7] iterate through the old schedule, building a new schedule from it
             for (var i = 1; i < oldSchedule.length; i++) {
               var currentEvent = oldSchedule[i];
 
-              oldInterval = oldIntervalArray[i];
+              oldInterval = oldIntervalArray[i]; // the time between the previous event and currentEvent in oldSchedule
 
-              // console.log('\n\n\n\n\n in for 311', i);
-              // console.log('currentEvent', currentEvent);
+              console.log('\n\n in for line 392', i);
+              console.log('currentEvent', currentEvent);
 
               if (currentEvent.name == 'sleep') {
-                // if it's sleep, don't move it, just push it
+                // [8] if it's sleep, don't move it, just push it
                 newSchedule.push(currentEvent);
               } else {
-                //otherwise, find the new interval
+                // otherwise, find the new interval
                 // console.log('intervalCarry', intervalCarry);
 
-                intervalDiff = (intervalFactor * oldInterval);
-                newPerfectInterval = oldInterval + intervalDiff + intervalCarry;
+                // v --- old bad code
+                // intervalDiff = (intervalFactor * oldInterval);
+                // newPerfectInterval = oldInterval + intervalDiff + intervalCarry;
+
+                console.log('intervalCarry', intervalCarry);
+                
+                newPerfectInterval = oldInterval * (1 + intervalFactor);
+                newPerfectInterval += intervalCarry;
+                intervalCarry = 0;
                 newActualInterval = 900000 * (Math.floor(newPerfectInterval / 900000));
 
                 // gotta have at least 15m interval
@@ -388,19 +420,20 @@ router.put('/edit-wake/:id', (req, res) => {
                 } else {
                   intervalCarry = newPerfectInterval - newActualInterval;
                 }
-                // console.log('intervalFactor', intervalFactor);
-                // console.log('oldInterval', oldInterval);
-                // console.log('intervalDiff', intervalDiff);
-                // console.log('newPerfectInterval', newPerfectInterval);
-                // console.log('newActualInterval', newActualInterval);
-                // console.log('intervalCarry', intervalCarry);
+                console.log('intervalFactor', intervalFactor);
+                console.log('oldInterval', oldInterval);
+                console.log('intervalDiff', intervalDiff);
+                console.log('newPerfectInterval', newPerfectInterval);
+                console.log('newActualInterval', newActualInterval);
+                console.log('intervalCarry', intervalCarry);
+                
                 // we now have the newActualInterval and the intervalCarry so we can set the new time
 
                 prevTime = newSchedule[i - 1].time.getTime();
 
                 currentEvent.time = new Date(prevTime + newActualInterval);
 
-                // console.log('currentEvent.time', currentEvent.time);
+                console.log('currentEvent.time', currentEvent.time);
 
                 newSchedule.push(currentEvent);
               } // end if statement pushing currentEvent to newSchedule
