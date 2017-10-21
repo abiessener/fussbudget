@@ -66,8 +66,7 @@ myApp.controller('ScheduleController', function (UserService, ScheduleService, C
 
   // pops the modal to get a user-inputted time to set wakeup to, then calls the editWakeUp function to execute that if the modal isn't cancelled
   self.editWakeUpModal = (ev) => {
-    // this will do things eventually
-    console.log('scheduleController.editWakeUp()');
+    // console.log('scheduleController.editWakeUp()');
 
     $mdDialog.show({
         controller: 'EditWakeupController as ewc',

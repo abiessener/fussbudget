@@ -43,7 +43,6 @@ myApp.controller('ManageClientController', function (UserService, ClientService,
 
   $mdDialog.show(confirm).then( () => {
     UserService.fileStack.pick().then((result) => {
-      console.log('result', result);
       let convertedUrl = 'https://cdn.filestackcontent.com/' + 
                           'resize=w:200,h:200,f:crop/' +
                           result.filesUploaded[0].handle;

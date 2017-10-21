@@ -9,13 +9,13 @@ var path = require('path');
 
 // Handles request for HTML file
 router.get('/', function(req, res, next) {
-  console.log('get /register route');
+  // console.log('get /register route');
   res.sendFile(path.resolve(__dirname, '../public/views/templates/register.html'));
 });
 
 // Handles POST request with new user data
 router.post('/', function(req, res, next) {
-  console.log('post /register route');
+  // console.log('post /register route');
   /*
   username: {type: String, required: true, index: {unique: true}},
   password: {type: String, required: true},
@@ -28,12 +28,12 @@ router.post('/', function(req, res, next) {
 
 
     Users.create(userToSave, function(err, post) {
-      console.log('post /register -- User.create');
+      // console.log('post /register -- User.create');
          if(err) {
            console.log('post /register -- User.create -- failure');
            res.sendStatus(500);
          } else {
-           console.log('post /register -- User.create -- success');
+          //  console.log('post /register -- User.create -- success');
            res.sendStatus(201);
          }
     });

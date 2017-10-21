@@ -10,7 +10,7 @@ myApp.controller('UserController', function(UserService, $location, $mdDialog) {
   }
 
   self.pickAvatar = (event) => {
-    console.log('uc.pickAvatar');
+    // console.log('uc.pickAvatar');
     
     var confirm = $mdDialog.confirm()
     .title('Confirm Set Avatar')
@@ -22,7 +22,7 @@ myApp.controller('UserController', function(UserService, $location, $mdDialog) {
 
   $mdDialog.show(confirm).then( () => {
     UserService.fileStack.pick().then((result) => {
-      console.log('result', result);
+      // console.log('result', result);
       let convertedUrl = 'https://cdn.filestackcontent.com/' + 
                           'resize=w:200,h:200,f:crop/' +
                           result.filesUploaded[0].handle;

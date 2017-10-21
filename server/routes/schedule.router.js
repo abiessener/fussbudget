@@ -121,7 +121,7 @@ router.put('/page-load', (req, res) => {
 
 // modifies a schedule. used by the editEvent, addEvent, and user schedule interactions 
 router.put('/modify/:id', (req, res) => {
-  console.log('\n-------------------\n/schedule/modify/' + req.params.id + ' hit');
+  // console.log('\n-------------------\n/schedule/modify/' + req.params.id + ' hit');
   if (req.isAuthenticated()) {
     var wakeTime = 0;
     var sleepTime = 0;
@@ -277,8 +277,8 @@ router.put('/edit-wake/:id', (req, res) => {
             var oldIntervalMinutes = (oldAwakeTime / 1000 / 60) / numEvents;
             var newIntervalMinutes = (newAwakeTime / 1000 / 60) / numEvents;
 
-            console.log('oldIntervalMinutes', oldIntervalMinutes);
-            console.log('newIntervalMinutes', newIntervalMinutes);
+            // console.log('oldIntervalMinutes', oldIntervalMinutes);
+            // console.log('newIntervalMinutes', newIntervalMinutes);
 
             // [3] get interval difference and factor
             var intervalDiff = oldIntervalMinutes - newIntervalMinutes;
@@ -287,7 +287,7 @@ router.put('/edit-wake/:id', (req, res) => {
             var currentTime = newWakeTime;
             var lowestTime = newWakeTime.getTime() + 85500000;
 
-            console.log('intervalFactor', intervalFactor);
+            // console.log('intervalFactor', intervalFactor);
             
 
             // [6] start a new schedule with the new wake time
@@ -341,7 +341,7 @@ router.put('/edit-wake/:id', (req, res) => {
             var newIntervalFactor = intervalFactor;
             while (newIntervalFactor < -0.1) {
               
-              console.log('interval difference too high, removing items...', newIntervalFactor);
+              // console.log('interval difference too high, removing items...', newIntervalFactor);
 
               // find the lowest-priority item
               var lowestPriority = 99;
@@ -357,11 +357,11 @@ router.put('/edit-wake/:id', (req, res) => {
               // don't remove anything if everything is > 99
               if (lowestPriority < 99) {
                 // remove the lowest-priority item
-                console.log('removing index', lowestIndex);
+                // console.log('removing index', lowestIndex);
                 numEvents--;
                 oldSchedule.splice(lowestIndex, 1);
               } else {
-                console.log('tried to remove items, but no sub-100 priority items exist');
+                // console.log('tried to remove items, but no sub-100 priority items exist');
 
                 break;
               }
@@ -370,7 +370,7 @@ router.put('/edit-wake/:id', (req, res) => {
               var newIntervalMinutes = (newAwakeTime / 1000 / 60) / numEvents;
               newIntervalFactor = (newIntervalMinutes - oldIntervalMinutes) / oldIntervalMinutes;
 
-              console.log('newIntervalFactor after removing item', newIntervalFactor);
+              // console.log('newIntervalFactor after removing item', newIntervalFactor);
               
 
             } // end while          
@@ -381,7 +381,7 @@ router.put('/edit-wake/:id', (req, res) => {
               oldIntervalArray.push(oldSchedule[i].time.getTime() - oldSchedule[i - 1].time.getTime());
             }
 
-            console.log('oldSchedule', oldSchedule);    console.log('oldIntervalArray', oldIntervalArray);
+            // console.log('oldSchedule', oldSchedule);    console.log('oldIntervalArray', oldIntervalArray);
                   
 
             // [7] iterate through the old schedule, building a new schedule from it
@@ -390,8 +390,8 @@ router.put('/edit-wake/:id', (req, res) => {
 
               oldInterval = oldIntervalArray[i]; // the time between the previous event and currentEvent in oldSchedule
 
-              console.log('\n\n in for line 392', i);
-              console.log('currentEvent', currentEvent);
+              // console.log('\n\n in for line 392', i);
+              // console.log('currentEvent', currentEvent);
 
               if (currentEvent.name == 'sleep') {
                 // [8] if it's sleep, don't move it, just push it
@@ -404,7 +404,7 @@ router.put('/edit-wake/:id', (req, res) => {
                 // intervalDiff = (intervalFactor * oldInterval);
                 // newPerfectInterval = oldInterval + intervalDiff + intervalCarry;
 
-                console.log('intervalCarry', intervalCarry);
+                // console.log('intervalCarry', intervalCarry);
                 
                 newPerfectInterval = oldInterval * (1 + intervalFactor);
                 newPerfectInterval += intervalCarry;
@@ -420,12 +420,12 @@ router.put('/edit-wake/:id', (req, res) => {
                 } else {
                   intervalCarry = newPerfectInterval - newActualInterval;
                 }
-                console.log('intervalFactor', intervalFactor);
-                console.log('oldInterval', oldInterval);
-                console.log('intervalDiff', intervalDiff);
-                console.log('newPerfectInterval', newPerfectInterval);
-                console.log('newActualInterval', newActualInterval);
-                console.log('intervalCarry', intervalCarry);
+                // console.log('intervalFactor', intervalFactor);
+                // console.log('oldInterval', oldInterval);
+                // console.log('intervalDiff', intervalDiff);
+                // console.log('newPerfectInterval', newPerfectInterval);
+                // console.log('newActualInterval', newActualInterval);
+                // console.log('intervalCarry', intervalCarry);
                 
                 // we now have the newActualInterval and the intervalCarry so we can set the new time
 
@@ -433,7 +433,7 @@ router.put('/edit-wake/:id', (req, res) => {
 
                 currentEvent.time = new Date(prevTime + newActualInterval);
 
-                console.log('currentEvent.time', currentEvent.time);
+                // console.log('currentEvent.time', currentEvent.time);
 
                 newSchedule.push(currentEvent);
               } // end if statement pushing currentEvent to newSchedule
@@ -441,8 +441,6 @@ router.put('/edit-wake/:id', (req, res) => {
               // console.log('newSchedule', newSchedule);
 
             } // end for loop for building new schedule
-
-            // TODO: PUSH NEW SCHEDULE
 
             // console.log('newSchedule', newSchedule);
 

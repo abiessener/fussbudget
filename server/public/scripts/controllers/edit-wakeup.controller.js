@@ -1,5 +1,5 @@
 myApp.controller('EditWakeupController', function (ScheduleService, ClientService, $location, $mdDialog) {
-  console.log('EditWakeupController created');
+  // console.log('EditWakeupController created');
 
   var self = this;
 
