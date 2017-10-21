@@ -14,6 +14,7 @@ MEAN Stack
 * Node.js
 
 Angular Material
+Filestack
 
 ## Getting Started
 
@@ -29,7 +30,7 @@ These instructions will get you a copy of the project up and running on your loc
 1. Clone this repo down to your local machine.
 2. `npm install`
 3. Modify db.config.js to point to a valid MongoDB instance.
-4. Launch server.js (I suggest `nodemon` myself, but your IDE's debugger or just `node server/server.js` from a command shell is fine)
+4. Launch server.js (I suggest `nodemon` myself, but your IDE's debugger or just `node server/server.js` or `npm start` from a command shell is fine)
 
 ### Completed Features
 
@@ -59,3 +60,6 @@ Should be pretty straightforward to deploy to whatever Node environment you like
 
 ## Icons
 Favicon, default user avatar, and default client avatar made by Freepik from www.flaticon.com.
+
+## Copyright
+All code (c) Adam Biessener
